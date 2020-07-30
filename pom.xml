@@ -21,6 +21,25 @@
 		<artifactId>postgresql</artifactId>
 		<version>42.2.14</version>
 	</dependency>
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+		<version>3.1.0</version>
+		<scope>provided</scope>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
+	<dependency>
+		<groupId>javax.servlet.jsp.jstl</groupId>
+		<artifactId>javax.servlet.jsp.jstl-api</artifactId>
+		<version>1.2.1</version>
+	</dependency>
+
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>jstl</artifactId>
+		<version>1.2</version>
+	</dependency>
+>>>>>>> 852d1fc2a1407f5e160dc5489a2876ff52bedf3c
 	
 	<!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
 	<dependency>
@@ -33,6 +52,14 @@
 		<artifactId>jquery</artifactId>
 		<version>3.1.1</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/javax.el/javax.el-api -->
+	<dependency>
+		<groupId>javax.el</groupId>
+		<artifactId>javax.el-api</artifactId>
+		<version>3.0.1-b06</version>
+	</dependency>
+
+
 
     <dependency>
       <groupId>junit</groupId>
@@ -70,6 +97,7 @@
 			</configuration>
 			<executions>
 				<execution>
+<<<<<<< HEAD
 					<id>desenovlimento-deploy</id>
 					<phase>pre-integration-test</phase>
 					<configuration>
@@ -88,6 +116,12 @@
 					<goals>
 						<goal>redeploy-only</goal>
 					</goals>
+=======
+					<phase>install</phase>
+				    <configuration>
+						<goal>redeploy</goal>
+					</configuration>
+>>>>>>> 852d1fc2a1407f5e160dc5489a2876ff52bedf3c
 				</execution>
 			</executions>
 		</plugin>
