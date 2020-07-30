@@ -14,6 +14,30 @@
 		<artifactId>mybatis</artifactId>
 		<version>3.5.5</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+	<dependency>
+		<groupId>org.postgresql</groupId>
+		<artifactId>postgresql</artifactId>
+		<version>42.2.14</version>
+	</dependency>
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+		<version>3.1.0</version>
+		<scope>provided</scope>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
+	<dependency>
+		<groupId>javax.servlet.jsp.jstl</groupId>
+		<artifactId>javax.servlet.jsp.jstl-api</artifactId>
+		<version>1.2.1</version>
+	</dependency>
+
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>jstl</artifactId>
+		<version>1.2</version>
+	</dependency>
 	
 	<!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
 	<dependency>
@@ -26,6 +50,21 @@
 		<artifactId>jquery</artifactId>
 		<version>3.1.1</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl-api -->
+	<!-- https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api -->
+	<dependency>
+		<groupId>jakarta.servlet.jsp.jstl</groupId>
+		<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+		<version>2.0.0-RC1</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/javax.el/javax.el-api -->
+	<dependency>
+		<groupId>javax.el</groupId>
+		<artifactId>javax.el-api</artifactId>
+		<version>3.0.1-b06</version>
+	</dependency>
+
+
 
     <dependency>
       <groupId>junit</groupId>
@@ -38,14 +77,31 @@
     <finalName>pastaeriso</finalName>
 	<plugins>
 		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.8.1</version>
+			<configuration>
+				<source>1.8</source>
+				<target>1.8</target>
+			</configuration>
+		</plugin>
+		<plugin>
 			<groupId>org.apache.tomcat.maven</groupId>
 			<artifactId>tomcat7-maven-plugin</artifactId>
 			<version>2.2</version>
 			<configuration>
-				<url>http://192.168.0.130:8080/manager/text</url>
+				<url>http://192.168.0.150:8080/manager/text</url>
 				<server>TomcatServer</server>
 				<path>/pastaerisoteste</path>
 			</configuration>
+			<executions>
+				<execution>
+					<phase>install</phase>
+				    <configuration>
+						<goal>redeploy</goal>
+					</configuration>
+				</execution>
+			</executions>
 		</plugin>
 	</plugins>
   </build>
