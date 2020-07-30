@@ -29,7 +29,6 @@
 		} else {
 			hideAllPanels(pedidos);
 		}
-		
 		document.getElementById(name).style.display = "block";
 	}
 
@@ -60,7 +59,7 @@
 					<tbody>
 						<c:forEach items="${requestScope.pedidos}" var="pedido">
 						<tr>
-							<td>${pedido.horarioEntrega}</td>
+							<td>${pedido.horarioSomenteEntrega}</td>
 							<td>${pedido.cliente}</td>
 							<td>
 								<button type="button" 
@@ -82,7 +81,7 @@
 							<li>Id: ${pedido.id}</li>
 							<li>Cliente: ${pedido.cliente}</li>
 							<li>Contato: ${pedido.contato}</li>
-							<li>Horario entrega: ${pedido.horarioEntrega}</li>
+							<li>Horario entrega: ${pedido.horarioSomenteEntrega}</li>
 							<li>Troco para: ${pedido.trocoPara}</li>
 						</li>
 					</div>
