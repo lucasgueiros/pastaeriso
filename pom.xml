@@ -8,11 +8,18 @@
   <name>pastaeriso Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
+	
 	<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 	<dependency>
 		<groupId>org.mybatis</groupId>
 		<artifactId>mybatis</artifactId>
 		<version>3.5.5</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+	<dependency>
+		<groupId>org.postgresql</groupId>
+		<artifactId>postgresql</artifactId>
+		<version>42.2.14</version>
 	</dependency>
 	
 	<!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
