@@ -3,6 +3,8 @@ package br.com.pastaeriso.pedidos;
 import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.LinkedList;
 
 public class Pedido {
 	private Integer id;
@@ -11,10 +13,12 @@ public class Pedido {
 	private BigDecimal trocoPara;
 	private LocalTime horarioEntrega;
 	private LocalDate dataEntrega;
+	private List<PedidoItem> itens;
 	
 	public Pedido(String cliente, String contato) {
 		this.cliente = cliente;
 		this.contato = contato;
+		this.itens = new LinkedList<PedidoItem>();
 	}
 	
 	public Pedido(Integer id, String cliente, String contato) {
@@ -57,5 +61,11 @@ public class Pedido {
 	}
 	public void setDataEntrega (LocalDate dataEntrega) {
 		this.dataEntrega = dataEntrega;
+	}
+	public List<PedidoItem> getItens(){
+		return this.itens;
+	}
+	public void setItens(List<PedidoItem> itens){
+		this.itens = itens;
 	}
 }
