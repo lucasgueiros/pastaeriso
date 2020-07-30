@@ -10,6 +10,11 @@ public class Cliente {
 	private List<Endereco> enderecos;
 	private List<Contato> contatos;
 	
+	public Cliente(Integer id, String nome) {
+		this(nome);
+		this.id = id;
+	}
+	
 	public Cliente(String nome) {
 		this.nome = nome;
 		this.enderecos = new LinkedList<Endereco>();

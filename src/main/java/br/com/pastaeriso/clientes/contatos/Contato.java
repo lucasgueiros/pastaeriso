@@ -1,4 +1,4 @@
-package br.com.pastaeriso.clientes;
+package br.com.pastaeriso.clientes.contatos;
 
 public class Contato{
 	
