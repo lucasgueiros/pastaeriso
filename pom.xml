@@ -33,6 +33,13 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+	<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin -->
+	<dependency>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-war-plugin</artifactId>
+		<version>3.3.1</version>
+	</dependency>
+
   </dependencies>
   <build>
     <finalName>pastaeriso</finalName>
@@ -44,8 +51,29 @@
 			<configuration>
 				<url>http://192.168.0.150:8080/manager/text</url>
 				<server>TomcatServer</server>
-				<path>/emdesenvolvimento</path>
 			</configuration>
+			<executions>
+				<execution>
+					<id>desenovlimento-deploy</id>
+					<phase>pre-integration-test</phase>
+					<configuration>
+						<path>/emdesenvolvimento</path>
+					</configuration>
+					<goals>
+						<goal>redeploy-only</goal>
+					</goals>
+				</execution>
+				<execution>
+					<id>final_deploy</id>
+					<phase>install</phase>
+					<configuration>
+						<path>/pastaeriso</path>
+					</configuration>
+					<goals>
+						<goal>redeploy-only</goal>
+					</goals>
+				</execution>
+			</executions>
 		</plugin>
 	</plugins>
   </build>
