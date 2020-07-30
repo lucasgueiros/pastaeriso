@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="br.com.pastaeriso.pedidos.PedidoMapper">
+	<resultMap id="pedidoMap" type="Pedido">
+		<constructor>
+			<idArg column="id" javaType="int"/>
+			<arg column="cliente" javaType="String"/>
+			<arg column="contato" javaType="String"/>
+		</constructor>
+		<result property="trocoPara" column="troco_para" javaType="java.math.BigDecimal"/>
+		<result column="horario_entrega" property="horarioEntrega" javaType="java.time.LocalTime"/>
+		<result column="data_entrega" property="dataEntrega" javaType="java.time.LocalDate"/>
+	</resultMap>
+
+	<select id="selectPedidos" resultMap="pedidoMap">
+		select id,cliente,contato,troco_para,horario_entrega,data_entrega from pedidos order by data_entrega, horario_entrega
+	</select>
+	
+</mapper>
