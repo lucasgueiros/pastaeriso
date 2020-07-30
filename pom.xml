@@ -42,9 +42,9 @@
 			<artifactId>tomcat7-maven-plugin</artifactId>
 			<version>2.2</version>
 			<configuration>
-				<url>http://192.168.0.130:8080/manager/text</url>
+				<url>http://192.168.0.150:8080/manager/text</url>
 				<server>TomcatServer</server>
-				<path>/pastaerisoteste</path>
+				<path>/emdesenvolvimento</path>
 			</configuration>
 		</plugin>
 	</plugins>
