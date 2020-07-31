@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="br.com.pastaeriso.produtos.ProdutoMapper">
+
+  <resultMap id="ProdutoPrecoMap" type="ProdutoPreco">
+    <constructor>
+      <idArg column="id" javaType="Integer"/>
+      <arg column="preco" javaType="java.math.BigDecimal"/>
+      <arg column="data" javaType="java.time.LocalDate"/>
+    </constructor>
+  </resultMap>
+
+  <resultMap id="ProdutoMap" type="Produto">
+    <constructor>
+      <idArg column="id" javaType="Integer"/>
+      <arg column="nome" javaType="String"/>
+      <arg column="data" javaType="java.time.LocalDate"/>
+    </constructor>
+    <result column="descricao" javaType="String"/>
+    <result column="comentarios" javaType="String"/>
+    <collection property="precos" ofType="ProdutoPreco" column="id"
+      select="selectProdutoPrecosByProdutoId"/>
+  </resultMap>
+
+  <select id="selectProdutoPrecosByProdutoId" resultMap="ProdutoPrecoMap"
+    parameterType="Integer">
+    select id, preco from produto_precos where produto_id = #{id}
+  </select>
+
+  <select id="selectProdutoById" resultMap="ProdutoMap" parameterType="Integer">
+    select  id, nome, data, descricao, comentarios from produtos where id = #{id}
+  </select>
+
+  <select id="selectProdutos" resultMap="ProdutoMap" >
+    select  id, nome, data, descricao, comentarios from produtos
+  </select>
+</mapper>

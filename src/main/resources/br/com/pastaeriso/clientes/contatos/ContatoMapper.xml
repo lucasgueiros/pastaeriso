@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="br.com.pastaeriso.clientes.contatos.ContatoMapper">
+  <resultMap id="formaDeContatoMap" type="FormaDeContato">
+    <constructor>
+			<idArg column="id" javaType="Integer"/>
+			<arg column="forma" javaType="String"/>
+		</constructor>
+  </resultMap>
+
+  <resultMap id="contatoMapper" type="Contato">
+    <constructor>
+			<idArg column="id" javaType="Integer"/>
+			<arg column="contato" javaType="String"/>
+		</constructor>
+    <association property="forma" column="forma_de_contato" javaType="FormaDeContato" select="selectFormaDeContatoById"/>
+  </resultMap>
+
+  <select id="selectFormaDeContatoById" resultMap="formaDeContatoMap" parameterType="Integer">
+    select id,forma from formas_de_contato where id=#{id}
+  </select>
+
+  <select id="selectContatosByClienteId" resultMap="contatoMapper" parameterType="Integer">
+    select id, forma_de_contato, contato from cliente_contatos where cliente_id = #{id}
+  </select>
+
+</mapper>

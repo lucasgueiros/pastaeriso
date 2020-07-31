@@ -5,14 +5,19 @@ import br.com.pastaeriso.produtos.Produto;
 import java.time.LocalDateTime;
 
 public class PedidoItem {
-	
+
 	private Integer id;
 	private Produto produto;
 	private BigDecimal preco; // preco do produto no momento da compra
 	private BigDecimal quantidade;
 	private String comentarios;
 	private LocalDateTime data;
-	
+
+	public PedidoItem(Integer id, BigDecimal quantidade) {
+		this.id = id;
+		this.quantidade = quantidade;
+	}
+
 	public PedidoItem(Produto produto, BigDecimal quantidade) {
 		this.produto = produto;
 		this.quantidade = quantidade;

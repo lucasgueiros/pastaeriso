@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="br.com.pastaeriso.pedidos.PedidoItemMapper">
+  <resultMap id="PedidoItemMap" type="PedidoItem">
+    <constructor>
+      <idArg property="id" javaType="Integer"/>
+      <arg property="quantidade" javaType="java.math.BigDecimal"/>
+    </constructor>
+    <result property="comentarios" javaType="String" />
+    <result property="data" javaType="java.time.LocalDate" />
+    <association property="produto" column="produto_id" javaType="Produto"
+      select="br.com.pastaeriso.produtos.ProdutoMapper.selectProdutoById"/>
+  </resultMap>
+
+  <select id="selectPedidoItensByPedidoId" resultMap="PedidoItemMap"
+    parameterType="Integer">
+    select id, quantidade, comentarios, data, produto_id from pedido_itens
+    where pedido_id = #{pedidoId}
+  </select>
+
+</mapper>

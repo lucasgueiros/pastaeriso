@@ -49,7 +49,7 @@
 <div class="btn-group">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <span data-feather="calendar"></span>
-		<p id="dataAtual">Datas</p>
+		<div id="dataAtual">Datas</div>
   </button>
   <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
 		<c:forEach items="${datas}" var="data">
@@ -67,7 +67,7 @@
 	<div id="dia${tupla.key}" class="container-fluid datas">
 		<div class="row">
 			<div class="col-6 col-md-4">
-				<table class="table-sm">
+				<table class="table-sm table-hover">
 					<thead>
 						<tr>
 							<th scope="scope">Horário</th>
@@ -96,6 +96,24 @@
 				<c:set var="primeiro" scope="request" value="${true}"/>
 				<c:forEach items="${requestScope.pedidos}" var="pedido">
 					<div id="pedido${pedido.id}" class='pedidos'>
+						<form>
+							<div class="form-row">
+						    <div class="form-group col-md-6">
+						      <label for="inputNomeCliente${pedido.id}">Nome do cliente</label>
+						      <input id="nomeCliente${pedido.id}"
+										type="text"
+										class="form-control-plaintext"
+										value="${pedido.cliente.nome}">
+						    </div>
+								<div class="form-group col-md-6">
+						      <label for="inputNomeCliente${pedido.id}">Nome do cliente</label>
+						      <input id="nomeCliente${pedido.id}"
+										type="text"
+										class="form-control-plaintext"
+										value="${pedido.cliente.nome}">
+						    </div>
+							</div>
+						</form>
 						<ul>
 							<li>Id: ${pedido.id}</li>
 							<li>Cliente: ${pedido.cliente.nome}</li>

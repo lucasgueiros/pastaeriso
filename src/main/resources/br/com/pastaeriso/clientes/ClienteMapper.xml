@@ -8,6 +8,10 @@
 			<idArg column="id" javaType="Integer"/>
 			<arg column="nome" javaType="String"/>
 		</constructor>
+    <collection property="contatos" ofType="Contato" column="id"
+      select="br.com.pastaeriso.clientes.contatos.ContatoMapper.selectContatosByClienteId"/>
+    <collection property="enderecos" ofType="Endereco" column="id"
+      select="br.com.pastaeriso.clientes.endereco.EnderecoMapper.selectEnderecosByClienteId"/>
 	</resultMap>
 
 	<select id="selectClienteById" resultMap="clienteMap" parameterType="Integer">

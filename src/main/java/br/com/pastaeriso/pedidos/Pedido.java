@@ -16,24 +16,26 @@ public class Pedido {
 	private BigDecimal trocoPara;
 	private LocalDateTime horarioEntrega;
 	private List<PedidoItem> itens;
-	
+	private BigDecimal total; // troco é calculado
+	private FormaDePagamento formaDePagamento;
+
 	public Pedido(){
 	}
-	
+
 	public Pedido(Integer id){
 		this.id=id;
 	}
-	
+
 	public Pedido(Cliente cliente) {
 		this.cliente = cliente;
 		this.itens = new LinkedList<PedidoItem>();
 	}
-	
+
 	public Pedido(Integer id, Cliente cliente) {
 		this(cliente);
 		this.id = id;
 	}
-	
+
 	public Integer getId(){
 		return id;
 	}
@@ -75,5 +77,17 @@ public class Pedido {
 	}
 	public Endereco getEnderecoEntrega(){
 		return this.enderecoEntrega;
+	}
+	public BigDecimal getTotal() {
+		return total;
+	}
+	public BigDecimal getTroco() {
+		return trocoPara - total;
+	}
+	public FormaDePagamento getFormaDePagamento() {
+		return formaDePagamento;
+	}
+	public void setFormaDePagamento(FormaDePagamento formaDePagamento) {
+		this.formaDePagamento = formaDePagamento;
 	}
 }

@@ -4,20 +4,25 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.LinkedList;
 public class Produto{
-	
+
 	private Integer id;
 	private String nome;
 	private LocalDate data;
 	private String descricao;
 	private String comentario;
 	private List<ProdutoPreco> precos;
-	
+
+	public Produto(Integer id, String nome, LocalDate data) {
+		this(nome,data);
+		this.id=id;
+	}
+
 	public Produto(String nome, LocalDate data) {
 		this.data = data;
 		this.nome = nome;
 		this.precos = new LinkedList<ProdutoPreco>();
 	}
-	
+
 	public void setId(Integer id){
 		this.id = id;
 	}

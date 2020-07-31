@@ -3,16 +3,34 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="br.com.pastaeriso.pedidos.PedidoMapper">
+  <resultMap id="formaDePagamentoMap" type="FormaDePagamento">
+    <constructor>
+      <idArg column="id" javaType="Integer" />
+      <arg column="forma" javaType="String"/>
+    </constructor>
+  </resultMap>
 	<resultMap id="pedidoMap" type="Pedido">
 		<id property="id" column="id" javaType="Integer" />
-		<result property="trocoPara" column="troco_para" javaType="java.math.BigDecimal"/>
-		<result column="horario_entrega" property="horarioEntrega" javaType="java.time.LocalDateTime"/>
-		<association property="cliente" column="cliente_id" javaType="Cliente" select="br.com.pastaeriso.clientes.ClienteMapper.selectClienteById"/>
-		<association property="enderecoEntrega" column="endereco_entrega" javaType="Endereco" select="br.com.pastaeriso.clientes.enderecos.EnderecoMapper.selectEnderecoById"/>
+		<result property="trocoPara" column="troco_para"
+      javaType="java.math.BigDecimal"/>
+		<result column="horario_entrega" property="horarioEntrega"
+      javaType="java.time.LocalDateTime"/>
+		<association property="cliente" column="cliente_id" javaType="Cliente"
+      select="br.com.pastaeriso.clientes.ClienteMapper.selectClienteById"/>
+		<association property="enderecoEntrega" column="endereco_entrega"
+      javaType="Endereco" select="br.com.pastaeriso.clientes.enderecos.EnderecoMapper.selectEnderecoById"/>
+    <association property="formaDePagamento" column="forma_de_pagamento"
+      javaType="FormaDePagamento" select="selectFormaDePagamentoById"/>
+    <collection property="itens" column="id" javaType="PedidoItem"
+      select="br.com.pastaeriso.pedidos.PedidoItemMapper.selectPedidoItensByPedidoId"/>
 	</resultMap>
 
+  <select id="selectFormaDePagamentoById" resultMap="formaDePagamentoMap" parameterType="Integer">
+    select id,forma from formas_de_pagamento where id=#{id}
+  </select>
+
 	<select id="selectPedidos" resultMap="pedidoMap">
-		select id,cliente_id,troco_para,horario_entrega,endereco_entrega from pedidos order by horario_entrega
+		select id,cliente_id,troco_para,horario_entrega,endereco_entrega,forma_de_pagamento from pedidos order by horario_entrega
 	</select>
-	
+
 </mapper>
