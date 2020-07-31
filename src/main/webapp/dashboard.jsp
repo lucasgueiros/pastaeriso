@@ -2,7 +2,7 @@
 <jsp:include page="include/header_head.jsp" flush="true"></jsp:include>
 <jsp:include page="include/header_head_to_body.jsp">
 	<jsp:param name="title" value="Dashboard"/>
-    <jsp:param name="active" value="Dashboard"/>
+  <jsp:param name="active" value="Dashboard"/>
 </jsp:include>
 <div class="btn-group mr-2">
 	<button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
