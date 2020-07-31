@@ -37,6 +37,7 @@ public class SelectPedidosServlet extends HttpServlet {
 			map.get(pedido.getDataEntrega()).add(pedido);
 		}
 		
+		request.setAttribute("todos",pedidos);
 		request.setAttribute("map",map);
 		RequestDispatcher rd = request.getRequestDispatcher("pedidos.jsp");
 		rd.forward(request,response);

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="br.com.pastaeriso.clientes.enderecos.EnderecoMapper">
+	<resultMap id="tipoDeEnderecoMap" type="TipoDeEndereco">
+		<constructor>
+			<idArg column="id" javaType="Integer"/>
+			<arg column="tipo" javaType="String"/>
+		</constructor>
+	</resultMap>
+	
+	<resultMap id="enderecoMap" type="Endereco">
+		<constructor>
+			<idArg column="id" javaType="Integer"/>
+			<arg column="rua" javaType="String"/>
+			<arg column="numero" javaType="String"/>
+			<arg column="bairro" javaType="String"/>
+		</constructor>
+		<result property="complemento" column="complemento" javaType="String"/>
+		<result property="comentarios" column="comentarios" javaType="String"/>
+		<result property="pontoDeReferencia" column="ponto_de_referencia" javaType="String"/>
+		<association property="tipo" column="tipo_de_endereco" javaType="TipoDeEndereco" select="selectTipoDeEnderecoById" />
+	</resultMap>
+	
+	<select id="selectEnderecoById" resultMap="enderecoMap" parameterType="Integer">
+		select id,rua,numero,bairro,complemento,ponto_de_referencia,comentarios,tipo_de_endereco from cliente_enderecos where id=#{id}
+	</select>
+	
+	<select id="selectTipoDeEnderecoById" resultMap="tipoDeEnderecoMap" parameterType="Integer">
+		select id,tipo from tipos_de_enderecos where id=#{id}
+	</select>
+	
+</mapper>

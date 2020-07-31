@@ -5,6 +5,10 @@ public class TipoDeEndereco {
 	private Integer id;
 	private String tipo;
 	
+	public TipoDeEndereco (Integer id, String tipo) {
+		this(tipo);
+		this.id = id;
+	}
 	public TipoDeEndereco (String tipo) {
 		this.tipo = tipo;
 	}

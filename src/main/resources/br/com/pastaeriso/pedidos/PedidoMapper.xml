@@ -8,10 +8,11 @@
 		<result property="trocoPara" column="troco_para" javaType="java.math.BigDecimal"/>
 		<result column="horario_entrega" property="horarioEntrega" javaType="java.time.LocalDateTime"/>
 		<association property="cliente" column="cliente_id" javaType="Cliente" select="br.com.pastaeriso.clientes.ClienteMapper.selectClienteById"/>
+		<association property="enderecoEntrega" column="endereco_entrega" javaType="Endereco" select="br.com.pastaeriso.clientes.enderecos.EnderecoMapper.selectEnderecoById"/>
 	</resultMap>
 
 	<select id="selectPedidos" resultMap="pedidoMap">
-		select id,cliente_id,troco_para,horario_entrega from pedidos order by horario_entrega
+		select id,cliente_id,troco_para,horario_entrega,endereco_entrega from pedidos order by horario_entrega
 	</select>
 	
 </mapper>

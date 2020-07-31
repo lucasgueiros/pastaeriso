@@ -10,7 +10,7 @@
 		</constructor>
 	</resultMap>
 
-	<select id="selectClienteById" resultMap="clienteMap">
+	<select id="selectClienteById" resultMap="clienteMap" parameterType="Integer">
 		select id,nome from clientes where id=#{id}
 	</select>
 
