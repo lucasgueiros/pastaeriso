@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.LinkedList;
 import br.com.pastaeriso.clientes.Cliente;
-import br.com.pastaeriso.clientes.Endereco;
+import br.com.pastaeriso.clientes.enderecos.Endereco;
 
 public class Pedido {
 	private Integer id;
@@ -16,6 +16,13 @@ public class Pedido {
 	private BigDecimal trocoPara;
 	private LocalDateTime horarioEntrega;
 	private List<PedidoItem> itens;
+	
+	public Pedido(){
+	}
+	
+	public Pedido(Integer id){
+		this.id=id;
+	}
 	
 	public Pedido(Cliente cliente) {
 		this.cliente = cliente;

@@ -2,6 +2,8 @@ package br.com.pastaeriso.clientes;
 
 import java.util.List;
 import java.util.LinkedList;
+import br.com.pastaeriso.clientes.enderecos.Endereco;
+import br.com.pastaeriso.clientes.contatos.Contato;
 
 public class Cliente {
 	
