@@ -7,8 +7,11 @@
   <version>1.0</version>
   <name>pastaeriso Maven Webapp</name>
   <url>http://maven.apache.org</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <dependencies>
-	
+
 	<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 	<dependency>
 		<groupId>org.mybatis</groupId>
