@@ -5,6 +5,7 @@
 <configuration>
   <typeAliases>
 	<typeAlias type="br.com.pastaeriso.pedidos.Pedido" alias="Pedido"/>
+	<typeAlias type="br.com.pastaeriso.clientes.Cliente" alias="Cliente"/>
   </typeAliases>
   <environments default="development">
     <environment id="development">
@@ -19,5 +20,6 @@
   </environments>
   <mappers>
     <mapper resource="br/com/pastaeriso/pedidos/PedidoMapper.xml"/>
+	<mapper resource="br/com/pastaeriso/clientes/ClienteMapper.xml"/>
   </mappers>
 </configuration>

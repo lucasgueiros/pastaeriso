@@ -81,7 +81,7 @@
 							<li>Id: ${pedido.id}</li>
 							<li>Cliente: ${pedido.cliente}</li>
 							<li>Contato: ${pedido.contato}</li>
-							<li>Horario entrega: ${pedido.horarioSomenteEntrega}</li>
+							<li>Horario entrega: ${pedido.horarioEntrega}</li>
 							<li>Troco para: ${pedido.trocoPara}</li>
 						</li>
 					</div>

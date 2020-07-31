@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="br.com.pastaeriso.clientes.ClienteMapper">
+	<resultMap id="clienteMap" type="Cliente">
+		<constructor>
+			<idArg column="id" javaType="Integer"/>
+			<arg column="nome" javaType="String"/>
+		</constructor>
+	</resultMap>
+
+	<select id="selectClienteById" resultMap="clienteMap">
+		select id,nome from clientes where id=#{id}
+	</select>
+
+</mapper>
