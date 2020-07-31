@@ -1,7 +1,7 @@
 package br.com.pastaeriso.clientes.enderecos;
 
 public class Endereco {
-	
+
 	private Integer id;
 	private String rua;
 	private String numero;
@@ -10,18 +10,18 @@ public class Endereco {
 	private String pontoDeReferencia;
 	private String comentarios;
 	private TipoDeEndereco tipo;
-	
+
 	public Endereco (Integer id, String rua, String numero, String bairro) {
 		this(rua,numero,bairro);
 		this.id=id;
 	}
-	
+
 	public Endereco (String rua, String numero, String bairro) {
 		this.rua = rua;
 		this.numero = numero;
 		this.bairro = bairro;
 	}
-	
+
 	public Integer getId(){
 		return id;
 	}
@@ -70,4 +70,9 @@ public class Endereco {
 	public void setTipo (TipoDeEndereco tipo) {
 		this.tipo = tipo;
 	}
+	@Override
+	public String toString(){
+		return rua + ", " + numero + ", " + bairro + ". " + complemento;
+	}
+
 }
