@@ -1,4 +1,5 @@
 <%@ page isELIgnored="false"%>
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <!-- saved from url=(0053)https://getbootstrap.com/docs/4.5/examples/dashboard/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
