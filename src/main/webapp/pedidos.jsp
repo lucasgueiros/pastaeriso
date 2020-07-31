@@ -17,21 +17,23 @@
 <script>
 	var pedidos = document.getElementsByClassName('pedidos');
 	var datas = document.getElementsByClassName('datas');
-	function hideAllPedidos (panels) {
+	function hideAll(panels) {
 	  var i;
 	  for (i = 0; i < panels.length; i+= 1){
-		pedidos[i].style.display = "none";
+			panels[i].style.display = "none";
 	  }
 	}
-	function showPanel(name,isDatas) {
-		if(isDatas){
-			hideAllPanels(datas);
-		} else {
-			hideAllPanels(pedidos);
-		}
-		document.getElementById(name).style.display = "block";
+	function showData(data) {
+		hideAll(datas);
+		document.getElementById("dataAtual").innerHtml = data;
+		document.getElementById("dia" + data).style.display = "block";
 	}
-
+	function showPedido(id){
+		hideAll(pedidos);
+		document.getElementById("pedido" + id).style.display = "block";
+		document.getElementsByClassName("table-light")[0].classList.remove("table-light");
+		document.getElementById("linhaPedido" + id).classList.add("table-light");
+	}
 </script>
 
 <jsp:include page="include/header_head_to_body.jsp">
@@ -39,36 +41,53 @@
 	<jsp:param name="active" value="pedidos"/>
 </jsp:include>
 
+<div class="btn-group mr-2">
+	<button type="button" class="btn btn-sm btn-outline-secondary">Compartilhar</button>
+	<button type="button" class="btn btn-sm btn-outline-secondary">Exportar</button>
+</div>
+
+<div class="btn-group">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span data-feather="calendar"></span>
+		<p id="dataAtual">Datas</p>
+  </button>
+  <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
+		<c:forEach items="${datas}" var="data">
+			<a class="dropdown-item" onClick="showData('${data}')">
+				${data}
+			</a>
+		</c:forEach>
+  </div>
+</div>
+
 <jsp:include page="include/header_body.jsp" flush="true"></jsp:include>
 
-
-
-<c:forEach items="${requestScope.map.keys()}" var="data">
-	<c:set var="pedidos" scope="request" value="${requestScope.map.get(data)}" />
-	<div id="pedidos${data}" class="container-fluid datas">
+<c:forEach items="${requestScope.map}" var="tupla">
+	<c:set var="pedidos" scope="request" value="${tupla.value}" />
+	<div id="dia${tupla.key}" class="container-fluid datas">
 		<div class="row">
 			<div class="col-6 col-md-4">
 				<table class="table-sm">
 					<thead>
 						<tr>
-							<th scope="scope">Hor�rio</th>
+							<th scope="scope">Horário</th>
 							<th scope="scope">Cliente</th>
 							<th scope="scope">Ver detalhes</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${requestScope.pedidos}" var="pedido">
-						<tr>
+						<c:forEach items="${tupla.value}" var="pedido">
+						<tr id="linhaPedido${pedido.id}" class="linhaPedido">
 							<td>${pedido.horarioSomenteEntrega}</td>
-							<td>${pedido.cliente}</td>
+							<td>${pedido.cliente.nome}</td>
 							<td>
-								<button type="button" 
+								<button type="button"
 										class="btn btn-primary"
-										onClick="showPanel('pedido${pedido.id}')">
+										onClick="showPedido('${pedido.id}')">
 									Detalhes
 								</button>
 							</td>
-						</tr>	
+						</tr>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -79,10 +98,10 @@
 					<div id="pedido${pedido.id}" class='pedidos'>
 						<ul>
 							<li>Id: ${pedido.id}</li>
-							<li>Cliente: ${pedido.cliente}</li>
-							<li>Contato: ${pedido.contato}</li>
-							<li>Horario entrega: ${pedido.horarioEntrega}</li>
-							<li>Troco para: ${pedido.trocoPara}</li>
+							<li>Cliente: ${pedido.cliente.nome}</li>
+							<li>Endereço: ${pedido.enderecoEntrega}</li>
+							<li>Entrega: às ${pedido.horarioSomenteEntrega} do dia ${pedido.dataEntrega}</li>
+							<li>Troco para: R$${pedido.trocoPara}</li>
 						</li>
 					</div>
 					<c:set var="primeiro" value="${false}"/>
