@@ -20,14 +20,22 @@ import br.com.pastaeriso.pedidos.PedidoMapper;
 public class SelectPedidosServlet extends HttpServlet {
 	protected void service (HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-		
+
 		List<Pedido> pedidos;
-  
-		try (SqlSession sqlSession = DatabaseConnection.getInstance().getSqlSessionFactory().openSession()) {
-			PedidoMapper mapper = sqlSession.getMapper(PedidoMapper.class);
+
+		try {
+			PedidoMapper mapper = DatabaseConnection.getInstance()
+															.getSqlSession("falso","falso")
+															.getMapper(PedidoMapper.class);
 			pedidos = mapper.selectPedidos();
+		} catch(Exception e) {
+			request.setAttribute("e",e);
+			RequestDispatcher rd = request.getRequestDispatcher("error.jsp");
+			rd.forward(request,response);
+			return;
 		}
-		
+
+
 		// Separando os pedidos por data de entrega
 		Map<LocalDate,List<Pedido>> map = new HashMap<>();
 		for(Pedido pedido : pedidos) {
@@ -36,7 +44,7 @@ public class SelectPedidosServlet extends HttpServlet {
 			}
 			map.get(pedido.getDataEntrega()).add(pedido);
 		}
-		
+
 		request.setAttribute("map",map);
 		RequestDispatcher rd = request.getRequestDispatcher("pedidos.jsp");
 		rd.forward(request,response);
