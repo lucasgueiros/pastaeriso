@@ -3,12 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-  <properties>
-    <property name="username" value="none"/>
-    <property name="password" value="none"/>
-    <property name="url" value="jdbc:postgresql://localhost:5432/pastaeriso"/>
-    <property name="driver" value="org.postgresql.Driver"/>
-  </properties>
   <typeAliases>
   	<typeAlias type="br.com.pastaeriso.pedidos.Pedido" alias="Pedido"/>
     <typeAlias type="br.com.pastaeriso.pedidos.pedidoItens.PedidoItem" alias="PedidoItem"/>
@@ -25,10 +19,10 @@
     <environment id="development">
       <transactionManager type="JDBC"/>
       <dataSource type="POOLED">
-        <property name="driver" value="${driver}"/>
-        <property name="url" value="${url}"/>
-        <property name="username" value="${username}"/>
-        <property name="password" value="${password}"/>
+        <property name="driver" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/pastaeriso"/>
+        <property name="username" value="lucasgueiros"/>
+        <property name="password" value="rmvll6fls"/>
       </dataSource>
     </environment>
   </environments>
