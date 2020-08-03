@@ -1,6 +1,8 @@
 package br.com.pastaeriso.produtos;
 
+import java.util.List;
+
 public interface ProdutoMapper {
   public List<ProdutoPreco> selectProdutoPrecosByProdutoId (Integer id);
-  public List<Produtos> selectProdutos();
+  public List<Produto> selectProdutos();
 }

@@ -4,10 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="br.com.pastaeriso.clientes.enderecos.EnderecoMapper">
 	<resultMap id="tipoDeEnderecoMap" type="TipoDeEndereco">
-		<constructor>
-			<idArg column="id" javaType="Integer"/>
-			<arg column="tipo" javaType="String"/>
-		</constructor>
+		<id property="id" column="id" javaType="Integer"/>
+		<result property="tipo" column="tipo" javaType="String"/>
 	</resultMap>
 
 	<resultMap id="enderecoMap" type="Endereco">

@@ -9,6 +9,8 @@ public class ProdutoPreco {
 	private BigDecimal preco;
 	private LocalDate data;
 
+	public ProdutoPreco (){}
+
 	public ProdutoPreco(Integer id, BigDecimal preco, LocalDate data) {
 		this(preco);
 		this.data = data;

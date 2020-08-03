@@ -4,10 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="br.com.pastaeriso.clientes.ClienteMapper">
 	<resultMap id="clienteMap" type="Cliente">
-		<constructor>
-			<idArg column="id" javaType="Integer"/>
-			<arg column="nome" javaType="String"/>
-		</constructor>
+		<id property="id" column="id" javaType="Integer"/>
+		<result property="nome" column="nome" javaType="String"/>
     <collection property="contatos" ofType="Contato" column="id"
       select="br.com.pastaeriso.clientes.contatos.ContatoMapper.selectContatosByClienteId"/>
     <collection property="enderecos" ofType="Endereco" column="id"

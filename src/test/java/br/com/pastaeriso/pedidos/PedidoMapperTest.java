@@ -6,20 +6,22 @@ import br.com.pastaeriso.servicos.DatabaseConnection;
 //import br.com.pastaeriso.pedidos.PedidoMapper;
 import java.util.List;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import org.apache.ibatis.session.SqlSession;
 
 public class PedidoMapperTest {
 
-  @Test
+  //@Test
   public void testeBdConexao() {
     List<Pedido> pedidos = new ArrayList<>();
-		try {
-			PedidoMapper mapper = DatabaseConnection.getInstance()
-															.getSqlSession("falso","falso")
-															.getMapper(PedidoMapper.class);
+    String user = JOptionPane.showInputDialog("Digite seu usuário");
+    String password = JOptionPane.showInputDialog("Digite a senha");
+    String url = "jdbc:postgresql://192.168.0.150:5432/pastaeriso";
+    String driver = "org.postgresql.Driver";
+		try (SqlSession sqlSession = DatabaseConnection.getInstance()
+                            .getSqlSession(driver,url,user,password)) {
+			PedidoMapper mapper = sqlSession.getMapper(PedidoMapper.class);
 			pedidos = mapper.selectPedidos();
-		} catch(Exception e) {
-			e.printStackTrace();
-      return;
 		}
     System.out.println(pedidos);
   }

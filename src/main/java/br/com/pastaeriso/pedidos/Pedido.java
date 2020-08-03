@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.LinkedList;
 import br.com.pastaeriso.clientes.Cliente;
 import br.com.pastaeriso.clientes.enderecos.Endereco;
+import br.com.pastaeriso.pedidos.pedidoItens.PedidoItem;
 
 public class Pedido {
 	private Integer id;
@@ -82,7 +83,7 @@ public class Pedido {
 		return total;
 	}
 	public BigDecimal getTroco() {
-		return trocoPara - total;
+		return trocoPara.subtract(total);
 	}
 	public FormaDePagamento getFormaDePagamento() {
 		return formaDePagamento;

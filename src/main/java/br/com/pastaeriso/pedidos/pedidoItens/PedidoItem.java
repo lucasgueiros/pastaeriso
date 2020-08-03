@@ -1,4 +1,4 @@
-package br.com.pastaeriso.pedidos;
+package br.com.pastaeriso.pedidos.pedidoItens;
 
 import java.math.BigDecimal;
 import br.com.pastaeriso.produtos.Produto;
@@ -12,7 +12,7 @@ public class PedidoItem {
 	private BigDecimal quantidade;
 	private String comentarios;
 	private LocalDateTime data;
-
+	public PedidoItem(){}
 	public PedidoItem(Integer id, BigDecimal quantidade) {
 		this.id = id;
 		this.quantidade = quantidade;

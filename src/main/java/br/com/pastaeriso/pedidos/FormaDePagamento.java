@@ -3,7 +3,7 @@ package br.com.pastaeriso.pedidos;
 public class FormaDePagamento {
   private Integer id;
   private String forma;
-
+  public FormaDePagamento () {}
   public FormaDePagamento (Integer id, String forma) {
     this(forma);
     this.id = id;

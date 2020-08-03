@@ -11,6 +11,8 @@ public class Endereco {
 	private String comentarios;
 	private TipoDeEndereco tipo;
 
+	public Endereco () {}
+
 	public Endereco (Integer id, String rua, String numero, String bairro) {
 		this(rua,numero,bairro);
 		this.id=id;

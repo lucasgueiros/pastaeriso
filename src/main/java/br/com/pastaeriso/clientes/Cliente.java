@@ -6,23 +6,25 @@ import br.com.pastaeriso.clientes.enderecos.Endereco;
 import br.com.pastaeriso.clientes.contatos.Contato;
 
 public class Cliente {
-	
+
 	private Integer id;
 	private String nome;
 	private List<Endereco> enderecos;
 	private List<Contato> contatos;
-	
+
+	public Cliente(){}
+
 	public Cliente(Integer id, String nome) {
 		this(nome);
 		this.id = id;
 	}
-	
+
 	public Cliente(String nome) {
 		this.nome = nome;
 		this.enderecos = new LinkedList<Endereco>();
 		this.contatos = new LinkedList<Contato>();
 	}
-	
+
 	public Integer getId(){
 		return id;
 	}

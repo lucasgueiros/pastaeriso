@@ -5,21 +5,17 @@
 <mapper namespace="br.com.pastaeriso.produtos.ProdutoMapper">
 
   <resultMap id="ProdutoPrecoMap" type="ProdutoPreco">
-    <constructor>
-      <idArg column="id" javaType="Integer"/>
-      <arg column="preco" javaType="java.math.BigDecimal"/>
-      <arg column="data" javaType="java.time.LocalDate"/>
-    </constructor>
+    <id property="id" column="id" javaType="Integer"/>
+    <result property="preco" column="preco" javaType="java.math.BigDecimal"/>
+    <result property="data" column="data" javaType="java.time.LocalDate"/>
   </resultMap>
 
   <resultMap id="ProdutoMap" type="Produto">
-    <constructor>
-      <idArg column="id" javaType="Integer"/>
-      <arg column="nome" javaType="String"/>
-      <arg column="data" javaType="java.time.LocalDate"/>
-    </constructor>
-    <result column="descricao" javaType="String"/>
-    <result column="comentarios" javaType="String"/>
+    <id property="id" column="id" javaType="Integer"/>
+    <result property="nome" column="nome" javaType="String"/>
+    <result property="data" column="data" javaType="java.time.LocalDate"/>
+    <result column="descricao" property="descricao" javaType="String"/>
+    <result column="comentarios" property="comentarios" javaType="String"/>
     <collection property="precos" ofType="ProdutoPreco" column="id"
       select="selectProdutoPrecosByProdutoId"/>
   </resultMap>

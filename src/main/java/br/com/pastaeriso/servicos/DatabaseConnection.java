@@ -28,7 +28,7 @@ public class DatabaseConnection {
 	private DatabaseConnection(){
 		String resource = "mybatis-config.xml";
 		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-		InputStream inputStream = classloader.getResourceAsStream(resource);
+		this.inputStream = classloader.getResourceAsStream(resource);
 		this.sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
 	}
 
@@ -40,10 +40,16 @@ public class DatabaseConnection {
 
 	public SqlSession getSqlSession
 			(String url, String username, String password){
+				return getSqlSession("org.postgresql.Driver",url,username,password);
+	}
+
+	public SqlSession getSqlSession
+			(String driver, String url, String username, String password){
 		Properties properties = new Properties();
 		properties.setProperty("username", username);
 		properties.setProperty("password", password);
 		properties.setProperty("url", url);
+		properties.setProperty("driver", driver);
 
 		SqlSessionFactory sqlSessionFactory =
 			sqlSessionFactoryBuilder.build(inputStream, properties);

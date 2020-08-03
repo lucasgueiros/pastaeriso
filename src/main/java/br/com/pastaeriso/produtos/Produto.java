@@ -12,6 +12,8 @@ public class Produto{
 	private String comentario;
 	private List<ProdutoPreco> precos;
 
+	public Produto() {}
+
 	public Produto(Integer id, String nome, LocalDate data) {
 		this(nome,data);
 		this.id=id;

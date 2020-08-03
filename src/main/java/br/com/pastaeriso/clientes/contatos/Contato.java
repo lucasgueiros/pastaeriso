@@ -6,6 +6,8 @@ public class Contato{
 	private FormaDeContato forma;
 	private String contato;
 
+	public Contato() {}
+
 	public Contato(Integer id, String contato) {
 		this.id=id;
 		this.contato = contato;
