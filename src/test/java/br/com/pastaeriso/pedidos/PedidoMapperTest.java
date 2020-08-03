@@ -11,7 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 
 public class PedidoMapperTest {
 
-  //@Test
+  /*@Test
   public void testeBdConexao() {
     List<Pedido> pedidos = new ArrayList<>();
     String user = JOptionPane.showInputDialog("Digite seu usuário");
@@ -24,6 +24,6 @@ public class PedidoMapperTest {
 			pedidos = mapper.selectPedidos();
 		}
     System.out.println(pedidos);
-  }
+  }*/
 
 }
