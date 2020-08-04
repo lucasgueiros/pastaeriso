@@ -9,7 +9,7 @@ public class Produto{
 	private String nome;
 	private LocalDate data;
 	private String descricao;
-	private String comentario;
+	private String comentarios;
 	private List<ProdutoPreco> precos;
 
 	public Produto() {}
@@ -43,11 +43,11 @@ public class Produto{
 	public String getDescricao(){
 		return this.descricao;
 	}
-	public void setComentarios(String comentario){
-		this.comentario = comentario;
+	public void setComentarios(String comentarios){
+		this.comentarios = comentarios;
 	}
 	public String getComentarios(){
-		return this.comentario;
+		return this.comentarios;
 	}
 	public void setData(LocalDate data){
 		this.data = data;

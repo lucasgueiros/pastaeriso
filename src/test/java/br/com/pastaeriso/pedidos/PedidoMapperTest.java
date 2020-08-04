@@ -11,19 +11,15 @@ import org.apache.ibatis.session.SqlSession;
 
 public class PedidoMapperTest {
 
-  /*@Test
+  @Test
   public void testeBdConexao() {
-    List<Pedido> pedidos = new ArrayList<>();
-    String user = JOptionPane.showInputDialog("Digite seu usuário");
-    String password = JOptionPane.showInputDialog("Digite a senha");
-    String url = "jdbc:postgresql://192.168.0.150:5432/pastaeriso";
-    String driver = "org.postgresql.Driver";
-		try (SqlSession sqlSession = DatabaseConnection.getInstance()
-                            .getSqlSession(driver,url,user,password)) {
-			PedidoMapper mapper = sqlSession.getMapper(PedidoMapper.class);
-			pedidos = mapper.selectPedidos();
-		}
+  List<Pedido> pedidos = new ArrayList<>();
+
+  try (SqlSession sqlSession = DatabaseConnection.getInstance().getSqlSessionFactory().openSession()) {
+    PedidoMapper mapper = sqlSession.getMapper(PedidoMapper.class);
+    pedidos = mapper.selectPedidos();
+  }
     System.out.println(pedidos);
-  }*/
+  }
 
 }

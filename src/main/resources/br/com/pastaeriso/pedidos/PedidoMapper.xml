@@ -5,7 +5,7 @@
 <mapper namespace="br.com.pastaeriso.pedidos.PedidoMapper">
   <resultMap id="formaDePagamentoMap" type="FormaDePagamento">
     <id column="forma_id" property="id" javaType="Integer" />
-    <result column="forma" property="column" javaType="String"/>
+    <result column="forma" property="forma" javaType="String"/>
   </resultMap>
 	<resultMap id="pedidoMap" type="Pedido">
 		<id property="id" column="id" javaType="Integer" />
@@ -15,11 +15,11 @@
       javaType="java.time.LocalDateTime"/>
 		<association property="cliente" column="cliente_id" javaType="Cliente"
       select="br.com.pastaeriso.clientes.ClienteMapper.selectClienteById"/>
-		<association property="enderecoEntrega" column="endereco_entrega"
+    <association property="enderecoEntrega" column="endereco_entrega"
       javaType="Endereco" select="br.com.pastaeriso.clientes.enderecos.EnderecoMapper.selectEnderecoById"/>
     <association property="formaDePagamento" column="forma_de_pagamento"
       javaType="FormaDePagamento" select="selectFormaDePagamentoById"/>
-    <collection property="itens" column="id" javaType="PedidoItem"
+    <collection property="itens" column="id" ofType="PedidoItem" javaType="ArrayList"
       select="br.com.pastaeriso.pedidos.pedidoItens.PedidoItemMapper.selectPedidoItensByPedidoId"/>
 	</resultMap>
 

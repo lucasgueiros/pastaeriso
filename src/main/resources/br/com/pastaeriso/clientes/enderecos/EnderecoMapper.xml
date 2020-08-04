@@ -18,7 +18,8 @@
 		<result property="complemento" column="complemento" javaType="String"/>
 		<result property="comentarios" column="comentarios" javaType="String"/>
 		<result property="pontoDeReferencia" column="ponto_de_referencia" javaType="String"/>
-		<association property="tipo" column="tipo_de_endereco" javaType="TipoDeEndereco" select="selectTipoDeEnderecoById" />
+		<association property="tipo" column="tipo_de_endereco"
+      javaType="TipoDeEndereco" select="selectTipoDeEnderecoById" />
 	</resultMap>
 
 	<select id="selectEnderecoById" resultMap="enderecoMap" parameterType="Integer">
