@@ -6,7 +6,7 @@ public class FormaDeContato {
 	private String forma;
 
 	public FormaDeContato () {}
-		
+
 	public FormaDeContato (String forma) {
 		this.forma = forma;
 	}
@@ -23,5 +23,7 @@ public class FormaDeContato {
 	public void setForma (String forma) {
 		this.forma = forma;
 	}
-
+	public String toString () {
+		return forma;
+	}
 }

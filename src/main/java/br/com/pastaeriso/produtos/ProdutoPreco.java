@@ -39,4 +39,14 @@ public class ProdutoPreco {
 	public LocalDate getData(){
 		return this.data;
 	}
+	public String toString() {
+		String r = "";
+		if(id != null)
+			r += id + ", ";
+		if(data != null)
+			r += data + ", ";
+		if(preco != null)
+			r += preco + ", ";
+		return r;
+	}
 }

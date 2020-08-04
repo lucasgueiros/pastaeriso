@@ -49,4 +49,8 @@ public class Cliente {
 	public List<Contato> getContatos() {
 		return this.contatos;
 	}
+	public String toString(){
+		String r = "cliente";
+		return r;
+	}
 }

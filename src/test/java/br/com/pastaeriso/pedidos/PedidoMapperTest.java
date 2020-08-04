@@ -13,13 +13,19 @@ public class PedidoMapperTest {
 
   @Test
   public void testeBdConexao() {
-  List<Pedido> pedidos = new ArrayList<>();
+    List<Pedido> pedidos = new ArrayList<>();
 
-  try (SqlSession sqlSession = DatabaseConnection.getInstance().getSqlSessionFactory().openSession()) {
-    PedidoMapper mapper = sqlSession.getMapper(PedidoMapper.class);
-    pedidos = mapper.selectPedidos();
-  }
-    System.out.println(pedidos);
+    try (SqlSession sqlSession = DatabaseConnection.getInstance().getSqlSessionFactory().openSession()) {
+      PedidoMapper mapper = sqlSession.getMapper(PedidoMapper.class);
+      pedidos = mapper.selectPedidos();
+    }
+    String r = "";
+    if(pedidos == null)
+      r = "null";
+    else
+      r = pedidos.toString();
+    r = r.replace(",","\n");
+    System.out.println(r);
   }
 
 }

@@ -58,4 +58,18 @@ public class PedidoItem {
 	public LocalDateTime getData(){
 		return this.data;
 	}
+	public String toString(){
+		String r = "";
+		if(produto != null )
+			r += "Produto: " + produto;
+		if(preco != null)
+			r += ", Preco: " + preco;
+		if(quantidade != null)
+			r += ", Quantidade: " + quantidade;
+		if(comentarios != null)
+			r += ", Comentarios: " + comentarios;
+		if(data != null )
+			r += ", Data: " + data;
+		return r;
+	}
 }

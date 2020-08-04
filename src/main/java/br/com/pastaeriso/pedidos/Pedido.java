@@ -83,6 +83,9 @@ public class Pedido {
 		return total;
 	}
 	public BigDecimal getTroco() {
+		if(total == null || trocoPara == null) {
+			return new BigDecimal(0);
+		}
 		return trocoPara.subtract(total);
 	}
 	public FormaDePagamento getFormaDePagamento() {
@@ -90,5 +93,28 @@ public class Pedido {
 	}
 	public void setFormaDePagamento(FormaDePagamento formaDePagamento) {
 		this.formaDePagamento = formaDePagamento;
+	}
+	public String toString() {
+		String r = "";
+		if(id != null)
+		r += "Id: " + id;
+		if(cliente != null)
+		r += "\nCliente: " + cliente;
+		if(enderecoEntrega != null)
+		r += "\nEndereco de entrega: " + enderecoEntrega;
+		if(trocoPara != null)
+		r += "\nTroco para: " + trocoPara;
+		if(horarioEntrega != null)
+		r += "\nHorario de entrega: " + horarioEntrega;
+		if(itens != null)
+			r += "\nItens:\n" + itens.toString().replace(",","\n    ");
+		else
+			r += "null";
+		if(total != null)
+		r += "\nTotal: " + total;
+		if(formaDePagamento != null)
+		r += "\nForma de pagamento: " + formaDePagamento;
+		r += "\nTroco: " + this.getTroco();
+		return r;
 	}
 }

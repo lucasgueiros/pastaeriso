@@ -61,4 +61,22 @@ public class Produto{
 	public List<ProdutoPreco> getPrecos(){
 		return this.precos;
 	}
+	public String toString() {
+		String r = "\n(";
+		if(nome != null )
+			r += nome + ",";
+		if(data != null )
+			r += data + ",";
+		if(descricao != null)
+			r+= descricao + ",";
+		if(comentarios != null)
+			r += comentarios + ",";
+		r+= "historico de precos:" + "\n";
+		if(precos != null)
+			r += this.precos.toString().replace(",","\n        ");
+		else
+			r += "null";
+		return r;
+
+	}
 }

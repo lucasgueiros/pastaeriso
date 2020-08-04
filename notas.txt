@@ -1,0 +1,10 @@
+de ClienteMapper eu tirei:
+<collection property="enderecos" ofType="Endereco" column="cliente_id"
+  javaType="ArrayList"
+  select="br.com.pastaeriso.clientes.endereco.EnderecoMapper.selectEnderecosByClienteId"/>
+
+
+select
+*
+from pedidos pe
+;

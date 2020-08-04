@@ -41,5 +41,18 @@ public class Contato{
 	public String getContato(){
 		return this.contato;
 	}
+	public String toString() {
+		String r = "";
+		if(id != null) {
+			r += id + ", ";
+		}
+		if(contato != null){
+			r += contato + ", ";
+		}
+		if(forma != null) {
+			r += forma;
+		}
+		return r;
+	}
 
 }
