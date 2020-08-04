@@ -50,7 +50,17 @@ public class Cliente {
 		return this.contatos;
 	}
 	public String toString(){
-		String r = "cliente";
+		String r = "cliente:(";
+		if(nome != null ) {
+			r += "nome: " + nome + ", ";
+		}
+		if(enderecos != null) {
+			r += "enderecos: " + enderecos.toString();
+		}
+		if(contatos != null) {
+			r += "contatos: " + contatos.toString();
+		}
+		r+=")";
 		return r;
 	}
 }

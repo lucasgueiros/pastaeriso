@@ -45,6 +45,8 @@ public class ProdutoPreco {
 			r += id + ", ";
 		if(data != null)
 			r += data + ", ";
+		else
+			r += "data is null";
 		if(preco != null)
 			r += preco + ", ";
 		return r;

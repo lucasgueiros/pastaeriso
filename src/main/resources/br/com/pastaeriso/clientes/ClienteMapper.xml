@@ -9,7 +9,9 @@
     <collection property="contatos" ofType="Contato" column="cliente_id"
       javaType="ArrayList"
       select="br.com.pastaeriso.clientes.contatos.ContatoMapper.selectContatosByClienteId"/>
-
+    <collection property="enderecos" ofType="Endereco" column="cliente_id"
+      javaType="ArrayList"
+      select="br.com.pastaeriso.clientes.enderecos.EnderecoMapper.selectEnderecosByClienteId"/>
 	</resultMap>
 
 	<select id="selectClienteById" resultMap="clienteMap" parameterType="Integer">

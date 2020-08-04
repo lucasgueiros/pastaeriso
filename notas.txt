@@ -1,10 +1,7 @@
-de ClienteMapper eu tirei:
-<collection property="enderecos" ofType="Endereco" column="cliente_id"
-  javaType="ArrayList"
-  select="br.com.pastaeriso.clientes.endereco.EnderecoMapper.selectEnderecosByClienteId"/>
-
-
-select
-*
-from pedidos pe
-;
+  insert into produto_precos
+  (produto_id, preco, data)
+  select cardapio_produtos.produto_id, cardapio_produtos.preco, max(cardapio_datas.data)
+  from cardapio_produtos
+  join cardapio_datas
+  on cardapio_produtos.cardapio_id = cardapio_datas.cardapio_id
+  group by cardapio_produtos.produto_id,cardapio_produtos.preco;

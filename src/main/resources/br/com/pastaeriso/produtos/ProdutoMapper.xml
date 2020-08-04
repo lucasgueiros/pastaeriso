@@ -23,7 +23,7 @@
 
   <select id="selectProdutoPrecosByProdutoId" resultMap="ProdutoPrecoMap"
     parameterType="Integer">
-    select id, preco from produto_precos where produto_id = #{id}
+    select id, preco, data from produto_precos where produto_id = #{id}
   </select>
 
   <select id="selectProdutoById" resultMap="ProdutoMap" parameterType="Integer">

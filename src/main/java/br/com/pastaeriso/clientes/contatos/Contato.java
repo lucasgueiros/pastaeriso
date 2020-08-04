@@ -42,7 +42,7 @@ public class Contato{
 		return this.contato;
 	}
 	public String toString() {
-		String r = "";
+		String r = "(";
 		if(id != null) {
 			r += id + ", ";
 		}
@@ -52,6 +52,7 @@ public class Contato{
 		if(forma != null) {
 			r += forma;
 		}
+		r += ")";
 		return r;
 	}
 
