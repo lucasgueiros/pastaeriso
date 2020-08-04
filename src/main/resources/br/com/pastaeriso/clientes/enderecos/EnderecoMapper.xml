@@ -31,7 +31,8 @@
 	</select>
 
   <select id="selectEnderecosByClienteId" resultMap="enderecoMap" parameterType="Integer">
-    select id,rua,numero,bairro,complemento,ponto_de_referencia,comentarios,tipo_de_endereco from cliente_enderecos where cliente_id=#{id}
+    select id,rua,numero,bairro,complemento,ponto_de_referencia,comentarios,tipo_de_endereco
+    from cliente_enderecos where cliente_id=#{cliente_id}
   </select>
 
 </mapper>

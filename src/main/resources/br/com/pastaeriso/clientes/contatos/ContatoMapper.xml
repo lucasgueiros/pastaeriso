@@ -20,7 +20,8 @@
   </select>
 
   <select id="selectContatosByClienteId" resultMap="contatoMapper" parameterType="Integer">
-    select id, forma_de_contato, contato from cliente_contatos where cliente_id = #{cliente_id}
+    select id, forma_de_contato, contato from cliente_contatos
+    where cliente_id = #{cliente_id}
   </select>
 
 </mapper>

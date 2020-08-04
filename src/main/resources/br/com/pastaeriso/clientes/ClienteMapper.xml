@@ -6,12 +6,14 @@
 	<resultMap id="clienteMap" type="Cliente">
 		<id property="id" column="id" javaType="Integer"/>
 		<result property="nome" column="nome" javaType="String"/>
-    <collection property="contatos" ofType="Contato" column="id"
+    <collection property="contatos" ofType="Contato" column="cliente_id"
+      javaType="ArrayList"
       select="br.com.pastaeriso.clientes.contatos.ContatoMapper.selectContatosByClienteId"/>
+
 	</resultMap>
 
 	<select id="selectClienteById" resultMap="clienteMap" parameterType="Integer">
-		select id,nome from clientes where id=#{id}
+		select id,nome,id as cliente_id from clientes where id=#{id}
 	</select>
 
 </mapper>

@@ -16,7 +16,9 @@
     <result property="data" column="data" javaType="java.time.LocalDate"/>
     <result column="descricao" property="descricao" javaType="String"/>
     <result column="comentarios" property="comentarios" javaType="String"/>
-    
+    <collection property="precos" javaType="ArrayList"
+      ofType="ProdutoPreco" column="id"
+      select="selectProdutoPrecosByProdutoId"/>
   </resultMap>
 
   <select id="selectProdutoPrecosByProdutoId" resultMap="ProdutoPrecoMap"
