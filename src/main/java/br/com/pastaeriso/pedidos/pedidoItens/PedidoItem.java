@@ -8,10 +8,8 @@ public class PedidoItem {
 
 	private Integer id;
 	private Produto produto;
-	private BigDecimal preco; // preco do produto no momento da compra
 	private BigDecimal quantidade;
 	private String comentarios;
-	private LocalDateTime data;
 	public PedidoItem(){}
 	public PedidoItem(Integer id, BigDecimal quantidade) {
 		this.id = id;
@@ -34,12 +32,6 @@ public class PedidoItem {
 	public Produto getProduto(){
 		return this.produto;
 	}
-	public void setPreco(BigDecimal preco){
-		this.preco = preco;
-	}
-	public BigDecimal getPreco(){
-		return this.preco;
-	}
 	public void setQuantidadeo(BigDecimal quantidade){
 		this.quantidade = quantidade;
 	}
@@ -52,24 +44,14 @@ public class PedidoItem {
 	public String getComentarios(){
 		return this.comentarios;
 	}
-	public void setData(LocalDateTime data){
-		this.data = data;
-	}
-	public LocalDateTime getData(){
-		return this.data;
-	}
 	public String toString(){
 		String r = "";
 		if(produto != null )
 			r += "Produto: " + produto;
-		if(preco != null)
-			r += ", Preco: " + preco;
 		if(quantidade != null)
 			r += ", Quantidade: " + quantidade;
 		if(comentarios != null)
 			r += ", Comentarios: " + comentarios;
-		if(data != null )
-			r += ", Data: " + data;
 		return r;
 	}
 }

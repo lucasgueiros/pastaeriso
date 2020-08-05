@@ -49,6 +49,18 @@ public class Cliente {
 	public List<Contato> getContatos() {
 		return this.contatos;
 	}
+	public Contato getContatoPreferido() {
+		if(contatos == null || contatos.isEmpty())
+			return null;
+		else
+			return this.contatos.get(0);
+	}
+	public Endereco getEnderecoPreferido() {
+		if(enderecos == null || enderecos.isEmpty())
+			return null;
+		else
+			return this.enderecos.get(0);
+	}
 	public String toString(){
 		String r = "cliente:(";
 		if(nome != null ) {

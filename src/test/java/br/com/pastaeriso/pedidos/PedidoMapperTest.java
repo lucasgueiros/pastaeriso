@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import org.apache.ibatis.session.SqlSession;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class PedidoMapperTest {
 
@@ -19,11 +20,16 @@ public class PedidoMapperTest {
       PedidoMapper mapper = sqlSession.getMapper(PedidoMapper.class);
       pedidos = mapper.selectPedidos();
     }
+    assertNotNull(pedidos);
+    //print(pedidos)
+  }
+
+  private void print(List<?> lista) {
     String r = "";
-    if(pedidos == null)
+    if(lista == null)
       r = "null";
     else
-      r = pedidos.toString();
+      r = lista.toString();
     r = r.replace(",","\n");
     System.out.println(r);
   }

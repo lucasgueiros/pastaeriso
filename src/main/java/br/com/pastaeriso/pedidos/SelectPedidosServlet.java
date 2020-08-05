@@ -15,16 +15,26 @@ import org.apache.ibatis.session.SqlSession;
 import br.com.pastaeriso.pedidos.Pedido;
 import br.com.pastaeriso.servicos.DatabaseConnection;
 import br.com.pastaeriso.pedidos.PedidoMapper;
+import br.com.pastaeriso.clientes.Cliente;
+import br.com.pastaeriso.clientes.ClienteMapper;
+import br.com.pastaeriso.produtos.ProdutoMapper;
+import br.com.pastaeriso.produtos.Produto;
 
 public class SelectPedidosServlet extends HttpServlet {
 	protected void service (HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
 		List<Pedido> pedidos;
+		List<Cliente> clientes;
+		List<Produto> produtos;
 
 		try (SqlSession sqlSession = DatabaseConnection.getInstance().getSqlSessionFactory().openSession()) {
-			PedidoMapper mapper = sqlSession.getMapper(PedidoMapper.class);
-			pedidos = mapper.selectPedidos();
+			PedidoMapper pedidoMapper = sqlSession.getMapper(PedidoMapper.class);
+			pedidos = pedidoMapper.selectPedidos();
+			ClienteMapper clienteMapper = sqlSession.getMapper(ClienteMapper.class);
+			clientes = clienteMapper.selectClientes();
+			ProdutoMapper produtoMapper = sqlSession.getMapper(ProdutoMapper.class);
+			produtos = produtoMapper.selectProdutos();
 		}
 
 		// Separando os pedidos por data de entrega
@@ -41,9 +51,11 @@ public class SelectPedidosServlet extends HttpServlet {
 			primeiroDia = map.floorKey(primeiroDia);
 		}
 
+		request.setAttribute("produtos", produtos);
 		request.setAttribute("primeiro",  primeiroDia );
 		request.setAttribute("datas",map.navigableKeySet());
 		request.setAttribute("map",map.entrySet());
+		response.setContentType("text/html;charset=UTF-8");
 		RequestDispatcher rd = request.getRequestDispatcher("pedidos.jsp");
 		rd.forward(request,response);
 	}

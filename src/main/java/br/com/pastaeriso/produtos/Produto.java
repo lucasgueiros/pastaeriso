@@ -2,7 +2,9 @@ package br.com.pastaeriso.produtos;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.LinkedList;
+import java.util.TreeMap;
+import java.util.ArrayList;
+
 public class Produto{
 
 	private Integer id;
@@ -10,7 +12,7 @@ public class Produto{
 	private LocalDate data;
 	private String descricao;
 	private String comentarios;
-	private List<ProdutoPreco> precos;
+	private TreeMap<LocalDate,ProdutoPreco> precos;
 
 	public Produto() {}
 
@@ -22,7 +24,7 @@ public class Produto{
 	public Produto(String nome, LocalDate data) {
 		this.data = data;
 		this.nome = nome;
-		this.precos = new LinkedList<ProdutoPreco>();
+		this.precos = new TreeMap<LocalDate,ProdutoPreco>();
 	}
 
 	public void setId(Integer id){
@@ -56,10 +58,21 @@ public class Produto{
 		return this.data;
 	}
 	public void setPrecos(List<ProdutoPreco> precos){
-		this.precos = precos;
+		this.precos = new TreeMap<LocalDate,ProdutoPreco>();
+		for(ProdutoPreco preco : precos) {
+			this.precos.put(preco.getData(),preco);
+		}
 	}
 	public List<ProdutoPreco> getPrecos(){
-		return this.precos;
+		return new ArrayList<ProdutoPreco>(this.precos.values());
+	}
+	public ProdutoPreco getPreco(LocalDate data) {
+		if(precos == null || data == null)
+			return null;
+		LocalDate key = this.precos.floorKey(data);
+		if(key == null)
+			return null;
+		return this.precos.get(key);
 	}
 	public String toString() {
 		String r = "\n(";

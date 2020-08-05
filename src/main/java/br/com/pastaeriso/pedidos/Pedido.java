@@ -9,16 +9,20 @@ import java.util.LinkedList;
 import br.com.pastaeriso.clientes.Cliente;
 import br.com.pastaeriso.clientes.enderecos.Endereco;
 import br.com.pastaeriso.pedidos.pedidoItens.PedidoItem;
+import br.com.pastaeriso.produtos.Produto;
+import br.com.pastaeriso.produtos.ProdutoPreco;
 
 public class Pedido {
 	private Integer id;
 	private Cliente cliente;
 	private Endereco enderecoEntrega;
 	private BigDecimal trocoPara;
-	private LocalDateTime horarioEntrega;
+	private LocalDateTime datahoraEntrega;
+	private LocalDateTime datahoraFeito;
 	private List<PedidoItem> itens;
 	private BigDecimal total; // troco é calculado
 	private FormaDePagamento formaDePagamento;
+	private String comentarios;
 
 	public Pedido(){
 	}
@@ -55,11 +59,11 @@ public class Pedido {
 	public void setTrocoPara(BigDecimal trocoPara) {
 		this.trocoPara = trocoPara;
 	}
-	public LocalDateTime getHorarioEntrega() {
-		return horarioEntrega;
+	public LocalDateTime getDatahoraEntrega() {
+		return datahoraEntrega;
 	}
-	public void setHorarioEntrega (LocalDateTime horarioEntrega) {
-		this.horarioEntrega = horarioEntrega;
+	public void setDatahoraEntrega (LocalDateTime datahoraEntrega) {
+		this.datahoraEntrega = datahoraEntrega;
 	}
 	public List<PedidoItem> getItens(){
 		return this.itens;
@@ -68,10 +72,10 @@ public class Pedido {
 		this.itens = itens;
 	}
 	public LocalDate getDataEntrega(){
-		return this.horarioEntrega.toLocalDate();
+		return this.datahoraEntrega.toLocalDate();
 	}
-	public LocalTime getHorarioSomenteEntrega(){
-		return this.horarioEntrega.toLocalTime();
+	public LocalTime getHorarioEntrega(){
+		return this.datahoraEntrega.toLocalTime();
 	}
 	public void setEnderecoEntrega(Endereco enderecoEntrega) {
 		this.enderecoEntrega = enderecoEntrega;
@@ -94,6 +98,36 @@ public class Pedido {
 	public void setFormaDePagamento(FormaDePagamento formaDePagamento) {
 		this.formaDePagamento = formaDePagamento;
 	}
+	public LocalDateTime getDatahoraFeito () {
+		return datahoraFeito;
+	}
+	public void setDatahoraFeito(LocalDateTime datahoraFeito) {
+		this.datahoraFeito = datahoraFeito;
+	}
+	public void setComentarios(String comentarios) {
+		this.comentarios = comentarios;
+	}
+	public String getComentarios() {
+		return this.comentarios;
+	}
+	public BigDecimal getSubtotal(PedidoItem item) {
+		if (item == null)
+			return new BigDecimal(0);
+		return getSubtotal(item.getProduto(), item.getQuantidade());
+	}
+	public BigDecimal getSubtotal(Produto produto, BigDecimal quantidade){
+		if(produto == null || quantidade == null)
+			return new BigDecimal(0);
+		return getPreco(produto).multiply(quantidade);
+	}
+	public BigDecimal getPreco(Produto produto) {
+		if(datahoraFeito == null || produto == null )
+			return new BigDecimal(0);
+		ProdutoPreco produtoPreco = produto.getPreco(this.datahoraFeito.toLocalDate());
+		if(produtoPreco == null)
+			return new BigDecimal(0);
+		return produtoPreco.getPreco();
+	}
 	public String toString() {
 		String r = "";
 		if(id != null)
@@ -104,8 +138,8 @@ public class Pedido {
 		r += "\nEndereco de entrega: " + enderecoEntrega;
 		if(trocoPara != null)
 		r += "\nTroco para: " + trocoPara;
-		if(horarioEntrega != null)
-		r += "\nHorario de entrega: " + horarioEntrega;
+		if(datahoraEntrega != null)
+		r += "\nData e hora de entrega: " + datahoraEntrega;
 		if(itens != null)
 			r += "\nItens:\n" + itens.toString().replace(",","\n    ");
 		else

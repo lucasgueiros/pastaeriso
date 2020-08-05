@@ -14,6 +14,10 @@
       select="br.com.pastaeriso.clientes.enderecos.EnderecoMapper.selectEnderecosByClienteId"/>
 	</resultMap>
 
+  <select id="selectClientes" resultMap="clienteMap">
+    select id,nome,id as cliente_id from clientes
+  </select>
+
 	<select id="selectClienteById" resultMap="clienteMap" parameterType="Integer">
 		select id,nome,id as cliente_id from clientes where id=#{id}
 	</select>

@@ -7,14 +7,13 @@
     <id property="id" column="pedido_itens_id" javaType="Integer"/>
     <result property="quantidade" column="quantidade" javaType="java.math.BigDecimal"/>
     <result property="comentarios" column="comentarios" javaType="String" />
-    <result property="data" column="data" javaType="java.time.LocalDateTime" />
     <association property="produto" column="produto_id" javaType="Produto"
       select="br.com.pastaeriso.produtos.ProdutoMapper.selectProdutoById"/>
   </resultMap>
 
   <select id="selectPedidoItensByPedidoId" resultMap="PedidoItemMap"
     parameterType="Integer">
-    select pedido_itens_id, quantidade, comentarios, data, produto_id
+    select pedido_itens_id, quantidade, comentarios,  produto_id
     from pedido_itens
     where pedido_id = #{pedidoId}
   </select>

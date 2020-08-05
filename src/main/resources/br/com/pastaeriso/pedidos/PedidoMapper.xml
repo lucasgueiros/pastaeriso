@@ -11,8 +11,12 @@
 		<id property="id" column="id" javaType="Integer" />
 		<result property="trocoPara" column="troco_para"
       javaType="java.math.BigDecimal"/>
-		<result column="horario_entrega" property="horarioEntrega"
+		<result column="datahora_entrega" property="datahoraEntrega"
       javaType="java.time.LocalDateTime"/>
+    <result column="datahora_feito" property="datahoraFeito"
+      javaType="java.time.LocalDateTime"/>
+    <result column="comentarios" property="comentarios"
+      javaType="String"/>
 		<association property="cliente" column="cliente_id" javaType="Cliente"
       select="br.com.pastaeriso.clientes.ClienteMapper.selectClienteById"/>
     <association property="enderecoEntrega" column="endereco_entrega"
@@ -28,7 +32,7 @@
   </select>
 
 	<select id="selectPedidos" resultMap="pedidoMap">
-		select id,cliente_id,troco_para,horario_entrega,endereco_entrega,forma_de_pagamento from pedidos order by horario_entrega
+		select id,cliente_id,troco_para,datahora_entrega,datahora_feito,endereco_entrega,forma_de_pagamento,comentarios from pedidos order by datahora_entrega
 	</select>
 
 </mapper>
