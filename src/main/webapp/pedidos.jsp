@@ -87,17 +87,17 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${tupla.value}" var="pedido">
-						<tr id="linhaPedido${pedido.id}" class="linhaPedido">
-							<td>${pedido.horarioEntrega}</td>
-							<td>${pedido.cliente.nome}</td>
-							<td>
-								<button type="button"
-										class="btn btn-primary"
-										onClick="showPedido('${pedido.id}')">
-									Detalhes
-								</button>
-							</td>
-						</tr>
+							<tr id="linhaPedido${pedido.id}" class="linhaPedido">
+								<td>${pedido.horarioEntrega}</td>
+								<td>${pedido.cliente.nome}</td>
+								<td>
+									<button type="button"
+											class="btn btn-primary"
+											onClick="showPedido('${pedido.id}')">
+										Detalhes
+									</button>
+								</td>
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -132,12 +132,12 @@
 										value="${pedido.id}">
 						    </div>
 								<div class="form-group col-md-6">
-						      <label for="horarioEntrega${pedido.id}">Data e hora da entrega</label>
-						      <input id="horarioEntrega${pedido.id}"
+						      <label for="datahoraEntrega${pedido.id}">Data e hora da entrega</label>
+						      <input id="datahoraEntrega${pedido.id}"
 										type="datetime-local"
 										form="pedidoForm${pedido.id}"
 										class="form-control"
-										value="${pedido.horarioEntrega}">
+										value="${pedido.datahoraEntrega}">
 						    </div>
 								<div class="form-group col-md-6">
 						      <label for="total${pedido.id}">Total</label>
@@ -248,21 +248,20 @@
 						<table class="table table-hover table-responsive-lg">
 							<thead>
 								<tr>
-									<th scope="scope">#</th>
-									<th scope="scope">Produto</th>
-									<th scope="scope">Qtd.</th>
-									<th scope="scope">Subtotal</th>
-									<th scope="scope">Comentarios</th>
-									<th scope="scope">Ações</th>
+									<th scope="scope" style="width: 10%">#</th>
+									<th scope="scope" style="width: 30%">Produto</th>
+									<th scope="scope" style="width: 10%">Qtd.</th>
+									<th scope="scope" style="width: 10%">Subtotal</th>
+									<th scope="scope" style="width: 30%">Comentarios</th>
+									<th scope="scope" style="width: 20%">Ações</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="${pedido.itens}" var="item">
 									<form id="pedidoForm${pedido.id}itemForm${item.id}">
+										<c:set var="item" value="${item}" scope="request"/>
 										<tr>
-											<jsp:include page="pedidos/pedidoItens/view.jsp" flush="true">
-												<jsp:param name="item" value="${item}"/>
-											</jsp:include>
+											<c:import url="pedidos/pedidoItens/view.jsp"/>
 										</tr>
 									</form>
 								</c:forEach>

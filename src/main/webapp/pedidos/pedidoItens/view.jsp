@@ -1,8 +1,12 @@
+<!DOCTYPE html>
+<%@page import="br.com.pastaeriso.pedidos.pedidoItens.PedidoItem" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<c:set var="item" value="${requestScope.item}" />
 <td>
   <div class="form-group">
     <input id="numero${item.id}"
       type="number"
-      class="form-control form-control-sm"
+      class="form-control"
       value="${item.id}" readonly>
   </div>
 </td>
@@ -11,7 +15,7 @@
     <input id="produto${item.id}"
       type="text"
       list="listaProdutos"
-      class="form-control form-control-lg"
+      class="form-control"
       value="${item.produto.nome}">
   </div>
 </td>
@@ -19,7 +23,7 @@
   <div class="form-group">
     <input id="quantidade${item.id}"
       type="number"
-      class="form-control form-control-sm"
+      class="form-control"
       value="${item.quantidade}">
   </div>
 </td>
@@ -27,7 +31,7 @@
   <div class="form-group">
     <input id="subtotal${item.id}"
       type="number"
-      class="form-control form-control-sm"
+      class="form-control"
       value="${item.subtotal}" readonly>
   </div>
 </td>
@@ -35,7 +39,7 @@
   <div class="form-group">
     <input id="comentarios${item.id}"
       type="text"
-      class="form-control form-control-lg"
+      class="form-control"
       value="${item.comentarios}">
   </div>
 </td>
