@@ -2,7 +2,7 @@ package br.com.pastaeriso.pedidos.pedidoItens;
 
 import java.math.BigDecimal;
 import br.com.pastaeriso.produtos.Produto;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class PedidoItem {
 
@@ -10,6 +10,8 @@ public class PedidoItem {
 	private Produto produto;
 	private BigDecimal quantidade;
 	private String comentarios;
+	private LocalDate data;
+
 	public PedidoItem(){}
 	public PedidoItem(Integer id, BigDecimal quantidade) {
 		this.id = id;
@@ -43,6 +45,17 @@ public class PedidoItem {
 	}
 	public String getComentarios(){
 		return this.comentarios;
+	}
+	public void setData(LocalDate data) {
+		this.data = data;
+	}
+	public LocalDate getData() {
+		return this.data;
+	}
+	public BigDecimal getSubtotal() {
+		if(this.produto == null || this.quantidade == null || this.data == null)
+			return new BigDecimal(0);
+		return this.produto.getPreco(this.data).multiply(this.quantidade);
 	}
 	public String toString(){
 		String r = "";

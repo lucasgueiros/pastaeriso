@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.ArrayList;
+import java.math.BigDecimal;
 
 public class Produto{
 
@@ -66,7 +67,14 @@ public class Produto{
 	public List<ProdutoPreco> getPrecos(){
 		return new ArrayList<ProdutoPreco>(this.precos.values());
 	}
-	public ProdutoPreco getPreco(LocalDate data) {
+	public BigDecimal getPreco(LocalDate data) {
+		ProdutoPreco produtoPreco = this.getProdutoPreco(data);
+		if(produtoPreco == null )
+			return new BigDecimal(0);
+		else
+			return produtoPreco.getPreco();
+	}
+	public ProdutoPreco getProdutoPreco(LocalDate data) {
 		if(precos == null || data == null)
 			return null;
 		LocalDate key = this.precos.floorKey(data);

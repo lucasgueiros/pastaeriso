@@ -70,6 +70,14 @@ public class Pedido {
 	}
 	public void setItens(List<PedidoItem> itens){
 		this.itens = itens;
+		updateItensData();
+	}
+	private void updateItensData() {
+		if(this.datahoraFeito != null && this.itens != null){
+			for(PedidoItem item : this.itens) {
+				item.setData(this.datahoraFeito.toLocalDate());
+			}
+		}
 	}
 	public LocalDate getDataEntrega(){
 		return this.datahoraEntrega.toLocalDate();
@@ -103,30 +111,13 @@ public class Pedido {
 	}
 	public void setDatahoraFeito(LocalDateTime datahoraFeito) {
 		this.datahoraFeito = datahoraFeito;
+		updateItensData();
 	}
 	public void setComentarios(String comentarios) {
 		this.comentarios = comentarios;
 	}
 	public String getComentarios() {
 		return this.comentarios;
-	}
-	public BigDecimal getSubtotal(PedidoItem item) {
-		if (item == null)
-			return new BigDecimal(0);
-		return getSubtotal(item.getProduto(), item.getQuantidade());
-	}
-	public BigDecimal getSubtotal(Produto produto, BigDecimal quantidade){
-		if(produto == null || quantidade == null)
-			return new BigDecimal(0);
-		return getPreco(produto).multiply(quantidade);
-	}
-	public BigDecimal getPreco(Produto produto) {
-		if(datahoraFeito == null || produto == null )
-			return new BigDecimal(0);
-		ProdutoPreco produtoPreco = produto.getPreco(this.datahoraFeito.toLocalDate());
-		if(produtoPreco == null)
-			return new BigDecimal(0);
-		return produtoPreco.getPreco();
 	}
 	public String toString() {
 		String r = "";

@@ -28,13 +28,13 @@ public class ProdutoTest {
     precos.add(preco2);
     produto.setPrecos(precos);
     assertNotNull(produto);
-    assertNotNull(produto.getPreco(data1));
-    assertNotNull(produto.getPreco(data2));
-    assertNotNull(produto.getPreco(data3));
-    assertNotNull(produto.getPreco(data4));
-    assertEquals(new BigDecimal(10),produto.getPreco(data1).getPreco());
-    assertEquals(new BigDecimal(10),produto.getPreco(data2).getPreco());
-    assertEquals(new BigDecimal(5),produto.getPreco(data3).getPreco());
-    assertEquals(new BigDecimal(5),produto.getPreco(data4).getPreco());
+    assertNotNull(produto.getProdutoPreco(data1));
+    assertNotNull(produto.getProdutoPreco(data2));
+    assertNotNull(produto.getProdutoPreco(data3));
+    assertNotNull(produto.getProdutoPreco(data4));
+    assertEquals(new BigDecimal(10),produto.getPreco(data1));
+    assertEquals(new BigDecimal(10),produto.getPreco(data2));
+    assertEquals(new BigDecimal(5),produto.getPreco(data3));
+    assertEquals(new BigDecimal(5),produto.getPreco(data4));
   }
 }
