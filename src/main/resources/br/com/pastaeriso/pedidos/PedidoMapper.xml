@@ -35,4 +35,14 @@
 		select id,cliente_id,troco_para,datahora_entrega,datahora_feito,endereco_entrega,forma_de_pagamento,comentarios from pedidos order by datahora_entrega
 	</select>
 
+  <select id="selectPedidosPorData" resultMap="pedidoMap" parameterType="java.time.LocalDate">
+    select id,cliente_id,troco_para,datahora_entrega,datahora_feito,endereco_entrega,forma_de_pagamento,comentarios
+    from pedidos where datahora_feito::date=#{data} order by id
+  </select>
+
+  <select id="selectPedidoPorId" resultMap="pedidoMap" parameterType="Integer">
+    select id,cliente_id,troco_para,datahora_entrega,datahora_feito,endereco_entrega,forma_de_pagamento,comentarios
+    from pedidos where id=#{id}
+  </select>
+
 </mapper>

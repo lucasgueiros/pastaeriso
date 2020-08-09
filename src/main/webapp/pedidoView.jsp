@@ -156,7 +156,7 @@
         <form id="pedidoForm${pedido.id}itemForm${item.id}">
           <c:set var="item" value="${item}" scope="request"/>
           <tr>
-            <c:import url="pedidos/pedidoItens/view.jsp"/>
+            <c:import url="viewPedidoItem.jsp"/>
           </tr>
         </form>
       </c:forEach>
