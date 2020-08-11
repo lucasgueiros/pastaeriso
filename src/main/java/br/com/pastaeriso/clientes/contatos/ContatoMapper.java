@@ -5,4 +5,5 @@ import java.util.List;
 public interface ContatoMapper {
   public FormaDeContato selectFormaDeContatoById(Integer id);
   public List<Contato> selectContatosByClienteId(Integer cliente_id);
+  public Contato selectContatoById(Integer id);
 }

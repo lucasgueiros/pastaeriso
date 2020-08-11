@@ -5,6 +5,7 @@ public class Contato{
 	private Integer id;
 	private FormaDeContato forma;
 	private String contato;
+	private String nome;
 
 	public Contato() {}
 
@@ -41,10 +42,19 @@ public class Contato{
 	public String getContato(){
 		return this.contato;
 	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getNome(){
+		return this.nome;
+	}
 	public String toString() {
 		String r = "(";
 		if(id != null) {
 			r += id + ", ";
+		}
+		if(nome != null) {
+			r += nome + ", ";
 		}
 		if(contato != null){
 			r += contato + ", ";

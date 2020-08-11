@@ -77,10 +77,15 @@ public class Produto{
 	public ProdutoPreco getProdutoPreco(LocalDate data) {
 		if(precos == null || data == null)
 			return null;
-		LocalDate key = this.precos.floorKey(data);
-		if(key == null)
+		LocalDate theKey = this.precos.firstKey();
+		for(LocalDate key : this.precos.keySet()) {
+			if(key.compareTo(data) > 0) continue;
+			if(key.compareTo(theKey) > 0)
+				theKey = key;
+		}
+		if(theKey == null)
 			return null;
-		return this.precos.get(key);
+		return this.precos.get(theKey);
 	}
 	public String toString() {
 		String r = "\n(";

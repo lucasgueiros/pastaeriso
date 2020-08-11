@@ -6,6 +6,10 @@
 	<resultMap id="clienteMap" type="Cliente">
 		<id property="id" column="id" javaType="Integer"/>
 		<result property="nome" column="nome" javaType="String"/>
+    <association property="contatoPreferencial" column="contato_preferencial" javaType="Contato"
+      select="br.com.pastaeriso.clientes.contatos.ContatoMapper.selectContatoById"/>
+      <association property="enderecoPreferencial" column="endereco_preferencial" javaType="Endereco"
+        select="br.com.pastaeriso.clientes.enderecos.EnderecoMapper.selectEnderecoById"/>
     <collection property="contatos" ofType="Contato" column="cliente_id"
       javaType="ArrayList"
       select="br.com.pastaeriso.clientes.contatos.ContatoMapper.selectContatosByClienteId"/>
@@ -15,11 +19,18 @@
 	</resultMap>
 
   <select id="selectClientes" resultMap="clienteMap">
-    select id,nome,id as cliente_id from clientes
+    select c.id as id,c.nome as nome,c.id as cliente_id, cp.contato_preferencial as contato_preferencial, cp.endereco_preferencial as endereco_preferencial
+    from clientes c
+    join cliente_preferencias cp
+    on c.id = cp.cliente_id
   </select>
 
 	<select id="selectClienteById" resultMap="clienteMap" parameterType="Integer">
-		select id,nome,id as cliente_id from clientes where id=#{id}
+		select c.id,c.nome,c.id as cliente_id, cp.contato_preferencial as contato_preferencial, cp.endereco_preferencial as endereco_preferencial
+    from clientes c
+    join cliente_preferencias cp
+    on c.id = cp.cliente_id
+    where c.id=#{id}
 	</select>
 
 </mapper>

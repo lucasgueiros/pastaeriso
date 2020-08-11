@@ -11,6 +11,8 @@ public class Cliente {
 	private String nome;
 	private List<Endereco> enderecos;
 	private List<Contato> contatos;
+	private Endereco enderecoPreferencial;
+	private Contato contatoPreferencial;
 
 	public Cliente(){}
 
@@ -49,17 +51,17 @@ public class Cliente {
 	public List<Contato> getContatos() {
 		return this.contatos;
 	}
-	public Contato getContatoPreferido() {
-		if(contatos == null || contatos.isEmpty())
-			return null;
-		else
-			return this.contatos.get(0);
+	public Contato getContatoPreferencial() {
+		return this.contatoPreferencial;
 	}
-	public Endereco getEnderecoPreferido() {
-		if(enderecos == null || enderecos.isEmpty())
-			return null;
-		else
-			return this.enderecos.get(0);
+	public Endereco getEnderecoPreferencial() {
+		return this.enderecoPreferencial;
+	}
+	public void setContatoPreferencial(Contato contatoPreferencial) {
+		this.contatoPreferencial = contatoPreferencial;
+	}
+	public void setEnderecoPreferencial(Endereco enderecoPreferencial) {
+		this.enderecoPreferencial = enderecoPreferencial;
 	}
 	public String toString(){
 		String r = "cliente:(";
@@ -71,6 +73,12 @@ public class Cliente {
 		}
 		if(contatos != null) {
 			r += "contatos: " + contatos.toString();
+		}
+		if(contatoPreferencial != null) {
+			r += "contato preferencial: " + contatoPreferencial.toString();
+		}
+		if(enderecoPreferencial != null) {
+			r += "endereco preferencial: " + enderecoPreferencial.toString();
 		}
 		r+=")";
 		return r;

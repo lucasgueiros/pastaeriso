@@ -15,7 +15,7 @@
 		}
 	}
 	function mostrarPedido(pedidoId) {
-		$.ajax({
+		/*$.ajax({
 			url: '/selectPedidoPorId?id='+pedidoId,
 			type: 'post',
 			dataType: 'json',
@@ -23,25 +23,124 @@
 			success: function (data) {
 				atualizarPedido(data);
 			}
-		});
+		});*/
+		string = localStorage.getItem("pedido" + pedidoId);
+		pedido = JSON.parse(string);
+		atualizarPedido(pedido);
 	}
 
 	function atualizarPedido(pedido) {
 		$("#nomeCliente").val(pedido.cliente.nome);
 		$("#pedidoId").val(pedido.id);
 		$("#total").val(pedido.total);
+		$("#datahoraEntrega").val(pedido.datahoraEntrega);
 		$("#trocoPara").val(pedido.trocoPara);
 		$("#comentarios").val(pedido.comentarios);
 		$("#troco").val( pedido.troco);
-		//$("#contatos").val( pedido.contato.contato);
-		//$("#contatosForma").val( pedido.contato.contatosForma);
+		$("#formaDePagamento").val( pedido.formaDePagamento);
+		$("#contatoNome").val( pedido.cliente.contatoPreferencial.nome);
+		$("#contatos").val( pedido.cliente.contatoPreferencial.contato);
+		$("#contatosForma").val( pedido.cliente.contatoPreferencial.forma.forma);
 		$("#rua").val( pedido.enderecoEntrega.rua);
 		$("#numero").val( pedido.enderecoEntrega.numero);
 		$("#bairro").val( pedido.enderecoEntrega.bairro);
 		$("#complemento").val( pedido.enderecoEntrega.complemento);
 		$("#pontoDeReferencia").val( pedido.enderecoEntrega.pontoDeReferencia);
-		$("#enderecoComentarios").val( pedido.enderecoEntrega.enderecoComentarios);
+		$("#enderecoComentarios").val( pedido.enderecoEntrega.comentarios);
+		var string = "";
+		pedido.itens.forEach((item, i) => {
+			string += "<tr id=\"rowitem" + item.id + "\">";
+			string += "<td>";
+			string += "<div class=\"form-group\">";
+			string += "<input id=\"produto" + item.id + "\"";
+			string += " type=\"text\"";
+			string += " list=\"listaProdutos\"";
+			string += " value=\""+ item.produto +"\"";
+			string += " class=\"form-control\">";
+			string += "</div>";
+			string += "</td>";
+			string += "<td>";
+			string += "<div class=\"form-group\">";
+			string += "<input id=\"quantidade" + item.id + "\"";
+			string += " type=\"number\"";
+			string += " value=\""+ item.quantidade +"\"";
+			string += "class=\"form-control\">";
+			string += "</div>";
+			string += "</td>";
+			string += "<td>";
+			string += "<div class=\"form-group\">";
+			string += "<input id=\"subtotal" + item.id + "\"";
+			string += " value=\""+ item.subtotal +"\"";
+			string += " type=\"number\"";
+			string += "class=\"form-control\" readonly>";
+			string += "</div>";
+			string += "</td>";
+			string += "<td>";
+			string += "<div class=\"form-group\">";
+			string += "<input id=\"itemComentarios" + item.id + "\"";
+			string += "type=\"text\"";
+			string += " value=\""+ item.comentarios +"\"";
+			string += "class=\"form-control\">";
+			string += "</div>";
+			string += "</td>";
+			string += "</tr>";
+		});
+		$("#pedidoItensBody").html(string);
 	}
+
+	function mudancaDeData() {
+		var dataSelecionada = $("#selectData").val();
+		$.ajax({
+			url: '/selectPedidosPorData?data=' + dataSelecionada,
+			type: 'post',
+			dataType: 'json',
+			contentType: 'application/json',
+			success: function (data) {
+				salvarPedidos(data);
+				atualizarPedidosResumo(data);
+				atualizarPedido(data[0]);
+			}
+		});
+	}
+
+	function atualizarPedidosResumo(pedidos){
+		var string = "";
+		pedidos.forEach((pedido, i) => {
+			string += "<tr id=\"linhaPedido\" class=\"linhaPedido\">";
+			string += "<td>";
+			string += "" + pedido.horaEntrega;
+			string += "</td>";
+			string += "<td>";
+			string += "" + pedido.cliente.nome;//cliente.nome
+			string += "</td>";
+			string += "<td>";
+			string += "<button type=\"button\"";
+			string += " class=\"btn btn-primary\"";
+			string += " onClick=\"mostrarPedido(\'";
+			string += "" + pedido.id;//id
+			string += "\')\">";
+			string += "Detalhes";
+			string += "</button>";
+			string += "</td>";
+			string += "</tr>";
+		});
+		$("#pedidosResumo").html(string);
+	}
+
+	function salvarPedidos(pedidos) {
+		pedidos.forEach(function (pedido){
+			string = JSON.stringify(pedido);
+			localStorage.setItem("pedido" + pedido.id,string);
+		});
+	}
+
+	$(document).ready(function () {
+		var data = new Date();
+		var stringData = data.getFullYear().toString() + '-' + (data.getMonth() + 1).toString().padStart(2, 0) +
+    '-' + data.getDate().toString().padStart(2, 0);
+		$("#selectData").val(stringData);
+		mudancaDeData();
+	});
 </script>
 
 <jsp:include page="include/header_head_to_body.jsp">
@@ -52,7 +151,8 @@
 <div class="btn-group">
   <form>
 		<div class="form-group">
-			<input type="date" name="data" id="selectData"/>
+			<input type="date" name="data" id="selectData"
+				onchange="mudancaDeData()"/>
 		</div>
 	</form>
 </div>
@@ -88,28 +188,8 @@
 		          <th scope="scope">Ver detalhes</th>
 		        </tr>
 		      </thead>
-		      <tbody>
-		        <c:forEach items="${requestScope.pedidos}" var="pedido">
-		          <tr id="linhaPedido" class="linhaPedido">
-		            <td>${pedido.horarioEntrega}</td>
-		            <td>${pedido.cliente.nome}</td>
-		            <td>
-		              <button type="button"
-		                  class="btn btn-primary"
-		                  onClick="mostrarPedido('${pedido.id}')">
-		                Detalhes
-		              </button>
-		            </td>
-		          </tr>
-		        </c:forEach>
-						<tr>
-							<td colspan="3">
-								<button>
-									Novo pedido
-								</button>
-								NOVO
-							</td>
-						</tr>
+		      <tbody id="pedidosResumo">
+
 		      </tbody>
 		    </table>
 		  </div>
@@ -124,7 +204,8 @@
 					        <label for="nomeCliente">Cliente</label>
 					        <input id="nomeCliente"
 					          type="text"
-					          list="listaClientes">
+					          list="listaClientes"
+										class="form-control">
 					      </div>
 					    </div>
 					  </form>
@@ -158,14 +239,18 @@
 					        <label for="troco">Troco</label>
 					        <input id="troco"
 					          type="number"
-
 					          class="form-control" readonly>
+					      </div>
+								<div class="form-group col-md-6">
+					        <label for="formaDePagamento">Forma de pagamento</label>
+					        <input id="formaDePagamento"
+					          type="text"
+					          class="form-control">
 					      </div>
 					      <div class="form-group col-md-6">
 					        <label for="comentarios">Comentários</label>
 					        <input id="comentarios"
-					          type="textarea"
-
+					          type="text"
 					          class="form-control">
 					      </div>
 					    </div>
@@ -175,6 +260,12 @@
 					      <h3>Contato</h3>
 					    </div>
 					    <div class="form-row">
+								<div class="form-group col-md-6">
+					        <label for="contatoNome">Contato nome</label>
+					        <input id="contatoNome"
+					          type="text"
+					          class="form-control">
+					      </div>
 					      <div class="form-group col-md-6">
 					        <label for="contatos">Contato preferido</label>
 					        <input id="contatos"
@@ -235,57 +326,15 @@
 					  <table class="table table-hover table-responsive-lg">
 					    <thead>
 					      <tr>
-					        <th scope="scope" style="width: 10%">#</th>
+					        <!--<th scope="scope" style="width: 10%">#</th>-->
 					        <th scope="scope" style="width: 50%">Produto</th>
-					        <th scope="scope" style="width: 10%">Qtd.</th>
-					        <th scope="scope" style="width: 10%">Subtotal</th>
+					        <th scope="scope" style="width: 20%">Qtd.</th>
+					        <th scope="scope" style="width: 20%">Subtotal</th>
 					        <th scope="scope" style="width: 50%">Comentarios</th>
 					        <th scope="scope" style="width: 20%">Ações</th>
 					      </tr>
 					    </thead>
-					    <tbody>
-								<form id="pedidoItemForm">
-					          <tr id="check1row">
-											<td>
-												<div class="form-group">
-													<input
-														id="check1"
-														class="form-check-input"
-														type="checkbox"
-														onchange="pedidoItemCheckUpdate(this)"/>
-												</div>
-											</td>
-											<td>
-											  <div class="form-group">
-											    <input id="produto1"
-											      type="text"
-											      list="listaProdutos"
-											      class="form-control">
-											  </div>
-											</td>
-											<td>
-											  <div class="form-group">
-											    <input id="quantidade1"
-											      type="number"
-											      class="form-control">
-											  </div>
-											</td>
-											<td>
-											  <div class="form-group">
-											    <input id="subtotal1"
-											      type="number"
-											      class="form-control" readonly>
-											  </div>
-											</td>
-											<td>
-											  <div class="form-group">
-											    <input id="itemComentarios1"
-											      type="text"
-											      class="form-control">
-											  </div>
-											</td>
-					          </tr>
-					        </form>
+					    <tbody id="pedidoItensBody">
 					    </tbody>
 					  </table>
 					</div>

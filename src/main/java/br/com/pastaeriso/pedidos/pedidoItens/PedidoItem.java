@@ -34,7 +34,7 @@ public class PedidoItem {
 	public Produto getProduto(){
 		return this.produto;
 	}
-	public void setQuantidadeo(BigDecimal quantidade){
+	public void setQuantidade(BigDecimal quantidade){
 		this.quantidade = quantidade;
 	}
 	public BigDecimal getQuantidade(){
@@ -65,6 +65,14 @@ public class PedidoItem {
 			r += ", Quantidade: " + quantidade;
 		if(comentarios != null)
 			r += ", Comentarios: " + comentarios;
+		BigDecimal subtotal = this.getSubtotal();
+		if(subtotal != null)
+			r += ", Subtotal: " + subtotal;
+		BigDecimal preco = this.produto.getPreco(this.data);
+		if(preco != null)
+			r += ", Preco: " + preco;
+		if(data != null)
+			r += ", Data: " + this.data;
 		return r;
 	}
 }

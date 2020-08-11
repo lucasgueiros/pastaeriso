@@ -20,7 +20,6 @@ public class Pedido {
 	private LocalDateTime datahoraEntrega;
 	private LocalDateTime datahoraFeito;
 	private List<PedidoItem> itens;
-	private BigDecimal total; // troco é calculado
 	private FormaDePagamento formaDePagamento;
 	private String comentarios;
 
@@ -92,13 +91,17 @@ public class Pedido {
 		return this.enderecoEntrega;
 	}
 	public BigDecimal getTotal() {
+		BigDecimal total = new BigDecimal(0);
+		for(PedidoItem item : itens) {
+			total = total.add(item.getSubtotal());
+		}
 		return total;
 	}
 	public BigDecimal getTroco() {
-		if(total == null || trocoPara == null) {
+		if(trocoPara == null) {
 			return new BigDecimal(0);
 		}
-		return trocoPara.subtract(total);
+		return trocoPara.subtract(this.getTotal());
 	}
 	public FormaDePagamento getFormaDePagamento() {
 		return formaDePagamento;
@@ -135,10 +138,9 @@ public class Pedido {
 			r += "\nItens:\n" + itens.toString().replace(",","\n    ");
 		else
 			r += "null";
-		if(total != null)
-		r += "\nTotal: " + total;
+		r += "\nTotal: " + getTotal();
 		if(formaDePagamento != null)
-		r += "\nForma de pagamento: " + formaDePagamento;
+			r += "\nForma de pagamento: " + formaDePagamento;
 		r += "\nTroco: " + this.getTroco();
 		return r;
 	}

@@ -45,12 +45,13 @@ public class PedidoMapperTest {
 
     try (SqlSession sqlSession = DatabaseConnection.getInstance().getSqlSessionFactory().openSession()) {
       PedidoMapper mapper = sqlSession.getMapper(PedidoMapper.class);
-      pedido = mapper.selectPedidoPorId(Integer.decode("39"));
+      pedido = mapper.selectPedidoPorId(Integer.decode("21"));
     }
     assertNotNull(pedido);
     if(pedido != null ){
       System.out.println(pedido);
-      System.out.println(new Gson().toJson(pedido));
+      //System.out.println(new Gson().toJson(pedido));
+      //System.out.println(pedido.getTotal());
     }
 
     //print(pedidos)

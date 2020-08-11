@@ -11,6 +11,7 @@
   <resultMap id="contatoMapper" type="Contato">
     <id column="id" property="id" javaType="Integer"/>
     <result property="contato" column="contato" javaType="String"/>
+    <result property="nome" column="nome" javaType="String"/>
     <association property="forma" column="forma_de_contato"
       javaType="FormaDeContato" select="selectFormaDeContatoById"/>
   </resultMap>
@@ -20,8 +21,12 @@
   </select>
 
   <select id="selectContatosByClienteId" resultMap="contatoMapper" parameterType="Integer">
-    select id, forma_de_contato, contato from cliente_contatos
+    select id, forma_de_contato, contato,nome from cliente_contatos
     where cliente_id = #{cliente_id}
+  </select>
+  <select id="selectContatoById" resultMap="contatoMapper" parameterType="Integer">
+    select id, forma_de_contato, contato,nome from cliente_contatos
+    where id = #{id}
   </select>
 
 </mapper>
