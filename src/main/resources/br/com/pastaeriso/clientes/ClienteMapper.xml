@@ -33,4 +33,20 @@
     where c.id=#{id}
 	</select>
 
+  <select id="selectClientePorNome" resultMap="clienteMap" parameterType="String">
+		select c.id,c.nome,c.id as cliente_id, cp.contato_preferencial as contato_preferencial, cp.endereco_preferencial as endereco_preferencial
+    from clientes c
+    join cliente_preferencias cp
+    on c.id = cp.cliente_id
+    where c.nome=#{nome}
+	</select>
+
+  <select id="insertCliente" resultType="Integer" parameterType="String">
+    INSERT INTO clientes (nome) values (#{nome}) returning id;
+  </select>
+
+  <insert id="insertClientePreferencias" parameterType="br.com.pastaeriso.clientes.ClientePreferencias">
+    insert into cliente_preferencias (cliente_id,endereco_preferencial,contato_preferencial) values (#{clienteId},#{enderecoId},#{contatoId});
+  </insert>
+
 </mapper>

@@ -10,6 +10,7 @@ public class Endereco {
 	private String pontoDeReferencia;
 	private String comentarios;
 	private TipoDeEndereco tipo;
+	private String nome;
 
 	public Endereco () {}
 
@@ -66,6 +67,12 @@ public class Endereco {
 	public void setComentarios (String comentarios) {
 		this.comentarios = comentarios;
 	}
+	public String getNome(){
+		return nome;
+	}
+	public void setNome (String nome) {
+		this.nome = nome;
+	}
 	public TipoDeEndereco getTipo(){
 		return tipo;
 	}
@@ -74,7 +81,7 @@ public class Endereco {
 	}
 	@Override
 	public String toString(){
-		return rua + ", " + numero + ", " + bairro + ". " + complemento;
+		return "" + (id == null ? "" : id) + "," + nome + "," + rua + ", " + numero + ", " + bairro + ". " + complemento + ", " + tipo;
 	}
 
 }

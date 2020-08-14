@@ -33,4 +33,9 @@
   <select id="selectProdutos" resultMap="ProdutoMap" >
     select  id, nome, data, descricao, comentarios from produtos
   </select>
+
+  <select id="selectProdutoPorNome" resultMap="ProdutoMap" parameterType="String">
+    select  id, nome, data, descricao, comentarios from produtos
+    where nome = #{nome}
+  </select>
 </mapper>

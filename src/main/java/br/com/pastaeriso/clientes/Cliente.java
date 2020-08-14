@@ -65,6 +65,9 @@ public class Cliente {
 	}
 	public String toString(){
 		String r = "cliente:(";
+		if (id != null) {
+			r += "id: " + id + ", ";
+		}
 		if(nome != null ) {
 			r += "nome: " + nome + ", ";
 		}

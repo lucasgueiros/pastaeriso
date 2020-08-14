@@ -52,6 +52,9 @@ public class PedidoItem {
 	public LocalDate getData() {
 		return this.data;
 	}
+	public boolean hasData() {
+		return this.data != null;
+	}
 	public BigDecimal getSubtotal() {
 		if(this.produto == null || this.quantidade == null || this.data == null)
 			return new BigDecimal(0);

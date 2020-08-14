@@ -117,6 +117,7 @@
 			<configuration>
 				<url>http://192.168.0.150:8080/manager/text</url>
 				<server>TomcatServer</server>
+        <path>/</path>
 			</configuration>
 			<executions>
 				<execution>

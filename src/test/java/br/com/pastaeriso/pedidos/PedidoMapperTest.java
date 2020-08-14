@@ -45,7 +45,7 @@ public class PedidoMapperTest {
 
     try (SqlSession sqlSession = DatabaseConnection.getInstance().getSqlSessionFactory().openSession()) {
       PedidoMapper mapper = sqlSession.getMapper(PedidoMapper.class);
-      pedido = mapper.selectPedidoPorId(Integer.decode("21"));
+      pedido = mapper.selectPedidoPorId(Integer.decode("23"));
     }
     assertNotNull(pedido);
     if(pedido != null ){

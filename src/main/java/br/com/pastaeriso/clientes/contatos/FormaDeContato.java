@@ -24,6 +24,6 @@ public class FormaDeContato {
 		this.forma = forma;
 	}
 	public String toString () {
-		return forma;
+		return "(" + id + "=" + forma + ")";
 	}
 }

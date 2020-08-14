@@ -15,6 +15,7 @@
 			<arg column="numero" javaType="String"/>
 			<arg column="bairro" javaType="String"/>
 		</constructor>
+    <result property="nome" column="nome" javaType="String"/>
 		<result property="complemento" column="complemento" javaType="String"/>
 		<result property="comentarios" column="comentarios" javaType="String"/>
 		<result property="pontoDeReferencia" column="ponto_de_referencia" javaType="String"/>
@@ -23,16 +24,24 @@
 	</resultMap>
 
 	<select id="selectEnderecoById" resultMap="enderecoMap" parameterType="Integer">
-		select id,rua,numero,bairro,complemento,ponto_de_referencia,comentarios,tipo_de_endereco from cliente_enderecos where id=#{id}
+		select id,nome,rua,numero,bairro,complemento,ponto_de_referencia,comentarios,tipo_de_endereco from cliente_enderecos where id=#{id}
 	</select>
 
 	<select id="selectTipoDeEnderecoById" resultMap="tipoDeEnderecoMap" parameterType="Integer">
 		select id,tipo from tipos_de_enderecos where id=#{id}
 	</select>
 
+  <select id="selectTipoDeEnderecoPorTipo" resultMap="tipoDeEnderecoMap" parameterType="String">
+		select id,tipo from tipos_de_enderecos where tipo=#{tipo}
+	</select>
+
   <select id="selectEnderecosByClienteId" resultMap="enderecoMap" parameterType="Integer">
-    select id,rua,numero,bairro,complemento,ponto_de_referencia,comentarios,tipo_de_endereco
+    select id,nome,rua,numero,bairro,complemento,ponto_de_referencia,comentarios,tipo_de_endereco
     from cliente_enderecos where cliente_id=#{cliente_id}
+  </select>
+
+  <select id="insertEndereco" resultType="Integer" parameterType="hashmap">
+    insert into cliente_enderecos (cliente_id,nome,rua,numero,bairro,complemento,ponto_de_referencia,comentarios,tipo_de_endereco) values (#{cliente_id},#{nome},#{rua},#{numero},#{bairro},#{complemento},#{ponto_de_referencia},#{comentarios},#{tipo_de_endereco}) returning id
   </select>
 
 </mapper>

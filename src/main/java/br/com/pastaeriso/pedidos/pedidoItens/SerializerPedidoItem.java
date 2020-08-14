@@ -1,14 +1,16 @@
 package br.com.pastaeriso.pedidos.pedidoItens;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonNull;
+import com.google.gson.*;
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
+import br.com.pastaeriso.produtos.Produto;
+import org.apache.ibatis.session.SqlSession;
+import br.com.pastaeriso.servicos.DatabaseConnection;
+import br.com.pastaeriso.produtos.ProdutoMapper;
 
-public class SerializerPedidoItem implements JsonSerializer<PedidoItem> {
+public class SerializerPedidoItem implements JsonSerializer<PedidoItem>, JsonDeserializer<PedidoItem> {
+
+
 
     public JsonElement serialize(PedidoItem pedidoItem, Type type,
         JsonSerializationContext jsonSerializationContext)
@@ -31,5 +33,27 @@ public class SerializerPedidoItem implements JsonSerializer<PedidoItem> {
         else
           object.addProperty("subtotal",0);
         return object;
+    }
+
+    public PedidoItem deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+        throws JsonParseException {
+      if(json != null  && json.isJsonObject()) {
+        JsonObject JsonObject = json.getAsJsonObject();
+        BigDecimal quantidade = BigDecimal.valueOf(JsonObject.getAsJsonPrimitive("quantidade").getAsDouble());
+        String comentarios = JsonObject.getAsJsonPrimitive("comentarios").getAsString();
+        String produtoNome = JsonObject.getAsJsonPrimitive("produto").getAsString();
+        Produto produto = null;
+
+        try (SqlSession sqlSession = DatabaseConnection.getInstance().getSqlSessionFactory().openSession()) {
+    			ProdutoMapper produtoMapper = sqlSession.getMapper(ProdutoMapper.class);
+    			produto = produtoMapper.selectProdutoPorNome(produtoNome);
+        }
+        if(produto == null ) return null;
+
+        PedidoItem pedidoItem = new PedidoItem(produto,quantidade);
+        pedidoItem.setComentarios(comentarios);
+        return pedidoItem;
+      }
+      return null;
     }
 }

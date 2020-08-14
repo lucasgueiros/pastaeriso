@@ -1,24 +1,10 @@
-  insert into produto_precos
-  (produto_id, preco, data)
-  select cardapio_produtos.produto_id, cardapio_produtos.preco, max(cardapio_datas.data)
-  from cardapio_produtos
-  join cardapio_datas
-  on cardapio_produtos.cardapio_id = cardapio_datas.cardapio_id
-  group by cardapio_produtos.produto_id,cardapio_produtos.preco;
+<select id="insertPedido" parameterType="Pedido" resultType="Integer">
+    INSERT INTO pedidos (cliente,endereco_entrega,troco_para,datahora_entrega,forma_de_pagamento,comentarios)
+    VALUES (#{cliente}, #{enderecoEntrega}, #{trocoPara}, #{datahoraEntrega}, #{formaDePagamento}, #{comentarios})
+    RETURNING id       <-- id only or many fields
+</select>
 
-  <filter>
-     <filter-name>SetCharacterEncodingFilter</filter-name>
-     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-     <init-param>
-         <param-name>encoding</param-name>
-         <param-value>UTF8</param-value>
-     </init-param>
-     <init-param>
-         <param-name>forceEncoding</param-name>
-         <param-value>true</param-value>
-     </init-param>
-  </filter>
-  <filter-mapping>
-     <filter-name>SetCharacterEncodingFilter</filter-name>
-     <url-pattern>/*</url-pattern>
-  </filter-mapping>
+for()
+
+public Integer insertPedido(Pedido pedido);
+https://stackoverflow.com/questions/15456033/returning-values-from-mybatis-insert-mapped-methods

@@ -20,13 +20,22 @@
     select id,forma from formas_de_contato where id=#{id}
   </select>
 
+  <select id="selectFormaDeContatoPorForma" resultMap="formaDeContatoMap" parameterType="String">
+    select id,forma from formas_de_contato where forma=#{forma}
+  </select>
+
   <select id="selectContatosByClienteId" resultMap="contatoMapper" parameterType="Integer">
     select id, forma_de_contato, contato,nome from cliente_contatos
     where cliente_id = #{cliente_id}
   </select>
+
   <select id="selectContatoById" resultMap="contatoMapper" parameterType="Integer">
     select id, forma_de_contato, contato,nome from cliente_contatos
     where id = #{id}
+  </select>
+
+  <select id="insertContato" resultType="Integer" parameterType="hashmap">
+    insert into cliente_contatos (cliente_id,nome,contato,forma_de_contato) values (#{cliente_id},#{nome},#{contato},#{forma}) returning id
   </select>
 
 </mapper>

@@ -90,7 +90,11 @@ public class Pedido {
 	public Endereco getEnderecoEntrega(){
 		return this.enderecoEntrega;
 	}
+	public boolean hasEnderecoEntrega() {
+		return enderecoEntrega != null;
+	}
 	public BigDecimal getTotal() {
+		updateItensData();
 		BigDecimal total = new BigDecimal(0);
 		for(PedidoItem item : itens) {
 			total = total.add(item.getSubtotal());
@@ -123,6 +127,7 @@ public class Pedido {
 		return this.comentarios;
 	}
 	public String toString() {
+		updateItensData();
 		String r = "";
 		if(id != null)
 		r += "Id: " + id;
@@ -133,7 +138,9 @@ public class Pedido {
 		if(trocoPara != null)
 		r += "\nTroco para: " + trocoPara;
 		if(datahoraEntrega != null)
-		r += "\nData e hora de entrega: " + datahoraEntrega;
+			r += "\nData e hora de entrega: " + datahoraEntrega;
+		if(datahoraFeito != null)
+			r += "\nData e hora em que foi feito: " + datahoraFeito;
 		if(itens != null)
 			r += "\nItens:\n" + itens.toString().replace(",","\n    ");
 		else
@@ -142,6 +149,8 @@ public class Pedido {
 		if(formaDePagamento != null)
 			r += "\nForma de pagamento: " + formaDePagamento;
 		r += "\nTroco: " + this.getTroco();
+		if(comentarios != null)
+			r += "\nComentarios: " + comentarios;
 		return r;
 	}
 }

@@ -31,18 +31,39 @@
     select id as forma_id,forma from formas_de_pagamento where id=#{id}
   </select>
 
+  <select id="selectFormaDePagamentoPorForma" resultMap="formaDePagamentoMap" parameterType="String">
+    select id as forma_id,forma from formas_de_pagamento where forma=#{forma}
+  </select>
+
+  <select id="insertFormaDePagamento" resultType="Integer" parameterType="String">
+    insert into formas_de_pagamento (forma) values (#{forma}) returning id
+  </select>
+
 	<select id="selectPedidos" resultMap="pedidoMap">
 		select id,cliente_id,troco_para,datahora_entrega,datahora_feito,endereco_entrega,forma_de_pagamento,comentarios from pedidos order by datahora_entrega
 	</select>
 
   <select id="selectPedidosPorData" resultMap="pedidoMap" parameterType="java.time.LocalDate">
     select id,cliente_id,troco_para,datahora_entrega,datahora_feito,endereco_entrega,forma_de_pagamento,comentarios
-    from pedidos where datahora_feito::date=#{data} order by id
+    from pedidos where datahora_entrega::date=#{data} order by id
   </select>
 
   <select id="selectPedidoPorId" resultMap="pedidoMap" parameterType="Integer">
     select id,cliente_id,troco_para,datahora_entrega,datahora_feito,endereco_entrega,forma_de_pagamento,comentarios
     from pedidos where id=#{id}
   </select>
+
+  <select id="insertPedido" parameterType="Pedido" resultType="Integer">
+    insert into pedidos (cliente_id,troco_para,datahora_entrega,datahora_feito,endereco_entrega,forma_de_pagamento,comentarios)
+    values (#{cliente.id},#{trocoPara},#{datahoraEntrega},#{datahoraFeito},#{enderecoEntrega.id},#{formaDePagamento.id},#{comentarios})
+    returning id
+  </select>
+
+  <insert id="insertPedidoItens" parameterType="Pedido">
+    insert into pedido_itens (pedido_id,produto_id,quantidade,comentarios) values
+    <foreach item="item" index="index" collection="itens" separator=",">
+      (#{id},#{item.produto.id},#{item.quantidade},#{item.comentarios})
+    </foreach>
+  </insert>
 
 </mapper>
