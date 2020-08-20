@@ -31,6 +31,10 @@
     select id as forma_id,forma from formas_de_pagamento where id=#{id}
   </select>
 
+  <select id="selectFormasDePagamento" resultMap="formaDePagamentoMap">
+    select id as forma_id,forma from formas_de_pagamento
+  </select>
+
   <select id="selectFormaDePagamentoPorForma" resultMap="formaDePagamentoMap" parameterType="String">
     select id as forma_id,forma from formas_de_pagamento where forma=#{forma}
   </select>

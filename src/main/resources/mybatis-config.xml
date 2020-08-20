@@ -3,6 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+  <settings>
+    <setting name="logImpl" value="LOG4J2"/>
+  </settings>
   <typeAliases>
   	<typeAlias type="br.com.pastaeriso.pedidos.Pedido" alias="Pedido"/>
     <typeAlias type="br.com.pastaeriso.pedidos.pedidoItens.PedidoItem" alias="PedidoItem"/>

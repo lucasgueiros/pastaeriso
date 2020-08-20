@@ -6,6 +6,7 @@ import java.util.HashMap;
 public interface EnderecoMapper {
 
 	public Endereco selectEnderecoById(Integer id);
+	public List<TipoDeEndereco> selectTiposDeEndereco();
 	public TipoDeEndereco selectTipoDeEnderecoById(Integer id);
 	public TipoDeEndereco selectTipoDeEnderecoPorTipo(String tipo);
 	public List<Endereco> selectEnderecosByClienteId(Integer cliente_id);

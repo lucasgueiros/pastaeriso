@@ -43,10 +43,17 @@ import br.com.pastaeriso.clientes.JsonCliente;
 import br.com.pastaeriso.produtos.ProdutoMapper;
 import br.com.pastaeriso.produtos.Produto;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 @WebServlet("/insertPedido")
 public class ServletInsertPedido extends HttpServlet {
+
+	final static Logger logger = LogManager.getLogger(ServletPreparePedidos.class);
+
 	protected void service (HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
+
 		BufferedReader br =
 		new BufferedReader(new InputStreamReader(request.getInputStream()));
 
@@ -54,7 +61,7 @@ public class ServletInsertPedido extends HttpServlet {
 		if(br != null){
 			json = br.readLine();
 		}
-		//System.out.println(json);
+		logger.atDebug().addKeyValue("json",json).log("json recebido.");
 		Gson gson = new GsonBuilder()
 			.registerTypeAdapter(LocalDateTime.class, new Deserializer.LocalDateTimeDeserializer())
 			.registerTypeAdapter(FormaDePagamento.class, new PedidoDeserializer.FormaDePagamentoDeserializer())
@@ -68,16 +75,15 @@ public class ServletInsertPedido extends HttpServlet {
 			Endereco endereco = cliente.getEnderecoPreferencial();
 			pedido.setEnderecoEntrega(endereco);
 		}
-		//System.out.println("ServletInserPedido.61: " + pedido);
+		logger.atDebug().addKeyValue("pedido",pedido).log("pedido construido");
 		Integer pedido_id;
 		try (SqlSession sqlSession = DatabaseConnection.getInstance().getSqlSessionFactory().openSession()) {
 			PedidoMapper pedidoMapper = sqlSession.getMapper(PedidoMapper.class);
 		  pedido_id = pedidoMapper.insertPedido(pedido);
 			sqlSession.commit();
 		}
-
 		pedido.setId(pedido_id);
-		//System.out.println(pedido.getId());
+		logger.atDebug().addKeyValue("pedido.id",pedido.getId()).log("pedido inserido");
 		try (SqlSession sqlSession = DatabaseConnection.getInstance().getSqlSessionFactory().openSession()) {
 			PedidoMapper pedidoMapper = sqlSession.getMapper(PedidoMapper.class);
 		  pedidoMapper.insertPedidoItens(pedido);
@@ -89,6 +95,9 @@ public class ServletInsertPedido extends HttpServlet {
 			PedidoMapper pedidoMapper = sqlSession.getMapper(PedidoMapper.class);
 		  pedido = pedidoMapper.selectPedidoPorId(pedido_id);
 		}
-		//System.out.println("ServletInsertPedido.91:" + pedido);
+		logger.atDebug().addKeyValue("pedido",pedido).log("pedido inserido e recuperado");
+		response.setContentType("text/html;chars	et=UTF-8");
+		RequestDispatcher rd = request.getRequestDispatcher("pedidos.jsp");
+		rd.forward(request,response);
   }
 }

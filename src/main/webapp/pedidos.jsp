@@ -39,6 +39,24 @@
 
 <jsp:include page="include/header_body.jsp" flush="true"></jsp:include>
 
+<datalist id="listaTiposDeEndereco">
+	<c:forEach items="${requestScope.tiposDeEndereco}" var="tipo">
+		<option>${tipo.tipo}</option>
+	</c:forEach>
+</datalist>
+
+<datalist id="listaFormaDeContato">
+	<c:forEach items="${requestScope.formasDeContato}" var="forma">
+		<option>${forma.forma}</option>
+	</c:forEach>
+</datalist>
+
+<datalist id="listaFormaDePagamento">
+	<c:forEach items="${requestScope.formasDePagamento}" var="forma">
+		<option>${forma.forma}</option>
+	</c:forEach>
+</datalist>
+
 <datalist id="listaClientes">
 	<c:forEach items="${requestScope.clientes}" var="cliente">
 		<option>${cliente.nome}</option>
@@ -127,6 +145,7 @@
 					        <label for="formaDePagamento">Forma de pagamento</label>
 					        <input id="formaDePagamento"
 					          type="text"
+										list="listaFormaDePagamento"
 					          class="form-control form-control-plaintext" readonly>
 					      </div>
 					      <div class="form-group col-md-6">
@@ -158,6 +177,7 @@
 					        <label for="contatosForma">Forma de contato</label>
 					        <input id="contatosForma"
 					          type="text"
+										list="listaFormaDeContato"
 					          class="form-control form-control-plaintext" readonly>
 					      </div>
 					    </div>
@@ -177,6 +197,7 @@
 					        <label for="tipoDeEndereco">Tipo de endereco</label>
 					        <input id="tipoDeEndereco"
 					          type="text"
+										list="listaTiposDeEndereco"
 					          class="form-control form-control-plaintext" readonly>
 					      </div>
 					      <div class="form-group col-md-6">

@@ -16,6 +16,10 @@
       javaType="FormaDeContato" select="selectFormaDeContatoById"/>
   </resultMap>
 
+  <select id="selectFormasDeContato" resultMap="formaDeContatoMap">
+    select id,forma from formas_de_contato
+  </select>
+
   <select id="selectFormaDeContatoById" resultMap="formaDeContatoMap" parameterType="Integer">
     select id,forma from formas_de_contato where id=#{id}
   </select>

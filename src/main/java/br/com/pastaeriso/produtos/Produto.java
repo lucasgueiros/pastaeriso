@@ -75,7 +75,7 @@ public class Produto{
 			return produtoPreco.getPreco();
 	}
 	public ProdutoPreco getProdutoPreco(LocalDate data) {
-		if(precos == null || data == null)
+		if(precos == null || data == null || precos.isEmpty())
 			return null;
 		LocalDate theKey = this.precos.firstKey();
 		for(LocalDate key : this.precos.keySet()) {

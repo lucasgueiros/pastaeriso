@@ -14,6 +14,8 @@ public interface PedidoMapper {
 
 	public Integer insertPedido(Pedido pedido);
 
+	public List<FormaDePagamento> selectFormasDePagamento ();
+
 	public FormaDePagamento selectFormaDePagamentoById (Integer id);
 
 	public FormaDePagamento selectFormaDePagamentoPorForma(String forma);
