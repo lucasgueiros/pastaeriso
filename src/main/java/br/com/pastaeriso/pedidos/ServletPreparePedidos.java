@@ -37,7 +37,6 @@ public class ServletPreparePedidos extends HttpServlet {
 	protected void service (HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
-		logger.atDebug().log("testando");
 		List<Cliente> clientes;
 		List<Produto> produtos;
 		List<FormaDePagamento> formasDePagamento;

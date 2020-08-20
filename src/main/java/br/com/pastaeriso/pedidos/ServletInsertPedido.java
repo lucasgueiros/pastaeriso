@@ -61,7 +61,7 @@ public class ServletInsertPedido extends HttpServlet {
 		if(br != null){
 			json = br.readLine();
 		}
-		logger.atDebug().addKeyValue("json",json).log("json recebido.");
+		logger.atDebug().log("json recebido. json : " + json);
 		Gson gson = new GsonBuilder()
 			.registerTypeAdapter(LocalDateTime.class, new Deserializer.LocalDateTimeDeserializer())
 			.registerTypeAdapter(FormaDePagamento.class, new PedidoDeserializer.FormaDePagamentoDeserializer())
@@ -75,7 +75,7 @@ public class ServletInsertPedido extends HttpServlet {
 			Endereco endereco = cliente.getEnderecoPreferencial();
 			pedido.setEnderecoEntrega(endereco);
 		}
-		logger.atDebug().addKeyValue("pedido",pedido).log("pedido construido");
+		logger.atDebug().log("pedido construido pedido : " + pedido);
 		Integer pedido_id;
 		try (SqlSession sqlSession = DatabaseConnection.getInstance().getSqlSessionFactory().openSession()) {
 			PedidoMapper pedidoMapper = sqlSession.getMapper(PedidoMapper.class);
@@ -83,7 +83,7 @@ public class ServletInsertPedido extends HttpServlet {
 			sqlSession.commit();
 		}
 		pedido.setId(pedido_id);
-		logger.atDebug().addKeyValue("pedido.id",pedido.getId()).log("pedido inserido");
+		logger.atDebug().log("pedido inserido. pedido : " + pedido);
 		try (SqlSession sqlSession = DatabaseConnection.getInstance().getSqlSessionFactory().openSession()) {
 			PedidoMapper pedidoMapper = sqlSession.getMapper(PedidoMapper.class);
 		  pedidoMapper.insertPedidoItens(pedido);
@@ -95,7 +95,7 @@ public class ServletInsertPedido extends HttpServlet {
 			PedidoMapper pedidoMapper = sqlSession.getMapper(PedidoMapper.class);
 		  pedido = pedidoMapper.selectPedidoPorId(pedido_id);
 		}
-		logger.atDebug().addKeyValue("pedido",pedido).log("pedido inserido e recuperado");
+		logger.atDebug().log("pedido inserido e recuperado. pedido : " + pedido);
 		response.setContentType("text/html;chars	et=UTF-8");
 		RequestDispatcher rd = request.getRequestDispatcher("pedidos.jsp");
 		rd.forward(request,response);

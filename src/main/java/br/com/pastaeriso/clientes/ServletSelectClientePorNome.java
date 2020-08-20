@@ -20,30 +20,42 @@ import br.com.pastaeriso.servicos.DatabaseConnection;
 import br.com.pastaeriso.clientes.Cliente;
 import br.com.pastaeriso.clientes.ClienteMapper;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 @WebServlet("/selectClientePorNome")
 public class ServletSelectClientePorNome extends HttpServlet {
+
+	static final Logger logger = LogManager.getLogger(ServletSelectClientePorNome.class);
+
 	protected void service (HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
+		logger.atTrace().log("Iniciando");
+
 		Cliente cliente;
     String nome = request.getParameter("nome");
+
+		logger.atDebug().log("Parameter nome : " + nome);
 
     try (SqlSession sqlSession = DatabaseConnection.getInstance().getSqlSessionFactory().openSession()) {
 			ClienteMapper clienteMapper = sqlSession.getMapper(ClienteMapper.class);
 			cliente = clienteMapper.selectClientePorNome(nome);
 		}
 
+		logger.atDebug().log("Cliente recuperado : " + cliente);
+
     ServletOutputStream out = response.getOutputStream();
     Gson gson = new Gson();
     if(cliente != null ) {
 			response.setContentType("application/json;charset=UTF-8");
       String string = gson.toJson(cliente);
-			System.out.println(string);
+			logger.atDebug().log("Cliente em jsn : " + string);
       out.print(string);
     } else {
 			response.setContentType("application/text;charset=UTF-8");
       String string = gson.toJson("false");
-			System.out.println(string);
+			logger.atDebug().log("cliente is null, responde = false");
       out.print(string);
     }
 	}

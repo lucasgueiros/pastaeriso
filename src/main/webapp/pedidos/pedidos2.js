@@ -4,7 +4,7 @@
     url: '/selectClientePorNome?nome=' + nome,
     type: 'post',
     success: function (data) {
-      if(data == "false") {
+      if(data == '\"false\"') {
         $("#contatoNome").removeClass("form-control-plaintext");
         $("#contatos").removeClass("form-control-plaintext");
         $("#contatosForma").removeClass("form-control-plaintext");
