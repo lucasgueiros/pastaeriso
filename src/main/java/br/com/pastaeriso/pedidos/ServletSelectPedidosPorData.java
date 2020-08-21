@@ -13,7 +13,7 @@ import javax.servlet.RequestDispatcher;
 import org.apache.ibatis.session.SqlSession;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import javax.servlet.ServletOutputStream;
+import java.io.PrintWriter;
 import br.com.pastaeriso.pedidos.Pedido;
 import br.com.pastaeriso.servicos.DatabaseConnection;
 import br.com.pastaeriso.pedidos.PedidoMapper;
@@ -52,7 +52,7 @@ public class ServletSelectPedidosPorData extends HttpServlet {
 											.create();
       String string = gson.toJson(pedidos.toArray(new Pedido[0]));
       response.setContentType("application/json;charset=UTF-8");
-      ServletOutputStream out = response.getOutputStream();
+      PrintWriter out = response.getWriter();
       out.print(string);
     }
 	}
