@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.RequestDispatcher;
 import org.apache.ibatis.session.SqlSession;
+import java.io.PrintWriter;
 
 import com.google.gson.Gson;
 import javax.servlet.ServletOutputStream;
@@ -45,7 +46,7 @@ public class ServletSelectClientePorNome extends HttpServlet {
 
 		logger.atDebug().log("Cliente recuperado : " + cliente);
 
-    ServletOutputStream out = response.getOutputStream();
+		PrintWriter out = response.getWriter();
     Gson gson = new Gson();
     if(cliente != null ) {
 			response.setContentType("application/json;charset=UTF-8");
