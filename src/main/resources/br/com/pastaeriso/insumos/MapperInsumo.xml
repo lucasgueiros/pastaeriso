@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="br.com.pastaeriso.insumo.MapperInsumo">
+
+  <resultMap id="InsumoMap" type="Insumo">
+    <id property="id" column="id" javaType="Integer"/>
+    <result property="insumo" column="insumo" javaType="String"/>
+    <result property="comentarios" column="comentarios" javaType="String"/>
+    <result property="preco" column="preco" javaType="BigDecimal"/>
+    <association property="unidade" column="unidade" javaType="Unidade"
+      select="br.com.pastaeriso.insumos.unidades.MapperUnidade.selectUnidadeById"/>
+  </resultMap>
+
+  <select id="selectInsumoById" parameterType="Integer" resultMap="InsumoMap">
+    select id,insumo,unidade,comentarios,preco from insumos where id = #{id}
+  </select>
+
+</mapper>

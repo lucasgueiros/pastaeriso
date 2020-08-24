@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="br.com.pastaeriso.receitas.MapperReceita">
+
+  <resultMap id="ReceitaMap" type="Receita">
+    <id property="id" column="id" javaType="Integer"/>
+    <result property="nome" column="nome" javaType="String"/>
+    <result property="tempoAtivo" column="tempoAtivo" javaType="Integer"/>
+    <result property="tempoTotal" column="tempoAtivo" javaType="Integer"/>
+    <result property="tempoGas" column="tempoAtivo" javaType="Integer"/>
+    <result property="rendimento" column="rendimento" javaType="Integer"/>
+    <result property="comentarios" column="comentarios" javaType="String"/>
+    <association property="gas" column="insumo_gas" javaType="Insumo"
+      select="br.com.pastaeriso.insumos.MapperInsumo.selectInsumoById"/>
+    <collection property="ingredientes" column="id" ofType="ReceitaInsumo" javaType="ArrayList"
+      select="selectReceitaInsumosPorReceitaId"/>
+    <collection property="etapas" column="id" ofType="String" javaType="ArrarList"
+      select="selectReceitaEtapasPorReceitaId"/>
+  </resultMap>
+
+  <resultMap id="ReceiaInsumoMap" type="ReceitaInsumo">
+    <id property="id" column="id" javaType="Integer"/>
+    <result property="quantidade" column="quantidade" javaType="BigDecimal"/>
+    <result property="comentarios" column="comentarios" javaType="String"/>
+    <association property="insumo" column="insumo_id" javaType="Insumo"
+      select="br.com.pastaeriso.insumos.MapperInsumo.selectInsumoById"/>
+    <association property="unidade" column="unidade" javaType="Unidade"
+      select="br.com.pastaeriso.insumos.unidades.MapperUnidade.selectUnidadeById"/>
+  </resultMap>
+
+  <select id="selectReceitas" resultMap="ReceitaMap">
+    select id,nome,data,tempoTotal,tempoAtivo,tempoGas,gas_uni,rendimento,rendimento_uni,comentarios from receitas
+  </select>
+
+  <select id="selectReceitaInsumosPorReceitaId" resultMap="ReceitaInsumoMap" parameterType="Integer">
+    select insumo_id,ordem,quantidade,unidade,comentario from receita_insumos where receita_id = #{receita_id}
+  </select>
+
+  <select id="selectReceitaEtapasPorReceitaId" resultType="String">
+    select ordem,etapa from etapas where receita_id = #{receita_id}
+  </select>
+
+</mapper>
