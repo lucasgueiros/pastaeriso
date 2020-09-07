@@ -49,7 +49,7 @@
 
   <select id="selectPedidosPorData" resultMap="pedidoMap" parameterType="java.time.LocalDate">
     select id,cliente_id,troco_para,datahora_entrega,datahora_feito,endereco_entrega,forma_de_pagamento,comentarios
-    from pedidos where datahora_entrega::date=#{data} order by id
+    from pedidos where datahora_entrega::date=#{data} order by datahora_entrega::time
   </select>
 
   <select id="selectPedidoPorId" resultMap="pedidoMap" parameterType="Integer">
