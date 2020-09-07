@@ -18,6 +18,7 @@
     <typeAlias type="br.com.pastaeriso.produtos.Produto" alias="Produto"/>
     <typeAlias type="br.com.pastaeriso.produtos.ProdutoPreco" alias="ProdutoPreco"/>
     <typeAlias type="br.com.pastaeriso.receitas.Receita" alias="Receita"/>
+    <typeAlias type="br.com.pastaeriso.receitas.ReceitaInsumo" alias="ReceitaInsumo"/>
     <typeAlias type="br.com.pastaeriso.insumos.Insumo" alias="Insumo"/>
     <typeAlias type="br.com.pastaeriso.insumos.unidades.Unidade" alias="Unidade"/>
   </typeAliases>

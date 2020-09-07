@@ -2,6 +2,7 @@ package br.com.pastaeriso.receitas;
 
 import br.com.pastaeriso.insumos.Insumo;
 import br.com.pastaeriso.insumos.unidades.Unidade;
+import java.math.BigDecimal;
 
 public class ReceitaInsumo {
   public Integer id;

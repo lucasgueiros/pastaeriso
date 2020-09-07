@@ -1,5 +1,8 @@
 package br.com.pastaeriso.insumos;
 
+import br.com.pastaeriso.insumos.unidades.Unidade;
+import java.math.BigDecimal;
+
 public class Insumo {
   private Integer id;
   private String insumo;
