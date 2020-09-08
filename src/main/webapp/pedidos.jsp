@@ -76,6 +76,7 @@
 		    <table class="table-sm table-hover">
 		      <thead>
 		        <tr>
+							<th scope="scope">Nº de pedido</th>
 		          <th scope="scope">Horário</th>
 		          <th scope="scope">Cliente</th>
 		          <th scope="scope">Ver detalhes</th>
@@ -112,7 +113,7 @@
 					  <form id="pedidoForm">
 					    <div class="form-row">
 					      <div class="form-group col-md-6">
-					        <label for="pedidoId">Id</label>
+					        <label for="pedidoId">Nº de pedido</label>
 					        <input id="pedidoId"
 					          type="number"
 					          class="form-control form-control-plaintext" readonly>

@@ -105,6 +105,7 @@ function addItemLinha() {
   string += "<input";
   string += " type=\"text\"";
   string += " list=\"listaProdutos\"";
+  string += " onchange=\"simularSubtotal(this)\"";
   string += " class=\"form-control itemProduto\">";
   string += "</div>";
   string += "</td>";
@@ -112,6 +113,8 @@ function addItemLinha() {
   string += "<div class=\"form-group\">";
   string += "<input";
   string += " type=\"number\"";
+  string += " value=\"1\"";
+  string += " onchange=\"simularSubtotal(this)\"";
   string += " class=\"form-control itemQuantidade\">";
   string += "</div>";
   string += "</td>";
@@ -119,7 +122,7 @@ function addItemLinha() {
   string += "<div class=\"form-group\">";
   string += "<input";
   string += " type=\"number\"";
-  string += " class=\"form-control\" readonly>";
+  string += " class=\"form-control itemSubtotal\" readonly>";
   string += "</div>";
   string += "</td>";
   string += "<td>";
@@ -364,10 +367,27 @@ function mudancaDeData() {
   });
 }
 
+function verificarNovosPedidos() {
+  var dataSelecionada = $("#selectData").val();
+  $.ajax({
+    url: '/selectPedidosPorData?data=' + dataSelecionada,
+    type: 'post',
+    dataType: 'json',
+    contentType: 'application/json',
+    success: function (data) {
+      salvarPedidos(data);
+      atualizarPedidosResumo(data);
+    }
+  });
+}
+
 function atualizarPedidosResumo(pedidos){
   var string = "";
   pedidos.forEach((pedido, i) => {
     string += "<tr id=\"linhaPedido\" class=\"linhaPedido\">";
+    string += "<td>";
+    string += "" + pedido.id;
+    string += "</td>";
     string += "<td>";
     string += "" + pedido.horaEntrega;
     string += "</td>";
@@ -404,6 +424,29 @@ function mudarCliente() {
   localStorage.removeItem("enderecoEntrega");
 }
 
+function simularSubtotal(campo) {
+  var produto = $(campo).parent().parent().parent().find(".itemProduto").val();
+  $.ajax({
+    url: '/selectPrecoDoProdutoPorNome?nome=' + produto,
+    type: 'post',
+    success: function (preco) {
+      var quantidade = $(campo).parent().parent().parent().find(".itemQuantidade").val();
+      var subtotal = preco * quantidade;
+      $(campo).parent().parent().parent().find(".itemSubtotal").val(subtotal);
+      simularTotal();
+    }
+  });
+}
+
+function simularTotal() {
+  var total = 0;
+  $("#pedidoItensBody").children('tr').each(function(i){
+    var subtotal = $(this).find(".itemSubtotal").val();
+    total += parseInt(subtotal);
+  });
+  $("#total").val(total);
+}
+
 $(document).ready(function () {
   var data = new Date();
   var stringData = data.getFullYear().toString() + '-' + (data.getMonth() + 1).toString().padStart(2, 0) +
@@ -412,4 +455,7 @@ $(document).ready(function () {
   mudancaDeData();
   $("#botaoAdicionarItem").hide();
   $("#buttonAlterarCliente").hide();
+  setInterval(function() {
+    verificarNovosPedidos()
+  }, 5 * 60 * 1000);
 });
