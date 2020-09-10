@@ -14,6 +14,8 @@
     <result property="comentarios" column="comentarios" javaType="String"/>
     <association property="gas" column="insumo_gas" javaType="Insumo"
       select="br.com.pastaeriso.insumos.MapperInsumo.selectInsumoById"/>
+    <association property="rendimentoUnidade" column="rendimento_uni" javaType="Unidade"
+      select="br.com.pastaeriso.insumos.MapperUnidade.selectUnidadeById"/>
     <collection property="ingredientes" column="id" ofType="ReceitaInsumo" javaType="ArrayList"
       select="selectReceitaInsumosPorReceitaId"/>
     <collection property="etapas" column="id" ofType="String" javaType="ArrayList"
@@ -40,6 +42,10 @@
 
   <select id="selectReceitaEtapasPorReceitaId" resultType="String">
     select descricao from receita_etapas where receita_id = #{receita_id} order by ordem
+  </select>
+
+  <select id="selectReceitasNomes" resultType="String">
+    select nome from receitas
   </select>
 
 </mapper>

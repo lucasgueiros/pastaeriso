@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import br.com.pastaeriso.insumos.Insumo;
 import java.util.ArrayList;
 import java.util.List;
+import br.com.pastaeriso.insumos.unidades.Unidade;
 
 public class Receita {
 
@@ -15,12 +16,10 @@ public class Receita {
   private Integer tempoGas;
   private Insumo gas;
   private Integer rendimento;
+  private Unidade rendimentoUnidade;
   private String comentarios;
   private List<ReceitaInsumo> ingredientes;
   private List<String> etapas;
-
-
-
 
 
 	/**
@@ -33,7 +32,7 @@ public class Receita {
 	/**
 	* Default Receita constructor
 	*/
-	public Receita(Integer id, String nome, LocalDate data, Integer tempoAtivo, Integer tempoTotal, Integer tempoGas, Insumo gas, Integer rendimento, String comentarios, List<ReceitaInsumo> ingredientes, List<String> etapas) {
+	public Receita(Integer id, String nome, LocalDate data, Integer tempoAtivo, Integer tempoTotal, Integer tempoGas, Insumo gas, Integer rendimento, Unidade rendimentoUnidade, String comentarios, List<ReceitaInsumo> ingredientes, List<String> etapas) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -43,6 +42,7 @@ public class Receita {
 		this.tempoGas = tempoGas;
 		this.gas = gas;
 		this.rendimento = rendimento;
+		this.rendimentoUnidade = rendimentoUnidade;
 		this.comentarios = comentarios;
 		this.ingredientes = ingredientes;
 		this.etapas = etapas;
@@ -177,6 +177,22 @@ public class Receita {
 	}
 
 	/**
+	* Returns value of rendimentoUnidade
+	* @return
+	*/
+	public Unidade getRendimentoUnidade() {
+		return rendimentoUnidade;
+	}
+
+	/**
+	* Sets new value of rendimentoUnidade
+	* @param
+	*/
+	public void setRendimentoUnidade(Unidade rendimentoUnidade) {
+		this.rendimentoUnidade = rendimentoUnidade;
+	}
+
+	/**
 	* Returns value of comentarios
 	* @return
 	*/
@@ -230,6 +246,6 @@ public class Receita {
 	*/
 	@Override
 	public String toString() {
-		return "Receita [id=" + id + ", nome=" + nome + ", data=" + data + ", tempoAtivo=" + tempoAtivo + ", tempoTotal=" + tempoTotal + ", tempoGas=" + tempoGas + ", gas=" + gas + ", rendimento=" + rendimento + ", comentarios=" + comentarios + ", ingredientes=" + ingredientes + ", etapas=" + etapas + "]";
+		return "Receita [id=" + id + ", nome=" + nome + ", data=" + data + ", tempoAtivo=" + tempoAtivo + ", tempoTotal=" + tempoTotal + ", tempoGas=" + tempoGas + ", gas=" + gas + ", rendimento=" + rendimento + ", rendimentoUnidade=" + rendimentoUnidade + ", comentarios=" + comentarios + ", ingredientes=" + ingredientes + ", etapas=" + etapas + "]";
 	}
 }
