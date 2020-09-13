@@ -239,15 +239,15 @@
 					      </div>
 					    </div>
 					  </form>
-					  <table class="table table-hover table-responsive-lg">
+					  <table class="table table-hover table-responsive-lg" style="width: 500px">
 					    <thead>
 					      <tr>
 					        <!--<th scope="scope" style="width: 10%">#</th>-->
-					        <th scope="scope" style="width: 50%">Produto</th>
-					        <th scope="scope" style="width: 20%">Qtd.</th>
-					        <th scope="scope" style="width: 20%">Subtotal</th>
-					        <th scope="scope" style="width: 50%">Comentarios</th>
-					        <th scope="scope" style="width: 20%">Ações</th>
+					        <th scope="scope" style="width: 65%">Produto</th>
+					        <th scope="scope" style="width: 5%">Qtd.</th>
+					        <th scope="scope" style="width: 5%">Sub.</th>
+					        <th scope="scope" style="width: 20%">Comentarios</th>
+					        <th scope="scope" style="width: 5%">Ações</th>
 					      </tr>
 					    </thead>
 					    <tbody id="pedidoItensBody">
