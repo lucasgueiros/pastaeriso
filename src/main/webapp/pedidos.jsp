@@ -239,13 +239,13 @@
 					      </div>
 					    </div>
 					  </form>
-					  <table class="table table-hover table-responsive-lg" style="width: 500px">
+					  <table class="table table-hover table-responsive-lg" style="width: 700px">
 					    <thead>
 					      <tr>
 					        <!--<th scope="scope" style="width: 10%">#</th>-->
-					        <th scope="scope" style="width: 65%">Produto</th>
-					        <th scope="scope" style="width: 5%">Qtd.</th>
-					        <th scope="scope" style="width: 5%">Sub.</th>
+					        <th scope="scope" style="width: 50%">Produto</th>
+					        <th scope="scope" style="width: 12%">Qtd.</th>
+					        <th scope="scope" style="width: 13%">Sub.</th>
 					        <th scope="scope" style="width: 20%">Comentarios</th>
 					        <th scope="scope" style="width: 5%">Ações</th>
 					      </tr>
