@@ -2,9 +2,10 @@ package br.com.pastaeriso.receitas;
 
 import java.time.LocalDate;
 import br.com.pastaeriso.insumos.Insumo;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import br.com.pastaeriso.insumos.unidades.Unidade;
+import java.math.BigDecimal;
 
 public class Receita {
 
@@ -15,24 +16,48 @@ public class Receita {
   private Integer tempoTotal;
   private Integer tempoGas;
   private Insumo gas;
-  private Integer rendimento;
+  private BigDecimal rendimento;
   private Unidade rendimentoUnidade;
   private String comentarios;
   private List<ReceitaInsumo> ingredientes;
   private List<String> etapas;
+  private boolean proporcioanada;
 
+  public Receita(Receita original, BigDecimal rendimento) {
+    super();
+    this.id = original.id;
+		this.nome = original.nome;
+		this.data = original.data;
+		this.tempoAtivo = original.tempoAtivo;
+		this.tempoTotal = original.tempoTotal;
+		this.tempoGas = original.tempoGas;
+		this.gas = original.gas;
+		this.rendimento = rendimento;
+		this.rendimentoUnidade = original.rendimentoUnidade;
+		this.comentarios = original.comentarios;
+
+    BigDecimal proporcao = rendimento.divide(original.rendimento);
+		this.ingredientes = new LinkedList<>();
+    original.ingredientes.forEach(receitaInsumoOriginal -> this.ingredientes.add(new ReceitaInsumo(receitaInsumoOriginal,proporcao)));
+		this.etapas = new LinkedList<>();
+    this.etapas.addAll(original.etapas);
+    this.proporcioanada = true;
+  }
+
+  // GENRETED CODE
 
 	/**
 	* Default empty Receita constructor
 	*/
 	public Receita() {
 		super();
+    this.proporcioanada = false;
 	}
 
 	/**
 	* Default Receita constructor
 	*/
-	public Receita(Integer id, String nome, LocalDate data, Integer tempoAtivo, Integer tempoTotal, Integer tempoGas, Insumo gas, Integer rendimento, Unidade rendimentoUnidade, String comentarios, List<ReceitaInsumo> ingredientes, List<String> etapas) {
+	public Receita(Integer id, String nome, LocalDate data, Integer tempoAtivo, Integer tempoTotal, Integer tempoGas, Insumo gas, BigDecimal rendimento, Unidade rendimentoUnidade, String comentarios, List<ReceitaInsumo> ingredientes, List<String> etapas) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -46,6 +71,7 @@ public class Receita {
 		this.comentarios = comentarios;
 		this.ingredientes = ingredientes;
 		this.etapas = etapas;
+    this.proporcioanada = false;
 	}
 
 	/**
@@ -164,7 +190,7 @@ public class Receita {
 	* Returns value of rendimento
 	* @return
 	*/
-	public Integer getRendimento() {
+	public BigDecimal getRendimento() {
 		return rendimento;
 	}
 
@@ -172,7 +198,7 @@ public class Receita {
 	* Sets new value of rendimento
 	* @param
 	*/
-	public void setRendimento(Integer rendimento) {
+	public void setRendimento(BigDecimal rendimento) {
 		this.rendimento = rendimento;
 	}
 

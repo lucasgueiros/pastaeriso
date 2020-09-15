@@ -70,24 +70,32 @@
 					class="form-control form-control-plaintext" readonly>
       </div>
       <div class="form-group col-md-6">
-        <label for="rendimento">Rendimento</label>
-        <input id="rendimento"
-          type="number"
-					class="form-control form-control-plaintext" readonly>
-      </div>
-      <div class="form-group col-md-6">
-        <label for="rendimentoUnidade">Rendimento Unidade</label>
-        <input id="rendimentoUnidade"
-          type="text"
-					class="form-control form-control-plaintext" readonly>
-      </div>
-      <div class="form-group col-md-6">
         <label for="comentarios">Comentarios</label>
         <input id="comentarios"
           type="text"
 					class="form-control form-control-plaintext" readonly>
       </div>
     </div>
+		<div class="form-row">
+			<div class="form-group col-md-6">
+        <label for="rendimento">Rendimento</label>
+        <input id="rendimento"
+          type="number"
+					class="form-control">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="calcularReceitaButton">Rendimento Unidade</label>
+        <input id="calcularReceitaButton"
+          type="text"
+					class="form-control form-control-plaintext" readonly>
+				<button id="buttonProporcionarReceita"
+					onclick="calcularProporcao()"
+					type="button"
+					class="btn btn-sm btn-outline-secondary">
+					Calcular
+				</button>
+      </div>
+		</div>
 		<table class="table table-responsive-lg">
 			<thead>
 				<tr>

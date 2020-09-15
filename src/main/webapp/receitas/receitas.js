@@ -1,5 +1,9 @@
 function selectReceitaPorNome () {
   var receita = JSON.parse(localStorage.getItem($("#nome").val()));
+  mostrarReceita (receita);
+}
+
+function mostrarReceita (receita) {
   $("#codigo").val(receita.id);
   $("#tempoAtivo").val(receita.tempoAtivo);
   $("#tempoTotal").val(receita.tempoTotal);
@@ -72,6 +76,16 @@ function selectReceitaPorNome () {
     string += "</tr>";
   });
   $("#etapas").html(string);
+}
+
+function calcularProporcao() {
+  $.ajax({
+    url: "/calcularReceita?id=" + $("#codigo").val() + "&rendimento=" + $("#rendimento").val(),
+    type: "post",
+    success: function(receita) {
+      mostrarReceita(receita);
+    }
+  });
 }
 
 $(document).ready(function () {

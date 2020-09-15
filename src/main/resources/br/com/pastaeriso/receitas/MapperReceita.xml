@@ -10,7 +10,7 @@
     <result property="tempoAtivo" column="tempoAtivo" javaType="Integer"/>
     <result property="tempoTotal" column="tempoTotal" javaType="Integer"/>
     <result property="tempoGas" column="tempo_gas" javaType="Integer"/>
-    <result property="rendimento" column="rendimento" javaType="Integer"/>
+    <result property="rendimento" column="rendimento" javaType="BigDecimal"/>
     <result property="comentarios" column="comentarios" javaType="String"/>
     <association property="gas" column="gas_insumo" javaType="Insumo"
       select="br.com.pastaeriso.insumos.MapperInsumo.selectInsumoById"/>
@@ -31,6 +31,10 @@
     <association property="unidade" column="unidade" javaType="Unidade"
       select="br.com.pastaeriso.insumos.unidades.MapperUnidade.selectUnidadeById"/>
   </resultMap>
+
+  <select id="selectReceitaPorId" resultMap="ReceitaMap">
+    select id,nome,data,tempoTotal,tempoAtivo,tempo_gas,gas_insumo,rendimento,rendimento_uni,comentarios from receitas where id=#{id}
+  </select>
 
   <select id="selectReceitas" resultMap="ReceitaMap">
     select id,nome,data,tempoTotal,tempoAtivo,tempo_gas,gas_insumo,rendimento,rendimento_uni,comentarios from receitas

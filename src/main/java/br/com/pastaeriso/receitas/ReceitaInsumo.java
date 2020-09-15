@@ -10,15 +10,36 @@ public class ReceitaInsumo {
   public Insumo insumo;
   public Unidade unidade;
   public String comentarios;
+  public boolean proporcionado;
 
+  public ReceitaInsumo (ReceitaInsumo original, BigDecimal proporcao) {
+    super();
+		this.id = original.id;
+		this.quantidade = original.quantidade.multiply(proporcao);
+		this.insumo = original.insumo;
+		this.unidade = original.unidade;
+		this.comentarios = original.comentarios;
+    this.proporcionado = true;
+  }
 
+  /**
+	* Returns value of comentarios
+	* @return
+	*/
+	public String getComentarios() {
+    if(this.comentarios == null)
+      return "";
+		return comentarios;
+	}
 
+  // GENRETED CODE
 
 	/**
 	* Default empty ReceitaInsumo constructor
 	*/
 	public ReceitaInsumo() {
 		super();
+    this.proporcionado = false;
 	}
 
 	/**
@@ -31,6 +52,7 @@ public class ReceitaInsumo {
 		this.insumo = insumo;
 		this.unidade = unidade;
 		this.comentarios = comentarios;
+    this.proporcionado = false;
 	}
 
 	/**
@@ -95,16 +117,6 @@ public class ReceitaInsumo {
 	*/
 	public void setUnidade(Unidade unidade) {
 		this.unidade = unidade;
-	}
-
-	/**
-	* Returns value of comentarios
-	* @return
-	*/
-	public String getComentarios() {
-    if(this.comentarios == null)
-      return "";
-		return comentarios;
 	}
 
 	/**
