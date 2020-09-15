@@ -40,7 +40,7 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="codigo">Código</label>
+        <label for="codigo">Codigo</label>
         <input id="codigo"
           type="number"
 					class="form-control form-control-plaintext" readonly>
@@ -58,13 +58,13 @@
 					class="form-control form-control-plaintext" readonly>
       </div>
       <div class="form-group col-md-6">
-        <label for="tempoGas">Tempo de gás</label>
+        <label for="tempoGas">Tempo de gas</label>
         <input id="tempoGas"
           type="number"
 					class="form-control form-control-plaintext" readonly>
       </div>
       <div class="form-group col-md-6">
-        <label for="gas">Gás insumo</label>
+        <label for="gas">Gas insumo</label>
         <input id="gas"
           type="text"
 					class="form-control form-control-plaintext" readonly>
@@ -76,8 +76,8 @@
 					class="form-control form-control-plaintext" readonly>
       </div>
       <div class="form-group col-md-6">
-        <label for="redimentoUnidade">Rendimento Unidade</label>
-        <input id="redimentoUnidade"
+        <label for="rendimentoUnidade">Rendimento Unidade</label>
+        <input id="rendimentoUnidade"
           type="text"
 					class="form-control form-control-plaintext" readonly>
       </div>
@@ -88,65 +88,24 @@
 					class="form-control form-control-plaintext" readonly>
       </div>
     </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <table class="table table-hover table-responsive-lg">
-          <thead>
-            <caption>
-              ingredientes
-            </caption>
-            <tr>
-              <th>
-              </th>
-            </tr>
-          </thead>
-          <tbody id="ingredientes">
-          </tbody>
-        </table>
-      </div>
-      <div class="form-group col-md-6">
-        <table class="table table-hover table-responsive-lg">
-          <thead>
-            <caption>
-              Etapas
-            </caption>
-            <tr>
-              <th>
-                Descrição
-              </th>
-            </tr>
-          </thead>
-          <tbody id="etapas">
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-
-					  <table class="table table-hover table-responsive-lg">
-					    <thead>
-					      <tr>
-					        <!--<th scope="scope" style="width: 10%">#</th>-->
-					        <th scope="scope" style="width: 50%">Produto</th>
-					        <th scope="scope" style="width: 20%">Qtd.</th>
-					        <th scope="scope" style="width: 20%">Subtotal</th>
-					        <th scope="scope" style="width: 50%">Comentarios</th>
-					        <th scope="scope" style="width: 20%">Ações</th>
-					      </tr>
-					    </thead>
-					    <tbody id="pedidoItensBody">
-					    </tbody>
-					  </table>
-						<button
-							id="botaoAdicionarItem"
-							onclick="addItemLinha()"
-							type="button"
-							class="btn btn-sm btn-outline-secondary">
-							Adicionar item
-						</button>
-					</div>
-		  </div>
-		</div>
-	</div>
+		<table class="table table-responsive-lg">
+			<thead>
+				<tr>
+					<th style="width: 50%">Ingredientes</th>
+					<th style="width: 10%">Qtd.</th>
+					<th style="width: 10%">Uni.</th>
+					<th style="width: 30%">Comentarios</th>
+				</tr>
+			</thead>
+			<tbody id="ingredientes">
+			</tbody>
+		</table>
+		<table class="table table-responsive-lg">
+			<thead><tr><th>Etapas</th></tr></thead>
+			<tbody id="etapas">
+			</tbody>
+		</table>
+	</form>
+</div>
 
 <jsp:include page="include/footer.jsp" flush="true"></jsp:include>

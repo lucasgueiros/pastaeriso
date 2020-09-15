@@ -8,14 +8,14 @@
     <id property="id" column="id" javaType="Integer"/>
     <result property="nome" column="nome" javaType="String"/>
     <result property="tempoAtivo" column="tempoAtivo" javaType="Integer"/>
-    <result property="tempoTotal" column="tempoAtivo" javaType="Integer"/>
-    <result property="tempoGas" column="tempoAtivo" javaType="Integer"/>
+    <result property="tempoTotal" column="tempoTotal" javaType="Integer"/>
+    <result property="tempoGas" column="tempo_gas" javaType="Integer"/>
     <result property="rendimento" column="rendimento" javaType="Integer"/>
     <result property="comentarios" column="comentarios" javaType="String"/>
-    <association property="gas" column="insumo_gas" javaType="Insumo"
+    <association property="gas" column="gas_insumo" javaType="Insumo"
       select="br.com.pastaeriso.insumos.MapperInsumo.selectInsumoById"/>
     <association property="rendimentoUnidade" column="rendimento_uni" javaType="Unidade"
-      select="br.com.pastaeriso.insumos.MapperUnidade.selectUnidadeById"/>
+      select="br.com.pastaeriso.insumos.unidades.MapperUnidade.selectUnidadeById"/>
     <collection property="ingredientes" column="id" ofType="ReceitaInsumo" javaType="ArrayList"
       select="selectReceitaInsumosPorReceitaId"/>
     <collection property="etapas" column="id" ofType="String" javaType="ArrayList"

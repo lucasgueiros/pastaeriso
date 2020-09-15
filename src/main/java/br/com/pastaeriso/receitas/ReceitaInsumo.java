@@ -102,6 +102,8 @@ public class ReceitaInsumo {
 	* @return
 	*/
 	public String getComentarios() {
+    if(this.comentarios == null)
+      return "";
 		return comentarios;
 	}
 
