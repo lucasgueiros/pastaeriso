@@ -16,6 +16,8 @@
       select="br.com.pastaeriso.insumos.MapperInsumo.selectInsumoById"/>
     <association property="rendimentoUnidade" column="rendimento_uni" javaType="Unidade"
       select="br.com.pastaeriso.insumos.unidades.MapperUnidade.selectUnidadeById"/>
+    <association property="equivalente" column="equivalente" javaType="Insumo"
+      select="br.com.pastaeriso.insumos.MapperInsumo.selectInsumoById"/>
     <collection property="ingredientes" column="id" ofType="ReceitaInsumo" javaType="ArrayList"
       select="selectReceitaInsumosPorReceitaId"/>
     <collection property="etapas" column="id" ofType="String" javaType="ArrayList"
@@ -33,11 +35,16 @@
   </resultMap>
 
   <select id="selectReceitaPorId" resultMap="ReceitaMap">
-    select id,nome,data,tempoTotal,tempoAtivo,tempo_gas,gas_insumo,rendimento,rendimento_uni,comentarios from receitas where id=#{id}
+    select id,nome,data,tempoTotal,tempoAtivo,tempo_gas,gas_insumo,rendimento,rendimento_uni,comentarios, rie.insumo_id as equivalente
+    from receitas r
+    join receita_insumo_equi rie on rie.receita_id = r.id
+    where id=#{id}
   </select>
 
   <select id="selectReceitas" resultMap="ReceitaMap">
-    select id,nome,data,tempoTotal,tempoAtivo,tempo_gas,gas_insumo,rendimento,rendimento_uni,comentarios from receitas
+    select id,nome,data,tempoTotal,tempoAtivo,tempo_gas,gas_insumo,rendimento,rendimento_uni,comentarios, rie.insumo_id as equivalente
+    from receitas r
+    join receita_insumo_equi rie on rie.receita_id = r.id
   </select>
 
   <select id="selectReceitaInsumosPorReceitaId" resultMap="ReceitaInsumoMap" parameterType="Integer">

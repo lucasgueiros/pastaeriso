@@ -22,6 +22,7 @@ public class Receita {
   private List<ReceitaInsumo> ingredientes;
   private List<String> etapas;
   private boolean proporcioanada;
+  private Insumo equivalente;
 
   public Receita(Receita original, BigDecimal rendimento) {
     super();
@@ -35,6 +36,7 @@ public class Receita {
 		this.rendimento = rendimento;
 		this.rendimentoUnidade = original.rendimentoUnidade;
 		this.comentarios = original.comentarios;
+    this.equivalente = original.equivalente;
 
     BigDecimal proporcao = rendimento.divide(original.rendimento);
 		this.ingredientes = new LinkedList<>();
@@ -57,7 +59,7 @@ public class Receita {
 	/**
 	* Default Receita constructor
 	*/
-	public Receita(Integer id, String nome, LocalDate data, Integer tempoAtivo, Integer tempoTotal, Integer tempoGas, Insumo gas, BigDecimal rendimento, Unidade rendimentoUnidade, String comentarios, List<ReceitaInsumo> ingredientes, List<String> etapas) {
+	public Receita(Integer id, String nome, LocalDate data, Integer tempoAtivo, Integer tempoTotal, Integer tempoGas, Insumo gas, BigDecimal rendimento, Unidade rendimentoUnidade, String comentarios, List<ReceitaInsumo> ingredientes, List<String> etapas, Insumo equivalente) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -72,6 +74,7 @@ public class Receita {
 		this.ingredientes = ingredientes;
 		this.etapas = etapas;
     this.proporcioanada = false;
+    this.equivalente = equivalente;
 	}
 
 	/**
@@ -265,6 +268,14 @@ public class Receita {
 	public void setEtapas(List<String> etapas) {
 		this.etapas = etapas;
 	}
+
+  public Insumo getEquivalente() {
+    return equivalente;
+  }
+
+  public void setEquivalente(Insumo equivalente){
+    this.equivalente = equivalente;
+  }
 
 	/**
 	* Create string representation of Receita for printing

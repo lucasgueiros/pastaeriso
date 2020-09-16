@@ -69,6 +69,12 @@
           type="text"
 					class="form-control form-control-plaintext" readonly>
       </div>
+			<div class="form-group col-md-6">
+        <label for="equivalente">Insumo equivalente</label>
+        <input id="equivalente"
+          type="text"
+					class="form-control form-control-plaintext" readonly>
+      </div>
       <div class="form-group col-md-6">
         <label for="comentarios">Comentarios</label>
         <input id="comentarios"

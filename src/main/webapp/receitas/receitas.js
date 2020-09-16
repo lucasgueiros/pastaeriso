@@ -11,6 +11,11 @@ function mostrarReceita (receita) {
   $("#gas").val(receita.gas.insumo);
   $("#rendimento").val(receita.rendimento);
   $("#rendimentoUnidade").val(receita.rendimentoUnidade.unidade);
+  if(receita.equivalente !== null) {
+    $("#equivalente").val(receita.equivalente.insumo + " (" + receita.equivalente.id + ")");
+  } else {
+    $("#equivalente").val("");
+  }
   $("#comentarios").val(receita.comentarios);
 
   var string = "";
