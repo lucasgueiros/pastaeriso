@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import br.com.pastaeriso.insumos.unidades.Unidade;
 import java.math.BigDecimal;
+import br.com.pastaeriso.insumos.InsumoQuantidade;
 
 public class Receita {
 
@@ -19,7 +20,7 @@ public class Receita {
   private BigDecimal rendimento;
   private Unidade rendimentoUnidade;
   private String comentarios;
-  private List<ReceitaInsumo> ingredientes;
+  private List<InsumoQuantidade> ingredientes;
   private List<String> etapas;
   private boolean proporcioanada;
   private Insumo equivalente;
@@ -40,7 +41,7 @@ public class Receita {
 
     BigDecimal proporcao = rendimento.divide(original.rendimento);
 		this.ingredientes = new LinkedList<>();
-    original.ingredientes.forEach(receitaInsumoOriginal -> this.ingredientes.add(new ReceitaInsumo(receitaInsumoOriginal,proporcao)));
+    original.ingredientes.forEach(insumoQuantidadeOriginal -> this.ingredientes.add(new InsumoQuantidade(insumoQuantidadeOriginal,proporcao)));
 		this.etapas = new LinkedList<>();
     this.etapas.addAll(original.etapas);
     this.proporcioanada = true;
@@ -59,7 +60,7 @@ public class Receita {
 	/**
 	* Default Receita constructor
 	*/
-	public Receita(Integer id, String nome, LocalDate data, Integer tempoAtivo, Integer tempoTotal, Integer tempoGas, Insumo gas, BigDecimal rendimento, Unidade rendimentoUnidade, String comentarios, List<ReceitaInsumo> ingredientes, List<String> etapas, Insumo equivalente) {
+	public Receita(Integer id, String nome, LocalDate data, Integer tempoAtivo, Integer tempoTotal, Integer tempoGas, Insumo gas, BigDecimal rendimento, Unidade rendimentoUnidade, String comentarios, List<InsumoQuantidade> ingredientes, List<String> etapas, Insumo equivalente) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -241,7 +242,7 @@ public class Receita {
 	* Returns value of ingredientes
 	* @return
 	*/
-	public List<ReceitaInsumo> getIngredientes() {
+	public List<InsumoQuantidade> getIngredientes() {
 		return ingredientes;
 	}
 
@@ -249,7 +250,7 @@ public class Receita {
 	* Sets new value of ingredientes
 	* @param
 	*/
-	public void setIngredientes(List<ReceitaInsumo> ingredientes) {
+	public void setIngredientes(List<InsumoQuantidade> ingredientes) {
 		this.ingredientes = ingredientes;
 	}
 

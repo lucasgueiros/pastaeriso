@@ -18,13 +18,13 @@
       select="br.com.pastaeriso.insumos.unidades.MapperUnidade.selectUnidadeById"/>
     <association property="equivalente" column="equivalente" javaType="Insumo"
       select="br.com.pastaeriso.insumos.MapperInsumo.selectInsumoById"/>
-    <collection property="ingredientes" column="id" ofType="ReceitaInsumo" javaType="ArrayList"
-      select="selectReceitaInsumosPorReceitaId"/>
+    <collection property="ingredientes" column="id" ofType="InsumoQuantidade" javaType="ArrayList"
+      select="selectReceitaInsumoQuantidadePorReceitaId"/>
     <collection property="etapas" column="id" ofType="String" javaType="ArrayList"
       select="selectReceitaEtapasPorReceitaId"/>
   </resultMap>
 
-  <resultMap id="ReceitaInsumoMap" type="ReceitaInsumo">
+  <resultMap id="ReceitaInsumoQuantidadeMap" type="InsumoQuantidade">
     <id property="id" column="id" javaType="Integer"/>
     <result property="quantidade" column="quantidade" javaType="BigDecimal"/>
     <result property="comentarios" column="comentarios" javaType="String"/>
@@ -47,7 +47,7 @@
     join receita_insumo_equi rie on rie.receita_id = r.id
   </select>
 
-  <select id="selectReceitaInsumosPorReceitaId" resultMap="ReceitaInsumoMap" parameterType="Integer">
+  <select id="selectReceitaInsumoQuantidadePorReceitaId" resultMap="ReceitaInsumoQuantidadeMap" parameterType="Integer">
     select insumo_id,ordem,quantidade,unidade,comentario
     from receita_insumos_quantidade riq
     join insumos_quantidade iq

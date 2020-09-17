@@ -1,10 +1,9 @@
-package br.com.pastaeriso.receitas;
+package br.com.pastaeriso.insumos;
 
-import br.com.pastaeriso.insumos.Insumo;
 import br.com.pastaeriso.insumos.unidades.Unidade;
 import java.math.BigDecimal;
 
-public class ReceitaInsumo {
+public class InsumoQuantidade {
   public Integer id;
   public BigDecimal quantidade;
   public Insumo insumo;
@@ -12,7 +11,7 @@ public class ReceitaInsumo {
   public String comentarios;
   public boolean proporcionado;
 
-  public ReceitaInsumo (ReceitaInsumo original, BigDecimal proporcao) {
+  public InsumoQuantidade (InsumoQuantidade original, BigDecimal proporcao) {
     super();
 		this.id = original.id;
 		this.quantidade = original.quantidade.multiply(proporcao);
@@ -37,7 +36,7 @@ public class ReceitaInsumo {
 	/**
 	* Default empty ReceitaInsumo constructor
 	*/
-	public ReceitaInsumo() {
+	public InsumoQuantidade() {
 		super();
     this.proporcionado = false;
 	}
@@ -45,7 +44,7 @@ public class ReceitaInsumo {
 	/**
 	* Default ReceitaInsumo constructor
 	*/
-	public ReceitaInsumo(Integer id, BigDecimal quantidade, Insumo insumo, Unidade unidade, String comentarios) {
+	public InsumoQuantidade(Integer id, BigDecimal quantidade, Insumo insumo, Unidade unidade, String comentarios) {
 		super();
 		this.id = id;
 		this.quantidade = quantidade;
@@ -133,19 +132,6 @@ public class ReceitaInsumo {
 	*/
 	@Override
 	public String toString() {
-		return "ReceitaInsumo [id=" + id + ", quantidade=" + quantidade + ", insumo=" + insumo + ", unidade=" + unidade + ", comentarios=" + comentarios + "]";
+		return "InsumoQuantidade [id=" + id + ", quantidade=" + quantidade + ", insumo=" + insumo + ", unidade=" + unidade + ", comentarios=" + comentarios + "]";
 	}
 }
-
-/*
-create table receita_insumos(
-insumo_id integer references insumos(id) on delete cascade,
-receita_id integer references receitas(id) on delete cascade,
-ordem integer not null generated always as (select (max(ri.ordem) + 1) from receita_insumos as ri where receita_id = ri.receita_id group by ri.receita_id) stored,
-quantidade numeric not null,
-unidade integer references unidades(id) on delete restrict null,
-comentario text null,
-constraint pk_insumos_receita primary key (insumo_id,receita_id),
-check (quantidade > 0.0)
-);
-*/
