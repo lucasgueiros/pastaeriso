@@ -8,10 +8,14 @@ function mostrarReceita (receita) {
   $("#tempoAtivo").val(receita.tempoAtivo);
   $("#tempoTotal").val(receita.tempoTotal);
   $("#tempoGas").val(receita.tempoGas);
-  $("#gas").val(receita.gas.insumo);
+  if(receita.gas) {
+    $("#gas").val(receita.gas.insumo);
+  }
   $("#rendimento").val(receita.rendimento);
-  $("#rendimentoUnidade").val(receita.rendimentoUnidade.unidade);
-  if(receita.equivalente !== null) {
+  if(receita.rendimentoUnidade){
+    $("#rendimentoUnidade").val(receita.rendimentoUnidade.unidade);
+  }
+  if(receita.equivalente) {
     $("#equivalente").val(receita.equivalente.insumo + " (" + receita.equivalente.id + ")");
   } else {
     $("#equivalente").val("");
