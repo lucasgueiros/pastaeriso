@@ -48,7 +48,12 @@
   </select>
 
   <select id="selectReceitaInsumosPorReceitaId" resultMap="ReceitaInsumoMap" parameterType="Integer">
-    select insumo_id,ordem,quantidade,unidade,comentario from receita_insumos where receita_id = #{receita_id}
+    select insumo_id,ordem,quantidade,unidade,comentario
+    from receita_insumos_quantidade riq
+    join insumos_quantidade iq
+    on riq.insumo_quantidade_id = iq.id
+    where receita_id = #{receita_id}
+    order by ordem
   </select>
 
   <select id="selectReceitaEtapasPorReceitaId" resultType="String">
