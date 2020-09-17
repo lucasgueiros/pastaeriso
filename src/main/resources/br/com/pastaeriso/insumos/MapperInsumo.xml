@@ -4,6 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="br.com.pastaeriso.insumos.MapperInsumo">
 
+  <resultMap id="InsumoQuantidadeMap" type="InsumoQuantidade">
+    <id property="id" column="id" javaType="Integer"/>
+    <result property="quantidade" column="quantidade" javaType="BigDecimal"/>
+    <result property="comentarios" column="comentarios" javaType="String"/>
+    <association property="insumo" column="insumo_id" javaType="Insumo"
+      select="br.com.pastaeriso.insumos.MapperInsumo.selectInsumoById"/>
+    <association property="unidade" column="unidade" javaType="Unidade"
+      select="br.com.pastaeriso.insumos.unidades.MapperUnidade.selectUnidadeById"/>
+  </resultMap>
+
   <resultMap id="InsumoMap" type="Insumo">
     <id property="id" column="id" javaType="Integer"/>
     <result property="insumo" column="insumo" javaType="String"/>
@@ -12,6 +22,10 @@
     <association property="unidade" column="unidade" javaType="Unidade"
       select="br.com.pastaeriso.insumos.unidades.MapperUnidade.selectUnidadeById"/>
   </resultMap>
+
+  <select id="selectInsumoQuantidadeById" resultMap="InsumoQuantidadeMap"
+          parameterType="Integer">
+  </select>
 
   <select id="selectInsumoById" parameterType="Integer" resultMap="InsumoMap">
     select id,insumo,unidade,comentario,preco from insumos where id = #{id}

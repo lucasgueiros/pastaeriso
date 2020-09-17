@@ -17,6 +17,7 @@
     <typeAlias type="br.com.pastaeriso.clientes.contatos.FormaDeContato" alias="FormaDeContato"/>
     <typeAlias type="br.com.pastaeriso.produtos.Produto" alias="Produto"/>
     <typeAlias type="br.com.pastaeriso.produtos.ProdutoPreco" alias="ProdutoPreco"/>
+    <typeAlias type="br.com.pastaeriso.produtos.ProdutoInsumoQuantidade" alias="ProdutoInsumoQuantidade"/>
     <typeAlias type="br.com.pastaeriso.receitas.Receita" alias="Receita"/>
     <typeAlias type="br.com.pastaeriso.insumos.InsumoQuantidade" alias="InsumoQuantidade"/>
     <typeAlias type="br.com.pastaeriso.insumos.Insumo" alias="Insumo"/>

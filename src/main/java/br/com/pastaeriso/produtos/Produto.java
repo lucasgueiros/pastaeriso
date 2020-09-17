@@ -14,6 +14,7 @@ public class Produto{
 	private String descricao;
 	private String comentarios;
 	private TreeMap<LocalDate,ProdutoPreco> precos;
+	private List<ProdutoInsumoQuantidade> insumos;
 
 	public Produto() {}
 
@@ -58,6 +59,13 @@ public class Produto{
 	public LocalDate getData(){
 		return this.data;
 	}
+	public void setInsumos(List<ProdutoInsumoQuantidade> insumos) {
+		this.insumos = insumos;
+	}
+	public List<ProdutoInsumoQuantidade> getInsumos() {
+		return this.insumos;
+	}
+
 	public void setPrecos(List<ProdutoPreco> precos){
 		this.precos = new TreeMap<LocalDate,ProdutoPreco>();
 		for(ProdutoPreco preco : precos) {

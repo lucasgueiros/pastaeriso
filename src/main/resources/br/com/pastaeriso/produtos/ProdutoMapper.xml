@@ -10,6 +10,12 @@
     <result property="data" column="data" javaType="java.time.LocalDate"/>
   </resultMap>
 
+  <resultMap id="ProdutoInsumoQuantidadeMap" type="ProdutoInsumoQuantidade">
+    <result property="receita" column="is_receita" javaType="boolean"/>
+    <association property="InsumoQuantidade" column="insumo_quantidade_id" javaType="InsumoQuantidade"
+      select=""/>
+  </resultMap>
+
   <resultMap id="ProdutoMap" type="Produto">
     <id property="id" column="id" javaType="Integer"/>
     <result property="nome" column="nome" javaType="String"/>
@@ -19,7 +25,12 @@
     <collection property="precos" javaType="ArrayList"
       ofType="ProdutoPreco" column="id"
       select="selectProdutoPrecosByProdutoId"/>
+    <collection property="insumos" javatType="ArrayList"
+      ofType="ProdutoInsumoQuantidade" column="id"
+      select="selectProdutoInsumoQuantidadeByProdutoId" />
   </resultMap>
+
+  
 
   <select id="selectProdutoPrecosByProdutoId" resultMap="ProdutoPrecoMap"
     parameterType="Integer">
