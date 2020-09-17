@@ -37,14 +37,14 @@
   <select id="selectReceitaPorId" resultMap="ReceitaMap">
     select id,nome,data,tempoTotal,tempoAtivo,tempo_gas,gas_insumo,rendimento,rendimento_uni,comentarios, rie.insumo_id as equivalente
     from receitas r
-    join receita_insumo_equi rie on rie.receita_id = r.id
+    left join receita_insumo_equi rie on rie.receita_id = r.id
     where id=#{id}
   </select>
 
   <select id="selectReceitas" resultMap="ReceitaMap">
     select id,nome,data,tempoTotal,tempoAtivo,tempo_gas,gas_insumo,rendimento,rendimento_uni,comentarios, rie.insumo_id as equivalente
     from receitas r
-    join receita_insumo_equi rie on rie.receita_id = r.id
+    left join receita_insumo_equi rie on rie.receita_id = r.id
   </select>
 
   <select id="selectReceitaInsumoQuantidadePorReceitaId" resultMap="ReceitaInsumoQuantidadeMap" parameterType="Integer">

@@ -31,7 +31,8 @@ public class ServletCalcularReceita extends HttpServlet {
     Receita receita = null;
     Integer id = -1;
     BigDecimal rendimento = new BigDecimal(0);
-
+		logger.atDebug().log("Id: " + request.getParameter("id"));
+		logger.atDebug().log("Rendimento: " + request.getParameter("rendimento"));
     try {
 			id = Integer.parseInt(request.getParameter("id"));
       rendimento = new BigDecimal(request.getParameter("rendimento"));
@@ -39,12 +40,16 @@ public class ServletCalcularReceita extends HttpServlet {
 			id = new Integer(1);
       rendimento = new BigDecimal(1);
 		}
+		logger.atDebug().log("Id integer: " + id);
+		logger.atDebug().log("Rendimento Big: " + rendimento);
 
     try (SqlSession sqlSession = DatabaseConnection.getInstance().getSqlSessionFactory().openSession()) {
       MapperReceita mapperReceita = sqlSession.getMapper(MapperReceita.class);
 			receita = mapperReceita.selectReceitaPorId(id);
     }
+
     if(receita != null ) {
+			logger.atDebug().log(receita);
       receita = new Receita(receita,rendimento);
       Gson gson = new GsonBuilder()
 											.serializeNulls()
@@ -53,7 +58,9 @@ public class ServletCalcularReceita extends HttpServlet {
       response.setContentType("application/json;charset=UTF-8");
       PrintWriter out = response.getWriter();
       out.print(string);
-    }
+    } else {
+			logger.atDebug().log("Receita is null");
+		}
 
   }
 }
