@@ -12,8 +12,8 @@
 
   <resultMap id="ProdutoInsumoQuantidadeMap" type="ProdutoInsumoQuantidade">
     <result property="receita" column="is_receita" javaType="boolean"/>
-    <association property="InsumoQuantidade" column="insumo_quantidade_id" javaType="InsumoQuantidade"
-      select=""/>
+    <association property="insumoQuantidade" column="insumo_quantidade_id" javaType="InsumoQuantidade"
+      select="br.com.pastaeriso.insumos.MapperInsumo.selectInsumoQuantidadeById"/>
   </resultMap>
 
   <resultMap id="ProdutoMap" type="Produto">
@@ -25,12 +25,16 @@
     <collection property="precos" javaType="ArrayList"
       ofType="ProdutoPreco" column="id"
       select="selectProdutoPrecosByProdutoId"/>
-    <collection property="insumos" javatType="ArrayList"
+    <collection property="insumos" javaType="ArrayList"
       ofType="ProdutoInsumoQuantidade" column="id"
       select="selectProdutoInsumoQuantidadeByProdutoId" />
   </resultMap>
 
-  
+  <select id="selectProdutoInsumoQuantidadeByProdutoId" resultMap="ProdutoInsumoQuantidadeMap"
+    parameterType="Integer">
+    select is_receita, insumo_quantidade_id from produto_insumos_quantidade piq
+    where piq.produto_id = #{id}
+  </select>
 
   <select id="selectProdutoPrecosByProdutoId" resultMap="ProdutoPrecoMap"
     parameterType="Integer">

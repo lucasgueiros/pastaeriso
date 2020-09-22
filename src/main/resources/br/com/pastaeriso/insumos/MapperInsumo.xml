@@ -7,7 +7,7 @@
   <resultMap id="InsumoQuantidadeMap" type="InsumoQuantidade">
     <id property="id" column="id" javaType="Integer"/>
     <result property="quantidade" column="quantidade" javaType="BigDecimal"/>
-    <result property="comentarios" column="comentarios" javaType="String"/>
+    <result property="comentarios" column="comentario" javaType="String"/>
     <association property="insumo" column="insumo_id" javaType="Insumo"
       select="br.com.pastaeriso.insumos.MapperInsumo.selectInsumoById"/>
     <association property="unidade" column="unidade" javaType="Unidade"
@@ -25,6 +25,8 @@
 
   <select id="selectInsumoQuantidadeById" resultMap="InsumoQuantidadeMap"
           parameterType="Integer">
+    select id,quantidade,comentario,insumo_id,unidade from insumos_quantidade
+    where id = #{id}
   </select>
 
   <select id="selectInsumoById" parameterType="Integer" resultMap="InsumoMap">
