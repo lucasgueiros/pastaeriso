@@ -6,9 +6,26 @@
   <resultMap id="MapUnidade" type="Unidade">
     <id property="id" column="id" javaType="Integer"/>
     <result property="unidade" column="unidade" javaType="String"/>
+    <association property="insumo" column="insumo_id" javaType="Insumo"
+      select="selectUnidadeById"/>
+    <collection property="unidadesProporcoes" ofType="UnidadeProporcao" column="insumo_id"
+      javaType="ArrayList"
+      select="selectUnidadesProporcaoByUndidadeId"/>
+  </resultMap>
+
+  <resultMap id="UnidadeProporcaoMap" type="UnidadeProporcao">
+    <result property="proporcao" column="proporcao" javaType="BigDecimal"/>
+    <association property="unidade" column="unidade_b_id" javaType="Unidade"
+      select="br.com.pastaeriso.insumos.unidades.MapperUnidade.selectUnidadeById"/>
   </resultMap>
 
   <select id="selectUnidadeById" parameterType="Integer" resultMap="MapUnidade">
     select id,unidade from unidades where id = #{id}
+  </select>
+
+  <select id="selectUnidadesProporcaoByUndidadeId" parameterType="Integer" resultMap="UnidadeProporcaoMap">
+    select unidade_b,proporcao
+    from unidades_equi
+    where unidade_a = #{id}
   </select>
 </mapper>

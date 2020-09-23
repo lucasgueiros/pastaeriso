@@ -11,7 +11,8 @@
   </resultMap>
 
   <resultMap id="ProdutoInsumoQuantidadeMap" type="ProdutoInsumoQuantidade">
-    <result property="receita" column="is_receita" javaType="boolean"/>
+    <association property="receitaEquivalente" column="receita_equivalente_id" javaType="Receita"
+      select="br.com.pastaeriso.receitas.MapperReceita.selectReceitaPorId"/>
     <association property="insumoQuantidade" column="insumo_quantidade_id" javaType="InsumoQuantidade"
       select="br.com.pastaeriso.insumos.MapperInsumo.selectInsumoQuantidadeById"/>
   </resultMap>
@@ -32,7 +33,11 @@
 
   <select id="selectProdutoInsumoQuantidadeByProdutoId" resultMap="ProdutoInsumoQuantidadeMap"
     parameterType="Integer">
-    select is_receita, insumo_quantidade_id from produto_insumos_quantidade piq
+    select rie.receita_id as receita_equivalente_id, insumo_quantidade_id
+    from produto_insumos_quantidade piq
+    join insumos_quantidade iq on iq.id = piq.insumo_quantidade_id
+    left join receita_insumo_equi rie
+    on rie.insumo_id = iq.insumo_id and piq.is_receita
     where piq.produto_id = #{id}
   </select>
 

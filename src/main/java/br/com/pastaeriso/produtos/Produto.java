@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.TreeMap;
 import java.util.ArrayList;
 import java.math.BigDecimal;
+import br.com.pastaeriso.receitas.Receita;
+import br.com.pastaeriso.receitas.ReceitaNaoEquivalenteAoInsumoException;
+import br.com.pastaeriso.insumos.unidades.UnidadesNaoEquivalentesException;
 
 public class Produto{
 
@@ -15,6 +18,48 @@ public class Produto{
 	private String comentarios;
 	private TreeMap<LocalDate,ProdutoPreco> precos;
 	private List<ProdutoInsumoQuantidade> insumos;
+
+	public void setPrecos(List<ProdutoPreco> precos){
+		this.precos = new TreeMap<LocalDate,ProdutoPreco>();
+		for(ProdutoPreco preco : precos) {
+			this.precos.put(preco.getData(),preco);
+		}
+	}
+	public List<ProdutoPreco> getPrecos(){
+		return new ArrayList<ProdutoPreco>(this.precos.values());
+	}
+
+	public BigDecimal getPreco() {
+		return this.getPreco(LocalDate.now());
+	}
+	public BigDecimal getPreco(LocalDate data) {
+		ProdutoPreco produtoPreco = this.getProdutoPreco(data);
+		if(produtoPreco == null )
+			return new BigDecimal(0);
+		else
+			return produtoPreco.getPreco();
+	}
+	public ProdutoPreco getProdutoPreco(LocalDate data) {
+		if(precos == null || data == null || precos.isEmpty())
+			return null;
+		LocalDate theKey = this.precos.firstKey();
+		for(LocalDate key : this.precos.keySet()) {
+			if(key.compareTo(data) > 0) continue;
+			if(key.compareTo(theKey) > 0)
+				theKey = key;
+		}
+		if(theKey == null)
+			return null;
+		return this.precos.get(theKey);
+	}
+
+	public BigDecimal getCusto() throws UnidadesNaoEquivalentesException,ReceitaNaoEquivalenteAoInsumoException {
+		BigDecimal custo = new BigDecimal(0);
+		for(ProdutoInsumoQuantidade insumo : insumos) {
+			custo = custo.add(insumo.getCusto());
+		}
+		return custo;
+	}
 
 	public Produto() {}
 
@@ -66,35 +111,7 @@ public class Produto{
 		return this.insumos;
 	}
 
-	public void setPrecos(List<ProdutoPreco> precos){
-		this.precos = new TreeMap<LocalDate,ProdutoPreco>();
-		for(ProdutoPreco preco : precos) {
-			this.precos.put(preco.getData(),preco);
-		}
-	}
-	public List<ProdutoPreco> getPrecos(){
-		return new ArrayList<ProdutoPreco>(this.precos.values());
-	}
-	public BigDecimal getPreco(LocalDate data) {
-		ProdutoPreco produtoPreco = this.getProdutoPreco(data);
-		if(produtoPreco == null )
-			return new BigDecimal(0);
-		else
-			return produtoPreco.getPreco();
-	}
-	public ProdutoPreco getProdutoPreco(LocalDate data) {
-		if(precos == null || data == null || precos.isEmpty())
-			return null;
-		LocalDate theKey = this.precos.firstKey();
-		for(LocalDate key : this.precos.keySet()) {
-			if(key.compareTo(data) > 0) continue;
-			if(key.compareTo(theKey) > 0)
-				theKey = key;
-		}
-		if(theKey == null)
-			return null;
-		return this.precos.get(theKey);
-	}
+
 	public String toString() {
 		String r = "\n(";
 		if(nome != null )

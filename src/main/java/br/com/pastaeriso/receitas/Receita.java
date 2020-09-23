@@ -5,6 +5,7 @@ import br.com.pastaeriso.insumos.Insumo;
 import java.util.LinkedList;
 import java.util.List;
 import br.com.pastaeriso.insumos.unidades.Unidade;
+import br.com.pastaeriso.insumos.unidades.UnidadesNaoEquivalentesException;
 import java.math.BigDecimal;
 import br.com.pastaeriso.insumos.InsumoQuantidade;
 
@@ -24,6 +25,22 @@ public class Receita {
   private List<String> etapas;
   private boolean proporcioanada;
   private Insumo equivalente;
+
+  public BigDecimal getCusto(InsumoQuantidade iq) throws UnidadesNaoEquivalentesException,ReceitaNaoEquivalenteAoInsumoException {
+    if(!iq.getInsumo().equals(equivalente)){
+      throw new ReceitaNaoEquivalenteAoInsumoException("Esta receita (id = " + this.id + ") nao e equivalente ao insumo (id = " + iq.getInsumo().getId()+ ")") ;
+    }
+    BigDecimal proporcaoUnidade = rendimentoUnidade.getProporcao(iq.getUnidade());
+    BigDecimal quantidade = iq.getQuantidade().multiply(proporcaoUnidade);
+    BigDecimal proporcao = quantidade.divide(rendimento);
+
+    BigDecimal custo;
+    custo = gas.getCusto(new BigDecimal(tempoGas).multiply(proporcao));
+    for(InsumoQuantidade ingrediente : ingredientes) {
+      custo = custo.add(new InsumoQuantidade(ingrediente,proporcao).getCusto());
+    }
+    return custo;
+  }
 
   public Receita(Receita original, BigDecimal rendimento) {
     super();

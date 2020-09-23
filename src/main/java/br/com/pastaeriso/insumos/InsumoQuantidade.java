@@ -2,14 +2,23 @@ package br.com.pastaeriso.insumos;
 
 import br.com.pastaeriso.insumos.unidades.Unidade;
 import java.math.BigDecimal;
+import br.com.pastaeriso.insumos.unidades.UnidadesNaoEquivalentesException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class InsumoQuantidade {
+  static final Logger logger = LogManager.getLogger(InsumoQuantidade.class);
+
   public Integer id;
   public BigDecimal quantidade;
   public Insumo insumo;
   public Unidade unidade;
   public String comentarios;
   public boolean proporcionado;
+
+  public BigDecimal getCusto() throws UnidadesNaoEquivalentesException {
+    return insumo.getCusto(quantidade,unidade);
+  }
 
   public InsumoQuantidade (InsumoQuantidade original, BigDecimal proporcao) {
     super();

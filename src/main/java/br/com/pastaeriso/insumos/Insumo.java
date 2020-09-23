@@ -1,6 +1,7 @@
 package br.com.pastaeriso.insumos;
 
 import br.com.pastaeriso.insumos.unidades.Unidade;
+import br.com.pastaeriso.insumos.unidades.UnidadesNaoEquivalentesException;
 import java.math.BigDecimal;
 
 public class Insumo {
@@ -10,6 +11,17 @@ public class Insumo {
   private String comentarios;
   private BigDecimal preco;
 
+  public BigDecimal getCusto(BigDecimal quantidade) throws UnidadesNaoEquivalentesException {
+    return getCusto(quantidade,this.unidade);
+  }
+
+  public BigDecimal getCusto(BigDecimal quantidade, Unidade unidade) throws UnidadesNaoEquivalentesException {
+    if(preco != null) {
+      return preco.multiply(quantidade.multiply(this.unidade.getProporcao(unidade)));
+    } else {
+      return new BigDecimal(0);
+    }
+  }
 
 	/**
 	* Default empty Insumo constructor

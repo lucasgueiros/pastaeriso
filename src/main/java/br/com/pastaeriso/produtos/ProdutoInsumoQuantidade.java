@@ -1,12 +1,33 @@
 package br.com.pastaeriso.produtos;
 
 import br.com.pastaeriso.insumos.InsumoQuantidade;
+import java.math.BigDecimal;
+import br.com.pastaeriso.receitas.Receita;
+import br.com.pastaeriso.receitas.ReceitaNaoEquivalenteAoInsumoException;
+import br.com.pastaeriso.insumos.unidades.UnidadesNaoEquivalentesException;
 
 public class ProdutoInsumoQuantidade {
   private InsumoQuantidade insumoQuantidade;
-  private boolean receita;
+  private Receita receitaEquivalente;
+
+  public BigDecimal getCusto() throws UnidadesNaoEquivalentesException,ReceitaNaoEquivalenteAoInsumoException {
+    if(receitaEquivalente != null) {
+      try {
+        return receitaEquivalente.getCusto(insumoQuantidade);
+      } catch (ReceitaNaoEquivalenteAoInsumoException e) {
+        try {
+          return insumoQuantidade.getCusto();
+        } catch (UnidadesNaoEquivalentesException e2) {
+          throw e;
+        }
+      }
+    } else {
+      return insumoQuantidade.getCusto();
+    }
+  }
 
   // GENERATED CODE
+
 
 	/**
 	* Default empty ProdutoInsumoQuantidade constructor
@@ -18,10 +39,10 @@ public class ProdutoInsumoQuantidade {
 	/**
 	* Default ProdutoInsumoQuantidade constructor
 	*/
-	public ProdutoInsumoQuantidade(InsumoQuantidade insumoQuantidade, boolean receita) {
+	public ProdutoInsumoQuantidade(InsumoQuantidade insumoQuantidade, Receita receitaEquivalente) {
 		super();
 		this.insumoQuantidade = insumoQuantidade;
-		this.receita = receita;
+		this.receitaEquivalente = receitaEquivalente;
 	}
 
 	/**
@@ -41,18 +62,18 @@ public class ProdutoInsumoQuantidade {
 	}
 
 	/**
-	* Returns value of receita
+	* Returns value of receitaEquivalente
 	* @return
 	*/
-	public boolean isReceita() {
-		return receita;
+	public Receita getReceitaEquivalente() {
+		return receitaEquivalente;
 	}
 
 	/**
-	* Sets new value of receita
+	* Sets new value of receitaEquivalente
 	* @param
 	*/
-	public void setReceita(boolean receita) {
-		this.receita = receita;
+	public void setReceitaEquivalente(Receita receitaEquivalente) {
+		this.receitaEquivalente = receitaEquivalente;
 	}
 }

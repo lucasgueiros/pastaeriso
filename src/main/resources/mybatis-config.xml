@@ -22,6 +22,7 @@
     <typeAlias type="br.com.pastaeriso.insumos.InsumoQuantidade" alias="InsumoQuantidade"/>
     <typeAlias type="br.com.pastaeriso.insumos.Insumo" alias="Insumo"/>
     <typeAlias type="br.com.pastaeriso.insumos.unidades.Unidade" alias="Unidade"/>
+    <typeAlias type="br.com.pastaeriso.insumos.unidades.UnidadeProporcao" alias="UnidadeProporcao"/>
   </typeAliases>
   <environments default="development">
     <environment id="development">
