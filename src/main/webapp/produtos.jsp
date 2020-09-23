@@ -35,7 +35,9 @@
 					<c:catch var="e">${produto.custo}</c:catch>
 					<c:if test="${e != null}">
 						${e.message}
-						<% logger.atError().log(pageContext.getAttribute("e")); %>
+						<% Exception e = (Exception)pageContext.getAttribute("e");
+							 logger.atError().log(e.getMessage());
+							 logger.atDebug().withThrowable(e).log(e.getMessage()); %>
 					</c:if>
 				</td>
         <td>${produto.preco}</td>

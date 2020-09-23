@@ -21,7 +21,7 @@ public class Receita {
   private BigDecimal rendimento;
   private Unidade rendimentoUnidade;
   private String comentarios;
-  private List<InsumoQuantidade> ingredientes;
+  private List<ReceitaInsumoQuantidade> ingredientes;
   private List<String> etapas;
   private boolean proporcioanada;
   private Insumo equivalente;
@@ -30,16 +30,20 @@ public class Receita {
     if(!iq.getInsumo().equals(equivalente)){
       throw new ReceitaNaoEquivalenteAoInsumoException("Esta receita (id = " + this.id + ") nao e equivalente ao insumo (id = " + iq.getInsumo().getId()+ ")") ;
     }
-    BigDecimal proporcaoUnidade = rendimentoUnidade.getProporcao(iq.getUnidade());
-    BigDecimal quantidade = iq.getQuantidade().multiply(proporcaoUnidade);
-    BigDecimal proporcao = quantidade.divide(rendimento);
-
-    BigDecimal custo;
-    custo = gas.getCusto(new BigDecimal(tempoGas).multiply(proporcao));
-    for(InsumoQuantidade ingrediente : ingredientes) {
-      custo = custo.add(new InsumoQuantidade(ingrediente,proporcao).getCusto());
+    if(this.rendimentoUnidade.equals(iq.getUnidade())
+    && this.rendimento.equals(iq.getQuantidade())){
+      BigDecimal custo;
+      custo = gas.getCusto(new BigDecimal(tempoGas));
+      for(ReceitaInsumoQuantidade ingrediente : ingredientes) {
+        custo = custo.add(ingrediente.getCusto());
+      }
+      return custo;
+    } else {
+      BigDecimal proporcaoUnidade = rendimentoUnidade.getProporcao(iq.getUnidade());
+      BigDecimal quantidade = iq.getQuantidade().multiply(proporcaoUnidade);
+      Receita proporcionada = new Receita(this,quantidade);
+      return proporcionada.getCusto(iq);
     }
-    return custo;
   }
 
   public Receita(Receita original, BigDecimal rendimento) {
@@ -58,13 +62,13 @@ public class Receita {
 
     BigDecimal proporcao = rendimento.divide(original.rendimento);
 		this.ingredientes = new LinkedList<>();
-    original.ingredientes.forEach(insumoQuantidadeOriginal -> this.ingredientes.add(new InsumoQuantidade(insumoQuantidadeOriginal,proporcao)));
+    original.ingredientes.forEach(insumoQuantidadeOriginal -> this.ingredientes.add(new ReceitaInsumoQuantidade(insumoQuantidadeOriginal,proporcao)));
 		this.etapas = new LinkedList<>();
     this.etapas.addAll(original.etapas);
     this.proporcioanada = true;
   }
 
-  // GENRETED CODE
+  // GENERATED CODE
 
 	/**
 	* Default empty Receita constructor
@@ -77,7 +81,7 @@ public class Receita {
 	/**
 	* Default Receita constructor
 	*/
-	public Receita(Integer id, String nome, LocalDate data, Integer tempoAtivo, Integer tempoTotal, Integer tempoGas, Insumo gas, BigDecimal rendimento, Unidade rendimentoUnidade, String comentarios, List<InsumoQuantidade> ingredientes, List<String> etapas, Insumo equivalente) {
+	public Receita(Integer id, String nome, LocalDate data, Integer tempoAtivo, Integer tempoTotal, Integer tempoGas, Insumo gas, BigDecimal rendimento, Unidade rendimentoUnidade, String comentarios, List<ReceitaInsumoQuantidade> ingredientes, List<String> etapas, Insumo equivalente) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -259,7 +263,7 @@ public class Receita {
 	* Returns value of ingredientes
 	* @return
 	*/
-	public List<InsumoQuantidade> getIngredientes() {
+	public List<ReceitaInsumoQuantidade> getIngredientes() {
 		return ingredientes;
 	}
 
@@ -267,7 +271,7 @@ public class Receita {
 	* Sets new value of ingredientes
 	* @param
 	*/
-	public void setIngredientes(List<InsumoQuantidade> ingredientes) {
+	public void setIngredientes(List<ReceitaInsumoQuantidade> ingredientes) {
 		this.ingredientes = ingredientes;
 	}
 

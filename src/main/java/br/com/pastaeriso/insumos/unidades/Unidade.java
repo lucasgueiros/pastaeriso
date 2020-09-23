@@ -17,10 +17,16 @@ public class Unidade {
   private List<UnidadeProporcao> unidadesProporcoes;
 
   public BigDecimal getProporcao(Unidade outra) throws UnidadesNaoEquivalentesException {
-    logger.atDebug().log("this: "+this);
-    logger.atDebug().log("outra: "+outra);
-    logger.atDebug().log("equivalentes: " +equivalentes);
-    logger.atDebug().log("unidadesProporcoes: " +unidadesProporcoes);
+    logger.traceEntry("this: {} .getProporcao(outra: {}})",this,outra);
+    logger.atTrace().log("equivalentes: " +equivalentes)
+    logger.atTrace().log("unidadesProporcoes: " +unidadesProporcoes);
+    if(this.equivalentes == null ){
+      if(this.unidadesProporcoes != null ){
+        copiarUnidadesProporcoes();
+      } else {
+        this.equivalentes = new HashMap<>();
+      }
+    }
     if(this.equals(outra)) {
       return new BigDecimal(1);
     } else if (this.equivalentes.containsKey(outra)){

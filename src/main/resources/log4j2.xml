@@ -9,5 +9,7 @@
     <Root level="debug">
       <AppenderRef ref="Console"/>
     </Root>
+    <Logger name="br.com.pastaeriso.insumos.unidades.Unidade" level="info" additivity="false">
+    </Logger>
   </Loggers>
 </Configuration>

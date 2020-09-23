@@ -24,14 +24,12 @@
       select="selectReceitaEtapasPorReceitaId"/>
   </resultMap>
 
-  <resultMap id="ReceitaInsumoQuantidadeMap" type="InsumoQuantidade">
-    <id property="id" column="id" javaType="Integer"/>
-    <result property="quantidade" column="quantidade" javaType="BigDecimal"/>
-    <result property="comentarios" column="comentarios" javaType="String"/>
-    <association property="insumo" column="insumo_id" javaType="Insumo"
-      select="br.com.pastaeriso.insumos.MapperInsumo.selectInsumoById"/>
-    <association property="unidade" column="unidade" javaType="Unidade"
-      select="br.com.pastaeriso.insumos.unidades.MapperUnidade.selectUnidadeById"/>
+  <resultMap id="ReceitaInsumoQuantidadeMap" type="ReceitaInsumoQuantidade">
+    <result property="ordem" column="ordem" javaType="Integer"/>
+    <association property="receitaEquivalente" column="receita_equivalente_id" javaType="Receita"
+      select="br.com.pastaeriso.receitas.MapperReceita.selectReceitaPorId"/>
+    <association property="insumoQuantidade" column="insumo_quantidade_id" javaType="InsumoQuantidade"
+      select="br.com.pastaeriso.insumos.MapperInsumo.selectInsumoQuantidadeById"/>
   </resultMap>
 
   <select id="selectReceitaPorId" resultMap="ReceitaMap">
@@ -48,12 +46,14 @@
   </select>
 
   <select id="selectReceitaInsumoQuantidadePorReceitaId" resultMap="ReceitaInsumoQuantidadeMap" parameterType="Integer">
-    select insumo_id,ordem,quantidade,unidade,comentario
+    select riq.ordem as ordem, rie.receita_id as receita_equivalente_id, iq.id as insumo_quantidade_id
     from receita_insumos_quantidade riq
     join insumos_quantidade iq
     on riq.insumo_quantidade_id = iq.id
-    where receita_id = #{receita_id}
-    order by ordem
+    join receita_insumo_equi rie
+    on rie.insumo_id = iq.insumo_id and riq.is_receita
+    where riq.receita_id = #{receita_id}
+    order by riq.ordem
   </select>
 
   <select id="selectReceitaEtapasPorReceitaId" resultType="String">
