@@ -18,7 +18,7 @@ public class Unidade {
 
   public BigDecimal getProporcao(Unidade outra) throws UnidadesNaoEquivalentesException {
     logger.traceEntry("this: {} .getProporcao(outra: {}})",this,outra);
-    logger.atTrace().log("equivalentes: " +equivalentes)
+    logger.atTrace().log("equivalentes: " +equivalentes);
     logger.atTrace().log("unidadesProporcoes: " +unidadesProporcoes);
     if(this.equivalentes == null ){
       if(this.unidadesProporcoes != null ){
