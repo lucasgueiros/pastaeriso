@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="br.com.pastaeriso.compras.itens.MapperItemCompra">
+
+  <resultMap id="ProdutoPrecoMap" type="ProdutoPreco">
+    <id property="id" column="id" javaType="Integer"/>
+    <result property="marca" column="marca" javaType="String"/>
+    <result property="descricao" column="descricao" javaType="String"/>
+    <result property="nomeProduto" column="nomeProduto" javaType="String"/>
+    <result property="codigoProduto" column="codigoProduto" javaType="BigDecimal"/>
+    <association property="movimentacao" column="movimentacao" javaType="MovimentacaoEstoque"
+      select="br.com.pastaeriso.estoque.MapperEstoque.selectMovimentacaoEstoquePorId"/>
+  </resultMap>
+
+  <select id="selectCompraItemPorCompraId" resultMap="ItemCompraMap" parameterType="Integer">
+    select id, marca, movimentacao, valor, descricao, codigoProduto, getNomeProduto
+    from
+    where ci.
+  </select>
+</mapper>
