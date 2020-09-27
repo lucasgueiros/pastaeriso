@@ -442,7 +442,7 @@ function simularTotal() {
   var total = 0;
   $("#pedidoItensBody").children('tr').each(function(i){
     var subtotal = $(this).find(".itemSubtotal").val();
-    total += parseInt(subtotal);
+    total += parseFloat(subtotal);
   });
   $("#total").val(total);
 }
