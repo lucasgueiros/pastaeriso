@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="br.com.pastaeriso.estoque.MapperEstoque">
+
+  <resultMap id="MovimentacaoEstoqueMap" type="MovimentacaoEstoque">
+    <id property="id" column="id" javaType="Integer"/>
+    <result property="datahora" column="datahora" javaType="LocalDateTime"/>
+    <association property="insumoQuantidade" column="insumo_quantidade_id" javaType="InsumoQuantidade"
+      select="br.com.pastaeriso.insumos.MapperInsumo.selectInsumoQuantidadeById"/>
+  </resultMap>
+
+  <select id="selectMovimentacaoEstoquePorId" resultMap="MovimentacaoEstoqueMap" parameterType="Integer">
+    select id, insumo_quantidade_id, datahora
+    from movimentacoes_estoque
+    where id = #{id}
+  </select>
+</mapper>
