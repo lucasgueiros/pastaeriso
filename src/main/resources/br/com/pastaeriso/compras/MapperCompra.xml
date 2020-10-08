@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="br.com.pastaeriso.compras.MapperCompra">
+
+  <resultMap id="CompraMap" type="Compra">
+    <id property="id" column="id" javaType="Integer"/>
+    <result property="datahora" column="datahora" javaType="LocalDateTime"/>
+    <result property="valorExtra" column="valor_extra" javaType="BigDecimal"/>
+    <result property="totalTributos" column="totaltributos" javaType="BigDecimal"/>
+    <result property="totalFrete" column="totalfrete" javaType="BigDecimal"/>
+    <result property="totalSeguro" column="totalseguro" javaType="BigDecimal"/>
+    <association property="transacao" column="transacao" javaType="Transacao"
+      select="br.com.pastaeriso.transacoes.MapperTransacao.selectTransacaoPorId"/>
+    <association property="danfe" column="danfes" javaType="Danfe"
+      select="selectDanfePorId"/>
+    <association property="fornecedor" column="fornecedor_id" javaType="Fornecedor"
+      select="br.com.pastaeriso.fornecedores.MapperFornecedor.selectFornecedorPorId"/>
+  </resultMap>
+
+  <resultMap id="DanfeMap" type="Danfe">
+    <id property="id" column="id" javaType="Integer"/>
+    <result property="danfe" column="danfe" javaType="File"/>
+    <result property="codigoDeAcesso" column="codigodeacesso" javaType="String"/>
+    <result property="codigoUf" column="codigouf" javaType="int"/>
+    <result property="datahoraEmissao" column="datahoraemissao" javaType="LocalDateTime"/>
+  </resultMap>
+
+  <select id="selectCompraPorId" resultMap="CompraMap" parameterType="Integer">
+    select id, datahora, valor_extra, totaltributos, totalfrete, totalseguro, transacao, danfes, fornecedor_id
+    from compras
+    where id = #{id}
+  </select>
+
+  <select id="selectDanfePorId" resultMap="DanfeMap" parameterType="Integer">
+    select id, danfe, codigodeacesso, codigouf, datahoraemissao
+    from compras_danfes
+    where id = #{id}
+  </select>
+</mapper>
