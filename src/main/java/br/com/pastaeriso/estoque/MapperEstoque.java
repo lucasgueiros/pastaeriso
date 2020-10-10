@@ -1,5 +1,5 @@
 package br.com.pastaeriso.estoque;
 
 public interface MapperEstoque {
-  public MovimentacaoEstoque selectMovimentacaoEstoquePorId(Integer id);
+  public MovimentacaoEstoque getMovimentacaoEstoqueById(Integer id);
 }

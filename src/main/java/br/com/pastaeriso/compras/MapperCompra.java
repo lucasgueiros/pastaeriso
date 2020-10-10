@@ -6,6 +6,6 @@ public interface MapperCompra {
 
   public List<Compra> selectCompras();
 
-  public Danfe selectDanfePorId(Integer id);
+  public Danfe selectDanfesPorId(Integer id);
 
 }
