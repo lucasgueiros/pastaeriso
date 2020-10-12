@@ -6,7 +6,7 @@
 
   <resultMap id="MovimentacaoEstoqueMap" type="MovimentacaoEstoque">
     <id property="id" column="id" javaType="Integer"/>
-    <result property="datahora" column="datahora" javaType="LocalDateTime"/>
+    <result property="datahora" column="datahora" javaType="java.time.LocalDateTime"/>
     <association property="insumoQuantidade" column="insumo_quantidade_id" javaType="InsumoQuantidade"
       select="br.com.pastaeriso.insumos.MapperInsumo.selectInsumoQuantidadeById"/>
   </resultMap>

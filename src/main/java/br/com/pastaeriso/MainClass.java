@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class MainClass {
   public static void main (String [] args) {
-    List<LocalDate> datas = new LinkedList<>();
+    /*List<LocalDate> datas = new LinkedList<>();
     Scanner scanner = new Scanner(System.in);
     System.out.println("Digite a data inicial: ");
     String inics = scanner.next();
@@ -40,7 +40,7 @@ public class MainClass {
       inic = inic.plusDays(1);
     }
     r += "Total: " + total +"\n";
-    System.out.println(r);
-
+    System.out.println(r);*/
+    DatabaseConnection.getInstance();
   }
 }

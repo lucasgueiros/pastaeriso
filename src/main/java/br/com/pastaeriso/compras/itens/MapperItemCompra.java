@@ -1,4 +1,4 @@
-package br.com.pastaeriso.compras;
+package br.com.pastaeriso.compras.itens;
 
 import java.util.List;
 

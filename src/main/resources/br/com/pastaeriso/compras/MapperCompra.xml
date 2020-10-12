@@ -6,7 +6,7 @@
 
   <resultMap id="CompraMap" type="Compra">
     <id property="id" column="id" javaType="Integer"/>
-    <result property="datahora" column="datahora" javaType="LocalDateTime"/>
+    <result property="horario" column="horario" javaType="java.time.LocalTime"/>
     <result property="valorExtra" column="valor_extra" javaType="BigDecimal"/>
     <result property="totalTributos" column="totaltributos" javaType="BigDecimal"/>
     <result property="totalFrete" column="totalfrete" javaType="BigDecimal"/>
@@ -21,14 +21,13 @@
 
   <resultMap id="DanfeMap" type="Danfe">
     <id property="id" column="id" javaType="Integer"/>
-    <result property="danfe" column="danfe" javaType="File"/>
     <result property="codigoDeAcesso" column="codigodeacesso" javaType="String"/>
     <result property="codigoUf" column="codigouf" javaType="int"/>
-    <result property="datahoraEmissao" column="datahoraemissao" javaType="LocalDateTime"/>
+    <result property="datahoraEmissao" column="datahoraemissao" javaType="java.time.LocalDateTime"/>
   </resultMap>
 
   <select id="selectCompraPorId" resultMap="CompraMap" parameterType="Integer">
-    select id, datahora, valor_extra, totaltributos, totalfrete, totalseguro, transacao, danfes, fornecedor_id
+    select id, horario, valor_extra, totaltributos, totalfrete, totalseguro, transacao, danfes, fornecedor_id
     from compras
     where id = #{id}
   </select>
